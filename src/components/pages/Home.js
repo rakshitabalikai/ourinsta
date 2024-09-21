@@ -1,9 +1,8 @@
-
+import '../css/Home.css'
 
 function Home(){
     return(
-        <div>
-            home1
+        <div className='Homecontainer'>home1
         </div>
 
     );
