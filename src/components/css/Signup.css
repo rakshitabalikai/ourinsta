@@ -1,0 +1,99 @@
+
+.main-container-sigin{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    overflow: hidden;
+    height: 90vh;
+    background-image: linear-gradient(to bottom, #623BE2ff , #B026C4ff , #8E34D1ff, #D822ABff,#20254Bff );
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+      
+}
+
+.Signin-main-container{
+    background-color:  rgba(247, 237, 237, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 28px 3%;
+    width: 750px;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    border: 1px solid white;
+    box-shadow: 5px 5px 40px rgba(255, 255, 255, 0.5) inset;
+    animation: annimate 800ms ease-in-out;
+}
+
+@keyframes annimate {
+    from{
+        transform: translateY(600px);
+    } to{
+        transform: translateY(0px);
+    }
+}
+
+.signin-Quote-container{
+    color: white;
+    margin: 30px;
+    text-align: center;
+    line-height: 34px;
+    font-size: 16px;
+}
+
+.signin-logo{
+    margin: 5px;
+}
+
+
+.username-container > label{
+    color: black;
+    margin-top: 20px;
+}
+
+.Username-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-input{
+    background-color: transparent;
+    border: 0px;
+    font-size: 20px;
+    border-bottom: .5px solid black;
+    outline: none;
+    width: 300px;
+    margin-top: 8px;
+    padding: 2px;
+}
+
+.signup-input:focus{
+    outline: 0px transparent;
+}
+
+.Signin_button_container{
+    margin: 30px;
+}
+
+.Signin_button{
+    width: 200px;
+    background-color:rgb(11, 11, 10);
+    color: white;
+    border: 0px;
+    padding: 5px;
+    border-radius: 10px;
+    height: 50px;
+    cursor:pointer;
+}
+
+#login-button{
+    background-color: transparent;
+    box-shadow: none;
+    margin-left: -20px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    color: black;
+}
