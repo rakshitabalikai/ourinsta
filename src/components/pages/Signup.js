@@ -75,14 +75,6 @@ function Signup() {
               <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
               <label htmlFor='password'>Password</label>
             </div>
-
-            <p className="info-text">
-              People who use our service may have uploaded your contact information to Instagram. <a href="#learn-more"> Learn More</a>
-            </p>
-            
-            <p className="policy-text">
-              By signing up, you agree to our <a href="#terms">Terms</a>, <a href="#privacy">Privacy Policy</a>, and <a href="#cookies">Cookies Policy</a>.
-            </p>
             
             <button type="submit" className="signup-btn">Sign Up</button>
           </form>
