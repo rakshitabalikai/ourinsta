@@ -23,7 +23,7 @@ function Signup() {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:5038/api/social_media/addinfo', {
+      const response = await fetch('http://localhost:5038/api/social_media/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -52,7 +52,9 @@ function Signup() {
   return (
     <div className="app">
       <div className="signup-box">
-        <h1 className="instagram-logo">Instagram</h1>
+        <div className="heading">
+          <h1 className="instagram-logo">Instagram</h1>
+        </div>
         
         <div>
           <form onSubmit={handleSubmit}>

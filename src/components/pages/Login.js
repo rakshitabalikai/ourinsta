@@ -1,44 +1,57 @@
-import '../css/Login.css'
+import '../css/Login.css';
+import { useState } from 'react';
+import axios from 'axios';
 
-function Login(){
-    
-    return(
-        <div> 
-            <div className="main-container-login">
-                <div className="box1">
-                    <div className="heading">
-                        
-                    </div>
-                    <form className="login-form">
-                        <div className="field">
-                            <input id="username" type="name" placeholder="Phone number or username or email"/>
-                            <label for="username">Phone number or username or email</label>
-                        </div>
-                        <div className="field">
-                            <input id="password" type="password" placeholder="Password"/>
-                            <label for="password">Password</label>
-                        </div>
-                        <button class="login-button" title="login">Log In</button>
-                        <div class="separator">
-                            <div class="line"></div>
-                                <p>OR</p>
-                            <div class="line"></div>
-                        </div>
-                        <div class="other">
-                            <button class="fb-login-btn" type="button">
-                             <i class="fa fa-facebook-official fb-icon"></i>
-                                <span class="">Log in with Facebook</span>
-                            </button>
-                             <a class="forgot-password" href="#">Forgot password?</a>
-                         </div>
-                    </form>
-                </div>
-                <div class="box2">
-                    <p>Don't have an account? <a class="signup" href="#">Sign Up</a></p>
-                </div>
+function Login() {
+  const [formData, setFormData] = useState({
+    mobileOrEmail: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
+      alert(response.data.message);
+      // Store user data in local storage or handle session here
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+
+  return (
+    <div>
+      <div className="main-container-login">
+        <div className="box1">
+          <div className="heading">
+            <h1 className="instagram-logo">Instagram</h1>
+          </div>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className='field'>
+              <input id='mobileOrEmail' type="text" name="mobileOrEmail" value={formData.mobileOrEmail} onChange={handleChange} required />
+              <label htmlFor='mobileOrEmail'>Mobile Number or Email</label>
             </div>
+            <div className='field'>
+              <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
+              <label htmlFor='password'>Password</label>
+            </div>
+            <button className="login-button" title="login">Log In</button>
+          </form>
         </div>
-
-    );
+        <div className="box2">
+          <p>Don't have an account? <a className="signup" href="#">Sign Up</a></p>
+        </div>
+      </div>
+    </div>
+  );
 }
+
 export default Login;
