@@ -2,7 +2,6 @@ import '../css/Signup.css';
 import { useState } from 'react';
 
 function Signup() {
-  // Managing form data state
   const [formData, setFormData] = useState({
     mobileOrEmail: '',
     fullName: '',
@@ -10,7 +9,6 @@ function Signup() {
     password: ''
   });
 
-  // Handling form changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,57 +16,40 @@ function Signup() {
     });
   };
 
-  // Handling form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data Submitted:', formData);
-    // Submit form data to your API or process it here
   };
 
   return (
     <div className="app">
       <div className="signup-box">
         <h1 className="instagram-logo">Instagram</h1>
-        <button className="facebook-login">Log in with Facebook</button>
-        <div className="divider">OR</div>
         
+    <div>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="mobileOrEmail"
-            placeholder="Mobile Number or Email"
-            value={formData.mobileOrEmail}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          
+          <div className='field'>
+            <input id='mobileOrEmail' type="text" name="mobileOrEmail" value={formData.mobileOrEmail} onChange={handleChange} required />
+            <label htmlFor='mobileOrEmail'>Mobile Number or Email</label>
+          </div>
+
+          <div className='field'>
+            <input id='fullName' type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
+            <label htmlFor='fullName'>Full Name</label>
+          </div>
+
+          <div className='field'>
+            <input id='username' type="text" name="username" value={formData.username} onChange={handleChange} required />
+            <label htmlFor='username'>Username</label>
+          </div>
+
+          <div className='field'>
+            <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
+            <label htmlFor='password'>Password</label>
+          </div>
+
           <p className="info-text">
-            People who use our service may have uploaded your contact information to Instagram.
-            <a href="#learn-more"> Learn More</a>
+            People who use our service may have uploaded your contact information to Instagram. <a href="#learn-more"> Learn More</a>
           </p>
           
           <p className="policy-text">
@@ -77,6 +58,7 @@ function Signup() {
           
           <button type="submit" className="signup-btn">Sign Up</button>
         </form>
+    </div>
         
         <p className="login-link">
           Have an account? <a href="#login">Log in</a>
