@@ -1,3 +1,69 @@
 .Homecontainer{
-    background-color: blue;
+    display:flex;
+
 }
+.instagramtext {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+
+  .menu {
+    width: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu img {
+    width: 50px;
+    height: auto;
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menubuttons {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: rgb(1, 0, 0);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+  
+  .homesection3_1{
+    display: flex;
+  }
+  .homesection3_1 img {
+    display: flex; 
+    align-items: center; 
+    padding: 10px; 
+    color: rgb(1, 0, 0); 
+    border: none; 
+    cursor: pointer; 
+    font-size: 18px; 
+    width: 100px;
+    height: 100px;
+  }
+  .switch{
+      background-color: transparent; 
+      border: none; 
+      cursor: pointer; 
+      color: inherit; 
+      padding: 10px; 
+      font-size: 16px; 
+  }
+  .switch:hover{
+      background-color: rgba(12, 11, 11, 0.152); 
+  }
+
+  .suggforu{
+    color: rgb(129, 125, 125);
+    font-family: 'Arial', sans-serif;
+    
+  }
