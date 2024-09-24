@@ -20,16 +20,16 @@ function Home(){
     return(
         <div className='Homecontainer'>
                 <div className="menu">
-                    <button type="button" className='menubuttons'><img src={home}></img>Home</button>
-                    <button type="button" className='menubuttons'><img src={search}></img>Search</button>
-                    <button type="button" className='menubuttons'><img src={explore}></img>Explore</button>
-                    <button type="button" className='menubuttons'><img src={reels}></img>Reels</button>
-                    <button type="button" className='menubuttons'><img src={messages}></img>Messages</button>
-                    <button type="button" className='menubuttons'><img src={notifications}></img>Notifications</button>
-                    <button type="button" className='menubuttons'><img src={create}></img>Create</button>
-                    <button type="button" className='menubuttons'><img src={profile}></img>Profile</button>
-                    <button type="button" className='menubuttons'><img src={hamburger}></img>More</button>  
-                </div>    
+        <button className='menu-button'><img src={home} alt="Home" /> Home</button>
+        <button className='menu-button'><img src={search} alt="Search" /> Search</button>
+        <button className='menu-button'><img src={explore} alt="Explore" /> Explore</button>
+        <button className='menu-button'><img src={reels} alt="Reels" /> Reels</button>
+        <button className='menu-button'><img src={messages} alt="Messages" /> Messages</button>
+        <button className='menu-button'><img src={notifications} alt="Notifications" /> Notifications</button>
+        <button className='menu-button'><img src={create} alt="Create" /> Create</button>
+        <button className='menu-button'><img src={profile} alt="Profile" /> Profile</button>
+        <button className='menu-button'><img src={hamburger} alt="More" /> More</button>
+      </div>    
             <div className='homesection2'>
 
             </div>
