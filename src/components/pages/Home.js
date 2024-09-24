@@ -18,12 +18,7 @@ const posts = [
 
 function Home(){
     return(
-        <div>
-              <div className='instagramtext'>
-                    <h1 className="instagram-logo">Instagram</h1>
-                </div>
         <div className='Homecontainer'>
-            <div className='homesection1'>
                 <div className="menu">
                     <button type="button" className='menubuttons'><img src={home}></img>Home</button>
                     <button type="button" className='menubuttons'><img src={search}></img>Search</button>
@@ -34,8 +29,7 @@ function Home(){
                     <button type="button" className='menubuttons'><img src={create}></img>Create</button>
                     <button type="button" className='menubuttons'><img src={profile}></img>Profile</button>
                     <button type="button" className='menubuttons'><img src={hamburger}></img>More</button>  
-                </div>
-            </div>    
+                </div>    
             <div className='homesection2'>
 
             </div>
@@ -54,7 +48,6 @@ function Home(){
             </div>
         
 </div>  
-</div>
     );
 }
 export default Home;
