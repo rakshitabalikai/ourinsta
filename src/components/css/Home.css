@@ -1,70 +1,136 @@
-.Homecontainer{
-    display:flex;
+/* App.css */
 
-}
-.instagramtext {
-    font-family: 'Arial', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 30px;
-  }
-
-  .menu {
-    width: 200px;
-    height: auto;
-    display: flex;
-    margin-top: -100px;
-    flex-direction: column;
-}
-
-.menu img {
-    width: 50px;
-    height: auto;
-    display: flex;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.menubuttons {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: rgb(1, 0, 0);
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-
+/* Ensure the app container takes full height and width */
+.home-container{
+  display: flex;
+  height: 100%; /* Full height of the viewport */
+  width: 216%;  /* Full width of the viewport */
+  margin-left: -60%;
+  color: white;
   
-  .homesection3_1{
-    display: flex;
-  }
-  .homesection3_1 img {
-    display: flex; 
-    align-items: center; 
-    padding: 10px; 
-    color: rgb(1, 0, 0); 
-    border: none; 
-    cursor: pointer; 
-    font-size: 18px; 
-    width: 100px;
-    height: 100px;
-  }
-  .switch{
-      background-color: transparent; 
-      border: none; 
-      cursor: pointer; 
-      color: inherit; 
-      padding: 10px; 
-      font-size: 16px; 
-  }
-  .switch:hover{
-      background-color: rgba(12, 11, 11, 0.152); 
-  }
+}
 
-  .suggforu{
-    color: rgb(129, 125, 125);
-    font-family: 'Arial', sans-serif;
-    
-  }
+/* Sidebar: set to full height */
+.sidebar {
+  width: 30%; /* Adjust the width as per requirement */
+  height: 100vh; /* Set height to 100% of the viewport */
+  background-color: #180f0fce;
+  padding: 25px;
+  border-right: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column; /* Ensures items are stacked vertically */
+  justify-content: flex-start; /* Align items at the top */
+  
+}
+
+/* Other styles remain the same */
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px; /* Add some spacing below the heading */
+}
+
+.sidebar button {
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  
+}
+.sidebar img {
+  background-color: #fff;
+}
+
+
+/* Main Feed */
+.main-feed {
+  width: 100%;
+  height: 100vh;
+  background-color: #180f0fce;
+  padding: 20px;
+  
+  
+}
+
+.stories {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.story {
+  width: 80px;
+  height: 80px;
+  background-color: #eeeeee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #0c0b0b;
+}
+
+.post {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  background-color: #dbdbdb;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-info p {
+  font-weight: bold;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Suggestions */
+.suggestions {
+  width: 55%;
+  background-color: #180f0fce;
+  padding: 22px;
+  border-left: 1px solid #dbdbdb;
+}
+
+.suggestions p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.suggestions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.suggestions li {
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  color: #3897f0;
+}
