@@ -3,7 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+@keyframes annimate {
+  from{
+      transform: translateY(600px);
+  } to{
+      transform: translateY(0px);
+  }
+}
 body {
   font-family: 'Arial', sans-serif;
   height: 100vh;
@@ -130,11 +136,11 @@ body {
   color: #fff;
 }
 
-.signup {
-  color: rgb(255, 255, 255);
+.signup1 {
+  color:red;
   text-decoration: none;
 }
 
-.signup:hover {
+.signup1:hover {
   text-decoration: underline;
 }

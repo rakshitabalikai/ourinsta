@@ -54,7 +54,7 @@ function Login() {
           </form>
         </div>
         <div className="box2">
-          <p>Don't have an account? <Link to={"/signup"} className="signup">Sign Up</Link></p>
+          <p>Don't have an account? <Link to={"/signup"} className="signup1">Sign Up</Link></p>
         </div>
       </div>
       <Outlet></Outlet>

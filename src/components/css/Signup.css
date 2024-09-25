@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+@keyframes annimate {
+  from{
+      transform: translateY(600px);
+  } to{
+      transform: translateY(0px);
+  }
+}
 
 body {
   font-family: 'Arial', sans-serif;
@@ -100,11 +107,19 @@ body {
   color: #fff;
 }
 
-.login-link a {
+.login {
   color: red;
   text-decoration: none;
 }
 
-.login-link a:hover {
+.login-link  {
+  text-decoration: underline;
+}
+.signup {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.signup:hover {
   text-decoration: underline;
 }
