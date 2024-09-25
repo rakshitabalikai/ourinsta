@@ -57,7 +57,7 @@ function Signup() {
         </div>
         
         <div>
-          <form onSubmit={handleSubmit}>
+          <form  onSubmit={handleSubmit}>
             <div className='field'>
               <input id='mobileOrEmail' type="text" name="mobileOrEmail" value={formData.mobileOrEmail} onChange={handleChange} required />
               <label htmlFor='mobileOrEmail'>Mobile Number or Email</label>

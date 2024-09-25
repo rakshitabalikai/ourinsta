@@ -1,17 +1,16 @@
-import logo from './logo.svg';
+
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
-
+import Customeroutes from './components/pages/Customeroutes';
 function App() {
   return (
     <div>
-      <Home></Home>
-      <Login></Login>
-      <Signup></Signup>
-    
-      
+      <BrowserRouter>
+        <Customeroutes></Customeroutes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import '../css/Login.css';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 function Login() {
   const [formData, setFormData] = useState({
     mobileOrEmail: '',
     password: ''
   });
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleChange = (e) => {
     setFormData({
@@ -20,8 +22,12 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
       alert(response.data.message);
-      // Store user data in local storage or handle session here
+
+      // Store user data in local storage
       localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // Redirect to profile page
+      navigate('/profile');
     } catch (error) {
       alert(error.response.data.message);
     }
