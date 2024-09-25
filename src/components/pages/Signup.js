@@ -1,6 +1,6 @@
 import '../css/Signup.css';
 import { useState } from 'react';
-
+import { Link,Outlet } from 'react-router-dom';
 function Signup() {
   const [formData, setFormData] = useState({
     mobileOrEmail: '',
@@ -87,9 +87,10 @@ function Signup() {
         </div>
         
         <p className="login-link">
-          Have an account? <a href="#login">Log in</a>
+          Have an account? <Link to="/">log in</Link>
         </p>
       </div>
+      <Outlet></Outlet>
     </div>
   );
 }

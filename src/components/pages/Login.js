@@ -2,6 +2,7 @@ import '../css/Login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // For navigation
+import { Link,Outlet } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -53,9 +54,10 @@ function Login() {
           </form>
         </div>
         <div className="box2">
-          <p>Don't have an account? <a className="signup" href="#">Sign Up</a></p>
+          <p>Don't have an account? <Link to={"/signup"} className="signup">Sign Up</Link></p>
         </div>
       </div>
+      <Outlet></Outlet>
     </div>
   );
 }
