@@ -8,18 +8,20 @@
   margin-left: -60%;
   color: white;
   
+  
 }
 
 /* Sidebar: set to full height */
 .sidebar {
-  width: 30%; /* Adjust the width as per requirement */
+  width: 10vw; /* Adjust the width as per requirement */
   height: 100vh; /* Set height to 100% of the viewport */
-  background-color: #180f0fce;
+  background-color: #000000ce;
   padding: 25px;
   border-right: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column; /* Ensures items are stacked vertically */
   justify-content: flex-start; /* Align items at the top */
+  
   
 }
 
@@ -37,7 +39,7 @@
 }
 
 .sidebar button {
-  padding: 15px 20px;
+  padding: 15px 30px;
   cursor: pointer;
   font-size: 16px;
   display: flex;
@@ -52,9 +54,9 @@
 
 /* Main Feed */
 .main-feed {
-  width: 100%;
+  width: 65%;
   height: 100vh;
-  background-color: #180f0fce;
+  background-color: #000000ce;
   padding: 20px;
   
   
@@ -75,7 +77,7 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  color: #0c0b0b;
+  color: #000000;
 }
 
 .post {
@@ -111,10 +113,12 @@
 
 /* Suggestions */
 .suggestions {
-  width: 55%;
-  background-color: #180f0fce;
-  padding: 22px;
+  width: 25%;
+  background-color: #000000ce;
+  padding: 20px;
   border-left: 1px solid #dbdbdb;
+  margin-right: -50px;
+  
 }
 
 .suggestions p {
@@ -125,12 +129,31 @@
 
 .suggestions ul {
   list-style-type: none;
-  padding: 0;
+  padding: 10px 30px;
+ 
+  
 }
 
 .suggestions li {
   padding: 10px 0;
   font-size: 16px;
   cursor: pointer;
-  color: #3897f0;
+  color: #ffffff;
+  margin-right: -260px;
+  
+}
+.follower-picture {
+  width: 80px;
+  height: 80px;
+  background-color: #eeeeee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  
+}
+#follow {
+  color: rgb(7, 69, 135);
 }
