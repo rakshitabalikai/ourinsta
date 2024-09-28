@@ -116,6 +116,9 @@
     color: #fff;
   }
   
+  #username{
+    height: 40px;
+  }
   .profile-form input[disabled] {
     background-color: #444;
     cursor: not-allowed;

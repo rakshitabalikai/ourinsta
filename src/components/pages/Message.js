@@ -1,13 +1,5 @@
 import React from 'react';
-import home from '../assets/icons/home.png';
-import search from '../assets/icons/search.png';
-import explore from '../assets/icons/explore.png';
-import reels from '../assets/icons/reels.png';
-import messages from '../assets/icons/messages.png';
-import notifications from '../assets/icons/notifications.png';
-import create from '../assets/icons/create.png';
-import profileIcon from '../assets/icons/profile.png';
-import hamburger from '../assets/icons/hamburger.png';
+import Nav from './Nav';
 import '../css/Message.css'; // CSS for the message section
 import '../css/Sidebar.css'; // CSS for the sidebar
 
@@ -36,19 +28,7 @@ const Message = () => {
   return (
     <div className="app-container">
       {/* Sidebar Section */}
-      <div className="sidebar-icons">
-        <ul>
-          <li><img src={home} alt="Home" /></li>
-          <li><img src={search} alt="Search" /></li>
-          <li><img src={explore} alt="Explore" /></li>
-          <li><img src={reels} alt="Reels" /></li>
-          <li><img src={messages} alt="Messages" /></li>
-          <li><img src={notifications} alt="Notifications" /></li>
-          <li><img src={create} alt="Create" /></li>
-          <li><img src={profileIcon} alt="Profile" /></li>
-          <li><img src={hamburger} alt="More" /></li>
-        </ul>
-      </div>
+      <Nav></Nav>
 
       {/* Messages Section */}
       <div className="messages-section">
