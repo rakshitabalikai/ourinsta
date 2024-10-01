@@ -25,25 +25,31 @@ function Signup() {
 
   // Function for basic validation
   const validateForm = () => {
-    const { mobile, email, password } = formData;
-    
+    const { mobile, email, password, fullName, username, gender, dateOfBirth } = formData;
+
     if (!mobile.match(/^\d{10}$/)) {
-      setErrorMessage("Please enter a valid 10-digit mobile number.");
-      return false;
+        setErrorMessage("Please enter a valid 10-digit mobile number.");
+        return false;
     }
 
     if (!email.includes('@')) {
-      setErrorMessage("Please enter a valid email address.");
-      return false;
+        setErrorMessage("Please enter a valid email address.");
+        return false;
     }
 
     if (password.length < 6) {
-      setErrorMessage("Password must be at least 6 characters long.");
-      return false;
+        setErrorMessage("Password must be at least 6 characters long.");
+        return false;
+    }
+
+    if (!fullName || !username || !gender || !dateOfBirth) {
+        setErrorMessage("All fields are required.");
+        return false;
     }
 
     return true;
-  };
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +64,7 @@ function Signup() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData) // Ensure the form data is sent as JSON
       });
 
       const result = await response.json();
@@ -75,7 +81,7 @@ function Signup() {
       setErrorMessage('An error occurred while connecting to the server.');
       setSuccessMessage(null);
     }
-  };
+};
 
   return (
     <div className="app">
