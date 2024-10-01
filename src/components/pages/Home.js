@@ -3,6 +3,7 @@ import Nav from './Nav';
 
 
 
+
 const posts = [
     { username: 'user1', imageUrl: 'https://via.placeholder.com/300' },
     { username: 'user2', imageUrl: 'https://via.placeholder.com/300' },
