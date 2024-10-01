@@ -39,7 +39,12 @@ function Login() {
       <div className="main-container-login">
         <div className="box1">
           <div className="heading">
-            <h1 className="instagram-logo">Instagram</h1>
+            {/* <h1 className="instagram-logo">Instagram</h1> */}
+            {/* <video autoplay muted loop id="background-video"> */}
+    {/* <source src="path_to_your_video.mp4" type="video/mp4"> */}
+    {/* Your browser does not support the video tag. */}
+  {/* </video> */}
+
           </div>
           <form className="login-form" onSubmit={handleSubmit}>
             <div className='field'>
