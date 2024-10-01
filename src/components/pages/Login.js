@@ -21,7 +21,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://socialmedia-apis-2iv6.onrender.com/api/social_media/login', formData);
+      const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
       alert(response.data.message);
 
       // Store user data in local storage

@@ -40,7 +40,7 @@ const EditProfile = () => {
     };
 
     try {
-      const response = await fetch('/api/social_media/update_profile', {
+      const response = await fetch('http://localhost:5038/api/social_media/update_profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProfile),
