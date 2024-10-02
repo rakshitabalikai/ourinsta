@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+
 import '../css/Editprofile.css';
 import Nav from './Nav';
 
@@ -11,7 +13,13 @@ const EditProfile = () => {
   const [accountPrivacy, setAccountPrivacy] = useState('Public');
   const [profilePic, setProfilePic] = useState(null); // For the selected image
   const [previewPic, setPreviewPic] = useState('profile-pic-url'); // For image preview
-
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   // Function to handle file selection and convert it to Base64
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -30,8 +38,9 @@ const EditProfile = () => {
   // Function to handle form submission (Update Profile)
 const handleSubmit = async (e) => {
   e.preventDefault();
-  
   const updatedProfile = {
+      user_id:user.id,
+      email:user.email,
       bio,
       username,
       gender,
@@ -52,6 +61,7 @@ const handleSubmit = async (e) => {
       } else {
           const data = await response.json();
           alert(`Error: ${data.message}`);
+          console.log(response);
       }
   } catch (error) {
       console.error('Error updating profile:', error);

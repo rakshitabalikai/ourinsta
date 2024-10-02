@@ -2,14 +2,14 @@ import '../css/Login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // For navigation
-import { Link,Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
-    mobileOrEmailOrUsername : '',
+    mobileOrEmailOrUsername: '',
     password: ''
   });
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,11 +23,9 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
       alert(response.data.message);
-
-      // Store user data in local storage
+      console.log(response)
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      // Redirect to profile page
       navigate('/profile');
     } catch (error) {
       alert(error.response.data.message);
@@ -38,18 +36,10 @@ function Login() {
     <div>
       <div className="main-container-login">
         <div className="box1">
-          <div className="heading">
-            {/* <h1 className="instagram-logo">Instagram</h1> */}
-            {/* <video autoplay muted loop id="background-video"> */}
-    {/* <source src="path_to_your_video.mp4" type="video/mp4"> */}
-    {/* Your browser does not support the video tag. */}
-  {/* </video> */}
-
-          </div>
           <form className="login-form" onSubmit={handleSubmit}>
             <div className='field'>
               <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
-              <label htmlFor='mobileOrEmailOrUsername'>mobileOrEmailOrUsername </label>
+              <label htmlFor='mobileOrEmailOrUsername'>Username, Email or Mobile</label>
             </div>
             <div className='field'>
               <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
@@ -62,7 +52,7 @@ function Login() {
           <p>Don't have an account? <Link to={"/signup"} className="signup1">Sign Up</Link></p>
         </div>
       </div>
-      <Outlet></Outlet>
+      <Outlet />
     </div>
   );
 }
