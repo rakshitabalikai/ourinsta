@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import Message from "./Message";
+import Search from "./Search";
 
 
 function Customeroutes(){
@@ -16,6 +17,7 @@ function Customeroutes(){
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/Editprofile" element={<EditProfile></EditProfile>}></Route>
             <Route path="/messages" element={<Message></Message>}></Route>
+            <Route path="/search" element={<Search></Search>}></Route>
         </Routes>
     )
 }

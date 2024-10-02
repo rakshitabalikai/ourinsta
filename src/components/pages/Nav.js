@@ -11,12 +11,13 @@ import profileIcon from '../assets/icons/profile.png';
 import hamburger from '../assets/icons/hamburger.png';
 
 
+
 function Nav(){
     return(
         <div className="menu">
         <Link to={"/home"}><button className='menu-button'><img src={home} alt="Home" /> Home</button></Link>
         
-        <button className='menu-button'><img src={search} alt="Search" /> Search</button>
+        <Link to={"/search"}><button className='menu-button'><img src={search} alt="Search" /> Search</button></Link> 
         <button className='menu-button'><img src={explore} alt="Explore" /> Explore</button>
         <button className='menu-button'><img src={reels} alt="Reels" /> Reels</button>
         <Link to={"/messages"}><button className='menu-button'><img src={messages} alt="Messages" /> Messages</button></Link>
@@ -26,6 +27,7 @@ function Nav(){
 
         <Link to={"/profile"}><button className='menu-button'><img src={profileIcon} alt="Profile" /> Profile</button></Link>
         <button className='menu-button'><img src={hamburger} alt="More" /> More</button>
+
         <Outlet></Outlet>
       </div>
     )
