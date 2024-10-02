@@ -80,7 +80,7 @@ body {
 /* Input Field Labels */
 .field label {
   position: absolute;
-  top: 10px; /* Space between the input and label */
+  top: 8px; /* Space between the input and label */
   left: 15px;
   font-size: 14px;
   color: #999; /* Default label color */
@@ -141,7 +141,6 @@ body {
   font-size: 14px;
   margin-top: 20px;
   color: #fff;
-  text-decoration: underline;
 }
 
 /* Login Text */
@@ -158,4 +157,9 @@ body {
 
 .signup:hover {
   text-decoration: underline;
+}
+.logo{
+  height: 80px;
+  /* margin-top: -10px; */
+  margin: -20px;
 }

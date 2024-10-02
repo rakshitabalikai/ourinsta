@@ -1,7 +1,7 @@
 import '../css/Signup.css';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-
+import logo from "../assets/logo/logo.png"
 function Signup() {
   const [formData, setFormData] = useState({
     mobile: '',
@@ -87,7 +87,7 @@ function Signup() {
     <div className="app">
       <div className="signup-box">
         <div className="heading">
-          <h1 className="instagram-logo">Instagram</h1>
+          <img src={logo}  className="logo" alt="logo" />
         </div>
 
         <div>

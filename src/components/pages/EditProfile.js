@@ -27,35 +27,37 @@ const EditProfile = () => {
   };
 
   // Function to handle form submission (Update Profile)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const updatedProfile = {
+  // Function to handle form submission (Update Profile)
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  const updatedProfile = {
       bio,
       username,
       gender,
       dateOfBirth,
       accountPrivacy,
       profilePic, // Sending Base64 encoded image as part of the update
-    };
+  };
 
-    try {
+  try {
       const response = await fetch('http://localhost:5038/api/social_media/update_profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedProfile),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedProfile),
       });
 
       if (response.ok) {
-        alert('Profile updated successfully!');
+          alert('Profile updated successfully!');
       } else {
-        const data = await response.json();
-        alert(`Error: ${data.message}`);
+          const data = await response.json();
+          alert(`Error: ${data.message}`);
       }
-    } catch (error) {
+  } catch (error) {
       console.error('Error updating profile:', error);
-    }
-  };
+  }
+};
+
 
   return (
     <div className="profile-container">
@@ -111,8 +113,8 @@ const EditProfile = () => {
               value={accountPrivacy}
               onChange={(e) => setAccountPrivacy(e.target.value)}
             >
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
+              <option value="0">Public</option>
+              <option value="1">Private</option>
             </select>
 
             <button type="submit" className="submit-btn">Update Profile</button>

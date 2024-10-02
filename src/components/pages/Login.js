@@ -6,7 +6,7 @@ import { Link,Outlet } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({
-    mobileOrEmail: '',
+    mobileOrEmailOrUsername : '',
     password: ''
   });
   const navigate = useNavigate(); // Initialize navigate function
@@ -48,8 +48,8 @@ function Login() {
           </div>
           <form className="login-form" onSubmit={handleSubmit}>
             <div className='field'>
-              <input id='mobileOrEmail' type="text" name="mobileOrEmail" value={formData.mobileOrEmail} onChange={handleChange} required />
-              <label htmlFor='mobileOrEmail'>Mobile Number or Email</label>
+              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
+              <label htmlFor='mobileOrEmailOrUsername'>mobileOrEmailOrUsername </label>
             </div>
             <div className='field'>
               <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
