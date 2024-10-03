@@ -38,6 +38,7 @@ const EditProfile = () => {
   // Function to handle form submission (Update Profile)
 const handleSubmit = async (e) => {
   e.preventDefault();
+  console.log(profilePic);
   const updatedProfile = {
       user_id:user.id,
       email:user.email,

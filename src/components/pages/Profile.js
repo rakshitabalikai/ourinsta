@@ -11,6 +11,7 @@ function Profile() {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
+      console.log(parsedUser);
       setUser(parsedUser);
       setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150'); // Set the profile pic here
     }
