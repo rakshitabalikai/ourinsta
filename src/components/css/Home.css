@@ -3,24 +3,29 @@
 /* Ensure the app container takes full height and width */
 .home-container{
   display: flex;
-  height: 100%; /* Full height of the viewport */
-  width: 216%;  /* Full width of the viewport */
-  margin-left: -60%;
-  color: white;
+    flex-direction: row;
+    min-height: 100vh;
+    margin: 0px;
+    /* margin-left: -300px; */
+    width: 100vw;
+    background-color: black; /* Set the background to black */
+    color: #fff;
+  
   
   
 }
 
 /* Sidebar: set to full height */
 .sidebar {
-  width: 10vw; /* Adjust the width as per requirement */
+  margin-right: 0px;
+  width: 10px; /* Adjust the width as per requirement */
   height: 100vh; /* Set height to 100% of the viewport */
   background-color: #000000ce;
   padding: 25px;
   border-right: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column; /* Ensures items are stacked vertically */
-  justify-content: flex-start; /* Align items at the top */
+  /* justify-content: flex-start; Align items at the top */
   
   
 }
