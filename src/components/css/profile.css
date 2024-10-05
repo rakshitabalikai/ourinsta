@@ -4,8 +4,10 @@
     flex-direction: row;
     min-height: 100vh;
     margin: 0px;
+    margin-left: 200px;
+    width: 86.98vw;
     /* margin-left: -300px; */
-    width: 100vw;
+    /* width: 100vw; */
     background-color: black; /* Set the background to black */
     color: #fff;
   }

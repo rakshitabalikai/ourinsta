@@ -19,11 +19,19 @@ function Search() {
         // Call the backend search API
         setIsLoading(true);
         try {
-            const response = await fetch(`/api/social_media/search_users?searchTerm=${value}`);
+            const response = await fetch(`http://localhost:5038/api/social_media/search?query=${value}`); // Updated endpoint to match the API
             const data = await response.json();
-            setSearchResults(data); // Update search results with fetched data
+
+            if (response.ok) {
+                setSearchResults(data.users); // Update search results with the users array from the response
+            } else {
+                setSearchResults([]); // Clear results if no users found
+                console.error(data.message); // Log error message for debugging
+            }
+            console.log(searchResults);
         } catch (error) {
             console.error("Error searching for users:", error);
+            setSearchResults([]);
         } finally {
             setIsLoading(false);
         }
@@ -31,9 +39,7 @@ function Search() {
 
     return (
         <div className="search-page">
-            <div className='nav-container'>
-                <Nav />
-            </div>
+            <Nav />
             <div className="search-container">
                 <div className="search-bar">
                     <input
@@ -53,21 +59,26 @@ function Search() {
                         <p>Loading...</p>
                     ) : (
                         <ul>
-                            {searchResults.map((user) => (
-                                <li key={user._id} className="search-result-item">
-                                    <div>
-                                        <img 
-                                            src={user.profilePic || '/default-profile.png'} 
-                                            alt={user.username} 
-                                            className="profile-pic"
-                                        />
-                                        <div className="user-info">
-                                            <p className="username">{user.username}</p>
-                                            <p className="full-name">{user.fullName}</p>
+                            {searchResults.length > 0 ? (
+                                searchResults.map((user) => (
+                                    <div key={user.id} className="search-result-item">
+                                        <div className='usercard'>
+                                            <img 
+                                                src={user.profile_pic} // Ensure profile_pic is used from the API
+                                                alt={user.username} 
+                                                className="profile-pic"
+                                            />
+                                            <div className="user-info">
+                                                <p className="username">{user.username}</p>
+                                                <p className="full-name">{user.fullName}</p>
+                                            </div>
+                                            <button>Follow</button>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
+                                    </div >
+                                ))
+                            ) : (
+                                <p>No users found</p>
+                            )}
                         </ul>
                     )}
                 </div>
