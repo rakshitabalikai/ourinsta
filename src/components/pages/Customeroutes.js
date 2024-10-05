@@ -8,6 +8,7 @@ import Message from "./Message";
 import Search from "./Search";
 import OtherProfile from "./otherprofile";  // Ensure this is the correct import path
 import Storyview from "./Storyview";
+import CreatePost from "./CreatePost";
 
 function Customeroutes(){
     return(
@@ -21,6 +22,7 @@ function Customeroutes(){
             <Route path="/search" element={<Search />} />
             <Route path="/otherprofile/:userId" element={<OtherProfile />} />
             <Route path="/storyview" element={<Storyview />} />
+            <Route path="/create" element={<CreatePost />} />
         </Routes>
     );
 }
