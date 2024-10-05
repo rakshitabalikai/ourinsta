@@ -2,7 +2,7 @@
 import React from 'react';
 import '../css/Storyview.css';
 
-const StoryView = ({ user, story, closeStory }) => {
+const Storyview = ({ user, story, closeStory }) => {
   return (
     <div className="story-view-container">
       <div className="story-header">
@@ -23,4 +23,4 @@ const StoryView = ({ user, story, closeStory }) => {
   );
 };
 
-export default StoryView;
+export default Storyview;

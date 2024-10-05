@@ -1,29 +1,43 @@
-import '../css/Home.css'
+import React, { useState } from 'react';
+import '../css/Home.css';
 import Nav from './Nav';
 
+// Sample story content (you can replace it with actual data or API calls)
+const storyData = {
+  story1: { title: 'Story 1', content: 'This is the content of Story 1' },
+  story2: { title: 'Story 2', content: 'This is the content of Story 2' },
+  story3: { title: 'Story 3', content: 'This is the content of Story 3' },
+  story4: { title: 'Story 4', content: 'This is the content of Story 4' },
+};
 
+function Home() {
+  // State to track the currently selected story
+  const [selectedStory, setSelectedStory] = useState(null);
 
-
-const posts = [
-    { username: 'user1', imageUrl: 'https://via.placeholder.com/300' },
-    { username: 'user2', imageUrl: 'https://via.placeholder.com/300' },
-];
-
-function Home(){
-    return(
-        <div className="home-container">
+  return (
+    <div className="home-container">
       {/* Sidebar */}
-      <Nav></Nav>
+      <Nav />
 
       {/* Main Feed */}
       <div className="main-feed">
+        {/* Stories */}
         <div className="stories">
-          <div className="story">Story 1</div>
-          <div className="story">Story 2</div>
-          <div className="story">Story 3</div>
-          <div className="story">Story 4</div>
+          <div className="story" onClick={() => setSelectedStory('story1')}>Story 1</div>
+          <div className="story" onClick={() => setSelectedStory('story2')}>Story 2</div>
+          <div className="story" onClick={() => setSelectedStory('story3')}>Story 3</div>
+          <div className="story" onClick={() => setSelectedStory('story4')}>Story 4</div>
         </div>
 
+        {/* Show Selected Story */}
+        {selectedStory && (
+          <div className="story-content">
+            <h2>{storyData[selectedStory].title}</h2>
+            <p>{storyData[selectedStory].content}</p>
+          </div>
+        )}
+
+        {/* Post */}
         <div className="post">
           <div className="post-header">
             <div className="profile-picture"></div>
@@ -42,14 +56,15 @@ function Home(){
       <div className="suggestions">
         <p>Suggestions For You</p>
         <ul>
-        <div className="follower-picture"><li>alex.anyways18 - <li id='follow'>Follow</li></li>  </div>
-        <div className="follower-picture"><li>chantoulflowergirl - Follow</li></div>  
-        <div className="follower-picture"> <li>gwangu77 - Follow</li></div> 
-        <div className="follower-picture"><li>mishka_songs - Follow</li></div>  
-        <div className="follower-picture"> <li>pierre_thecomet - Follow</li></div> 
+          <div className="follower-picture"><li>alex.anyways18 - <li id='follow'>Follow</li></li></div>
+          <div className="follower-picture"><li>chantoulflowergirl - Follow</li></div>
+          <div className="follower-picture"><li>gwangu77 - Follow</li></div>
+          <div className="follower-picture"><li>mishka_songs - Follow</li></div>
+          <div className="follower-picture"><li>pierre_thecomet - Follow</li></div>
         </ul>
       </div>
     </div>
-    );
+  );
 }
+
 export default Home;
