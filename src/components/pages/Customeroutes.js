@@ -1,4 +1,4 @@
-import { Route,Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -6,20 +6,21 @@ import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import Message from "./Message";
 import Search from "./Search";
-
+import OtherProfile from "./otherprofile";  // Ensure this is the correct import path
 
 function Customeroutes(){
     return(
         <Routes>
-            <Route path="/" element={<Login></Login>}></Route>
-            <Route path="/signup" element={<Signup></Signup>}></Route>
-            <Route path="/home" element={<Home></Home>}></Route>
-            <Route path="/profile" element={<Profile></Profile>}></Route>
-            <Route path="/Editprofile" element={<EditProfile></EditProfile>}></Route>
-            <Route path="/messages" element={<Message></Message>}></Route>
-            <Route path="/search" element={<Search></Search>}></Route>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/messages" element={<Message />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/otherprofile/:userId" element={<OtherProfile />} />
         </Routes>
-    )
+    );
 }
 
 export default Customeroutes;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
 import '../css/Search.css';
 import Nav from './Nav';
 
@@ -9,6 +10,8 @@ function Search() {
     
     const [user, setUser] = useState(null);
     const [profilepic, setProfilePic] = useState('https://via.placeholder.com/150');
+
+    const navigate = useNavigate();  // Initialize useNavigate
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -82,6 +85,11 @@ function Search() {
         }
     };
 
+    // Navigate to the user's profile page
+    const handleProfileClick = (user_id) => {
+        navigate(`/otherprofile/${user_id}`);  // Redirect to /profile/:user_id
+    };
+
     return (
         <div className="search-page">
             <Nav />
@@ -105,7 +113,11 @@ function Search() {
                         <ul>
                             {searchResults.length > 0 ? (
                                 searchResults.map((resultUser) => (
-                                    <div key={resultUser.id} className="search-result-item">
+                                    <div 
+                                        key={resultUser.id} 
+                                        className="search-result-item"
+                                        onClick={() => handleProfileClick(resultUser.id)} // Redirect on click
+                                    >
                                         <div className='usercard'>
                                             <img 
                                                 src={resultUser.profile_pic}
@@ -116,7 +128,10 @@ function Search() {
                                                 <p className="username">{resultUser.username}</p>
                                                 <p className="full-name">{resultUser.fullName}</p>
                                             </div>
-                                            <button onClick={() => handleFollow(resultUser.id)}>Follow</button>
+                                            <button onClick={(e) => { 
+                                                e.stopPropagation();  // Prevent triggering the profile click when following
+                                                handleFollow(resultUser.id);
+                                            }}>Follow</button>
                                         </div>
                                     </div >
                                 ))
