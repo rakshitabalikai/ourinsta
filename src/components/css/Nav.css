@@ -1,6 +1,11 @@
  /* Menu Styling */
  .menu {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0 ;
+    background-color: black;
+    height: 100vh;
     flex-direction: column;
     width: 15%;
     padding: 40px 20px;

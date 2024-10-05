@@ -10,8 +10,12 @@ body {
 .search-page {
     display: flex;
     height: 100vh;
+    margin-left: 200px;
+    width: 86.98vw;
+    background-color: #000;
     padding: 20px;
 }
+
 
 /* Styling for the search bar */
 .search-container {
@@ -26,7 +30,8 @@ body {
     align-items: center;
     background-color: #333;
     padding: 8px;
-    border-radius: 30px;
+    border-radius: 5px;
+    width: 400px;
 }
 
 #search {
@@ -115,3 +120,26 @@ body {
 }
 
 
+.usercard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0px 15px 0px;
+    transition: background-color 0.3s;
+    width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.usercard > button{
+    margin: 10px;
+    background-color: #3498db;
+    color: white;
+    height: 25px;
+    width: 50px;
+    border: none;
+    border-radius: 5px;
+}
+.usercard:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
