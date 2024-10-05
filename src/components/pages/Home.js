@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import '../css/Home.css';
 import Nav from './Nav';
 
+
 // Sample story content (you can replace it with actual data or API calls)
 const storyData = {
-  story1: { title: 'Story 1', content: 'This is the content of Story 1' },
+  story1: { 
+    username: 'Mohit Karekar',
+    profilePic: 'https://via.placeholder.com/40', // Add a profile picture URL here
+    imageUrl: 'your_story_image_url_here', // Add the URL of the story image here
+    timestamp: 'Posted 32m ago', },
   story2: { title: 'Story 2', content: 'This is the content of Story 2' },
   story3: { title: 'Story 3', content: 'This is the content of Story 3' },
   story4: { title: 'Story 4', content: 'This is the content of Story 4' },
