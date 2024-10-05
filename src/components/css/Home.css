@@ -6,9 +6,9 @@
     flex-direction: row;
     min-height: 100vh;
     margin: 0px;
-    /* margin-left: -300px; */
-    width: 100vw;
-    background-color: black; /* Set the background to black */
+    margin-left: 220px;
+    width: 85vw;
+    background-color: #000; /* Set the background to black */
     color: #fff;
   
   
@@ -118,11 +118,11 @@
 
 /* Suggestions */
 .suggestions {
-  width: 25%;
+  /* width: %; */
   background-color: #000000ce;
-  padding: 20px;
+  padding: 10px;
   border-left: 1px solid #dbdbdb;
-  margin-right: -50px;
+  /* margin-right: -50px; */
   
 }
 
