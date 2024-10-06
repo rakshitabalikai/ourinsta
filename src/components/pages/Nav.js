@@ -18,8 +18,8 @@ function Nav(){
         <Link to={"/home"}><button className='menu-button'><img src={home} alt="Home" /> Home</button></Link>
         
         <Link to={"/search"}><button className='menu-button'><img src={search} alt="Search" /> Search</button></Link> 
-        <button className='menu-button'><img src={explore} alt="Explore" /> Explore</button>
-    <Link to={"/Reels"}><button className='menu-button'><img src={reels} alt="Reels" /> Clip</button></Link> 
+        <Link to={"/Explore"}><button className='menu-button'><img src={explore} alt="Explore" /> Explore</button></Link>
+        <Link to={"/Reels"}><button className='menu-button'><img src={reels} alt="Reels" /> Clip</button></Link> 
         <Link to={"/messages"}><button className='menu-button'><img src={messages} alt="Messages" /> Messages</button></Link>
         
         <button className='menu-button'><img src={notifications} alt="Notifications" /> Notifications</button>

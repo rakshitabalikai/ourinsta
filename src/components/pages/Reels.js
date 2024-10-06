@@ -1,12 +1,13 @@
 import Nav from "./Nav";
-
-function Reels(){
+import "../css/Reels.css"
+function Reels() {
+    console.log("this is reels")
     return(
-        <div>
-            <Nav />
-            <h1>Reels can be uplod here , we can watch the reels from here</h1>
+        <div className="reels_container">
+            <Nav></Nav>
+            <h1 >hi trhere</h1>
         </div>
-
-    );
+    )
 }
+
 export default Reels;
