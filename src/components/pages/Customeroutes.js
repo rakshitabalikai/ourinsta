@@ -7,7 +7,7 @@ import EditProfile from "./EditProfile";
 import Message from "./Message";
 import Search from "./Search";
 import OtherProfile from "./otherprofile";  // Ensure this is the correct import path
-// import Storyview from "./Storyview";
+import StoryView from "./StoryView";
 import CreatePost from "./CreatePost";
 import Reels from "./Reels";
 
@@ -22,7 +22,7 @@ function Customeroutes(){
             <Route path="/messages" element={<Message />} />
             <Route path="/search" element={<Search />} />
             <Route path="/otherprofile/:userId" element={<OtherProfile />} />
-            {/* <Route path="/storyview" element={<Storyview />} /> */}
+            <Route path="/storyview" element={<StoryView />} />
             <Route path="/create" element={<CreatePost />} />
             <Route path="/Reel" element={<Reels></Reels>}></Route>
 

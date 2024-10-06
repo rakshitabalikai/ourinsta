@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/Home.css';
 import Nav from './Nav';
+import StoryView from './StoryView';
 
 
 // Sample story content (you can replace it with actual data or API calls)
 const storyData = {
-  story1: { 
-    username: 'Mohit Karekar',
-    profilePic: 'https://via.placeholder.com/40', // Add a profile picture URL here
-    imageUrl: 'your_story_image_url_here', // Add the URL of the story image here
-    timestamp: 'Posted 32m ago', },
-  story2: { title: 'Story 2', content: 'This is the content of Story 2' },
-  story3: { title: 'Story 3', content: 'This is the content of Story 3' },
-  story4: { title: 'Story 4', content: 'This is the content of Story 4' },
+  story1: { title: 'Story 1', username: 'Mohit Karekar' },
+  story2: { title: 'Story 2', username: 'John Doe' },
+  story3: { title: 'Story 3', username: 'Jane Smith' },
+  story4: { title: 'Story 4', username: 'Alice Johnson' },
 };
 
 function Home() {
-  // State to track the currently selected story
-  const [selectedStory, setSelectedStory] = useState(null);
+  
 
   return (
     <div className="home-container">
@@ -28,19 +25,12 @@ function Home() {
       <div className="main-feed">
         {/* Stories */}
         <div className="stories">
-          <div className="story" onClick={() => setSelectedStory('story1')}>Story 1</div>
-          <div className="story" onClick={() => setSelectedStory('story2')}>Story 2</div>
-          <div className="story" onClick={() => setSelectedStory('story3')}>Story 3</div>
-          <div className="story" onClick={() => setSelectedStory('story4')}>Story 4</div>
+          {/* Use Link to navigate to StoryView */}
+          <Link to={StoryView} className="story">Story 1</Link>
+          <Link to="/story/story2" className="story">Story 2</Link>
+          <Link to="/story/story3" className="story">Story 3</Link>
+          <Link to="/story/story4" className="story">Story 4</Link>
         </div>
-
-        {/* Show Selected Story */}
-        {selectedStory && (
-          <div className="story-content">
-            <h2>{storyData[selectedStory].title}</h2>
-            <p>{storyData[selectedStory].content}</p>
-          </div>
-        )}
 
         {/* Post */}
         <div className="post">
