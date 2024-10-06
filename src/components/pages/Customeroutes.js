@@ -25,7 +25,7 @@ function Customeroutes(){
             <Route path="/otherprofile/:userId" element={<OtherProfile />} />
             {/* <Route path="/storyview" element={<Storyview />} /> */}
             <Route path="/create" element={<CreatePost />} />
-            <Route path="/Reel" element={<Reels></Reels>}></Route>
+            <Route path="/Reels" element={<Reels></Reels>}></Route>
             <Route path="/Explore" element={<Explore></Explore>}></Route>
 
         </Routes>
