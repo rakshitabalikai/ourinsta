@@ -58,64 +58,66 @@ function CreatePost() {
   };
 
   return (
-    <div>
+    <div className="create-post-container">
       <Nav />
-      <div>
-        <h2>Create a Post or Story</h2>
-
-        {/* Buttons to choose between story and post */}
-        <div>
-          <button onClick={() => setFileType("story")}>Upload Story</button>
-          <button onClick={() => setFileType("post")}>Upload Post</button>
-        </div>
-
-        {/* Show the file input and caption only if type is selected */}
-        {fileType && (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Select {fileType === "story" ? "Story" : "Post"} File (Image/Video):</label>
-              <input type="file" accept="image/*,video/*" onChange={handleFileChange} required />
-            </div>
-
-            {/* Preview of the selected file */}
-            {preview && (
+      <div  >
+        <div >
+          <h2>Create a Post or Story</h2>
+  
+          {/* Buttons to choose between story and post */}
+          <div>
+            <button onClick={() => setFileType("story")}>Upload Story</button>
+            <button onClick={() => setFileType("post")}>Upload Post</button>
+          </div>
+  
+          {/* Show the file input and caption only if type is selected */}
+          {fileType && (
+            <form onSubmit={handleSubmit}>
               <div>
-                <h3>Preview:</h3>
-                {file.type.startsWith("image") ? (
-                  <img src={preview} alt="Preview" style={{ maxWidth: "300px", maxHeight: "300px" }} />
-                ) : (
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    style={{ maxWidth: "300px", maxHeight: "300px" }}
-                  >
-                    <source src={preview} type={file.type} />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
+                <label>Select {fileType === "story" ? "Story" : "Post"} File (Image/Video):</label>
+                <input type="file" accept="image/*,video/*" onChange={handleFileChange} required />
               </div>
-            )}
-
-            {/* Caption input */}
-            <div>
-              <label>Caption:</label>
-              <input
-                type="text"
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                placeholder="Add a caption..."
-                required
-              />
-            </div>
-
-            {/* Submit button */}
-            <button type="submit">Upload {fileType === "story" ? "Story" : "Post"}</button>
-          </form>
-        )}
+  
+              {/* Preview of the selected file */}
+              {preview && (
+                <div className="preview-container">
+                  <h3>Preview:</h3>
+                  {file.type.startsWith("image") ? (
+                    <img src={preview} alt="Preview" />
+                  ) : (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                    >
+                      <source src={preview} type={file.type} />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
+              )}
+  
+              {/* Caption input */}
+              <div>
+                <label>Caption:</label>
+                <input
+                  type="text"
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                  placeholder="Add a caption..."
+                  required
+                />
+              </div>
+  
+              {/* Submit button */}
+              <button type="submit">Upload {fileType === "story" ? "Story" : "Post"}</button>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
+  
 }
 
 export default CreatePost;
