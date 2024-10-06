@@ -10,6 +10,7 @@ import OtherProfile from "./otherprofile";  // Ensure this is the correct import
 // import Storyview from "./Storyview";
 import CreatePost from "./CreatePost";
 import Reels from "./Reels";
+import Explore from "./Explore";
 
 function Customeroutes(){
     return(
@@ -25,6 +26,7 @@ function Customeroutes(){
             {/* <Route path="/storyview" element={<Storyview />} /> */}
             <Route path="/create" element={<CreatePost />} />
             <Route path="/Reel" element={<Reels></Reels>}></Route>
+            <Route path="/Explore" element={<Explore></Explore>}></Route>
 
         </Routes>
     );
