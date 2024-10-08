@@ -23,7 +23,7 @@ function Customeroutes(){
             <Route path="/messages" element={<Message />} />
             <Route path="/search" element={<Search />} />
             <Route path="/otherprofile/:userId" element={<OtherProfile />} />
-            <Route path="/storyview" element={<StoryView />} />
+            <Route path="/storyview/:storyId" element={<StoryView />} />
             <Route path="/create" element={<CreatePost />} />
             <Route path="/Reels" element={<Reels></Reels>}></Route>
             <Route path="/Explore" element={<Explore></Explore>}></Route>
