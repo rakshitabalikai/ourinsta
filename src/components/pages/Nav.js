@@ -21,8 +21,7 @@ function Nav(){
         <Link to={"/Explore"}><button className='menu-button'><img src={explore} alt="Explore" /> Explore</button></Link>
         <Link to={"/Reels"}><button className='menu-button'><img src={reels} alt="Reels" /> Clip</button></Link> 
         <Link to={"/messages"}><button className='menu-button'><img src={messages} alt="Messages" /> Messages</button></Link>
-        
-        <button className='menu-button'><img src={notifications} alt="Notifications" /> Notifications</button>
+        <Link to={"/Notification"}><button className='menu-button'><img src={notifications} alt="Notifications" /> Notifications</button></Link>
         <Link to={"/create"}><button className='menu-button'><img src={create} alt="Create" /> Create</button></Link>
 
         <Link to={"/profile"}><button className='menu-button'><img src={profileIcon} alt="Profile" /> Profile</button></Link>

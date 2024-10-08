@@ -1,0 +1,55 @@
+/* Notifications.css */
+.notifications-container {
+    display: flex;
+  }
+  
+  .notifications-feed {
+    width: 700px;
+    padding: 20px 30px;
+    background-color: black;
+    
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .notification-info {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  
+  .notification-info p {
+    margin: 0;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .notification-info span {
+    font-size: 0.8em;
+    color: #888;
+  }
+  
+  .notification-actions button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .confirm-button {
+    background-color: #1da1f2;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  

@@ -11,6 +11,7 @@ import StoryView from "./StoryView";
 import CreatePost from "./CreatePost";
 import Reels from "./Reels";
 import Explore from "./Explore";
+import Notification from "./Notification";
 
 function Customeroutes(){
     return(
@@ -27,6 +28,7 @@ function Customeroutes(){
             <Route path="/create" element={<CreatePost />} />
             <Route path="/Reels" element={<Reels></Reels>}></Route>
             <Route path="/Explore" element={<Explore></Explore>}></Route>
+            <Route path="/Notification" element={<Notification></Notification>}></Route>
 
         </Routes>
     );
