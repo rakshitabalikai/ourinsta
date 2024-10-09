@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
 import '../css/CreatePost.css';
 
@@ -7,69 +7,95 @@ function CreatePost() {
   const [fileType, setFileType] = useState(""); // 'story' or 'post'
   const [preview, setPreview] = useState(null);
   const [caption, setCaption] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); // For displaying success message
+  const [errorMessage, setErrorMessage] = useState(""); // For displaying error message
 
-  // Handle file input
+  // Handle file input and convert to base64 for preview
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
 
-      // Create an object URL for preview instead of base64 for videos
-      const fileUrl = URL.createObjectURL(selectedFile);
-      setPreview(fileUrl);
+      // Convert the file to base64
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onload = () => {
+        setPreview(reader.result); // Set base64 preview
+      };
+      reader.onerror = (error) => {
+        console.error("Error converting file to base64:", error);
+      };
     }
   };
 
-  // Clean up object URL when component unmounts or a new file is selected
-  useEffect(() => {
-    return () => {
-      if (preview) {
-        URL.revokeObjectURL(preview); // Clean up memory
-      }
-    };
-  }, [preview]);
+  // Convert file to base64 for submission
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (file && caption && fileType) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("caption", caption);
-      formData.append("type", fileType); // Either 'story' or 'post'
+    setSuccessMessage(""); // Reset messages
+    setErrorMessage("");
 
-      // Here you would make your POST request to the backend
+    if (file && caption && fileType) {
       try {
-        const response = await fetch("https://your-backend-endpoint/upload", {
+        const base64File = await convertToBase64(file); // Convert file to base64
+
+        const formData = {
+          file: base64File,
+          caption,
+          type: fileType, // Either 'story' or 'post'
+        };
+
+        // Select API based on fileType
+        const apiUrl = fileType === "story"
+          ? "http://localhost:5038/api/social_media/uploadstory"
+          : "http://localhost:5038/api/social_media/uploadpost";
+
+        // Make API request
+        const response = await fetch(apiUrl, {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         });
+
         if (response.ok) {
-          console.log("File uploaded successfully!");
+          setSuccessMessage(`${fileType === "story" ? "Story" : "Post"} uploaded successfully!`);
         } else {
-          console.error("Error uploading file.");
+          const errorData = await response.json();
+          setErrorMessage(errorData.message || "Error uploading file.");
         }
       } catch (error) {
         console.error("Error:", error);
+        setErrorMessage("An unexpected error occurred.");
       }
     } else {
-      console.log("Please select a file, add a caption, and choose type.");
+      setErrorMessage("Please select a file, add a caption, and choose a type.");
     }
   };
 
   return (
     <div className="create-post-container">
       <Nav />
-      <div  >
-        <div >
+      <div>
+        <div>
           <h2>Create a Post or Story</h2>
-  
+
           {/* Buttons to choose between story and post */}
           <div>
             <button onClick={() => setFileType("story")}>Upload Story</button>
             <button onClick={() => setFileType("post")}>Upload Post</button>
           </div>
-  
+
           {/* Show the file input and caption only if type is selected */}
           {fileType && (
             <form onSubmit={handleSubmit}>
@@ -77,7 +103,7 @@ function CreatePost() {
                 <label>Select {fileType === "story" ? "Story" : "Post"} File (Image/Video):</label>
                 <input type="file" accept="image/*,video/*" onChange={handleFileChange} required />
               </div>
-  
+
               {/* Preview of the selected file */}
               {preview && (
                 <div className="preview-container">
@@ -85,18 +111,14 @@ function CreatePost() {
                   {file.type.startsWith("image") ? (
                     <img src={preview} alt="Preview" />
                   ) : (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                    >
+                    <video autoPlay loop muted>
                       <source src={preview} type={file.type} />
                       Your browser does not support the video tag.
                     </video>
                   )}
                 </div>
               )}
-  
+
               {/* Caption input */}
               <div>
                 <label>Caption:</label>
@@ -108,16 +130,19 @@ function CreatePost() {
                   required
                 />
               </div>
-  
+
               {/* Submit button */}
               <button type="submit">Upload {fileType === "story" ? "Story" : "Post"}</button>
             </form>
           )}
+
+          {/* Display success or error message */}
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
       </div>
     </div>
   );
-  
 }
 
 export default CreatePost;
