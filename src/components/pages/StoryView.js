@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import "../css/StoryView.css";
+import "../css/Storyview.css";
 
 // Story data with mixed content (images or videos)
 const storyData = {
