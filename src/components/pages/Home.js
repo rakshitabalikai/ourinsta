@@ -1,20 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Home.css';
 import Nav from './Nav';
-import StoryView from './StoryView';
-
-
-// Sample story content (you can replace it with actual data or API calls)
-const storyData = {
-  story1: { title: 'Story 1', username: 'Mohit Karekar' },
-  story2: { title: 'Story 2', username: 'John Doe' },
-  story3: { title: 'Story 3', username: 'Jane Smith' },
-  story4: { title: 'Story 4', username: 'Alice Johnson' },
-};
 
 function Home() {
-  
+  const [posts, setPosts] = useState([]);
+  const [stories, setStories] = useState([]);
+
+  // Fetch posts and stories when the component mounts
+  useEffect(() => {
+    // Fetch stories from API
+    fetch('http://localhost:5038/api/social_media/stories')
+      .then(response => {
+        if (response.headers.get('content-type').includes('application/json')) {
+          return response.json();
+        } else {
+          throw new Error('Stories response is not JSON');
+        }
+      })
+      .then(data => setStories(data))
+      .catch(error => {
+        console.error('Error fetching stories:', error);
+        alert('Failed to load stories');
+      });
+
+    // Fetch posts from API
+    fetch('http://localhost:5038/api/social_media/posts')
+      .then(response => {
+        if (response.headers.get('content-type').includes('application/json')) {
+          return response.json();
+        } else {
+          throw new Error('Posts response is not JSON');
+        }
+      })
+      .then(data => setPosts(data))
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+        alert('Failed to load posts');
+      });
+  }, []);
 
   return (
     <div className="home-container">
@@ -25,25 +49,45 @@ function Home() {
       <div className="main-feed">
         {/* Stories */}
         <div className="stories">
-          {/* Use Link to navigate to StoryView */}
-          <Link to={StoryView} className="story">Story 1</Link>
-          <Link to="/story/story2" className="story">Story 2</Link>
-          <Link to="/story/story3" className="story">Story 3</Link>
-          <Link to="/story/story4" className="story">Story 4</Link>
+          {stories.length > 0 ? (
+            stories.map((story, index) => (
+              <Link key={index} to={`/story/${story._id}`} className="story">
+                {story.title} by {story.username}
+              </Link>
+            ))
+          ) : (
+            <p>No stories available.</p>
+          )}
         </div>
 
         {/* Post */}
-        <div className="post">
-          <div className="post-header">
-            <div className="profile-picture"></div>
-            <div className="profile-info">
-              <p>tartinebakery</p>
-              <span>San Francisco, California</span>
-            </div>
-          </div>
-          <div className="post-image">
-            <img src="your_image_url_here" alt="Pie" />
-          </div>
+        <div className="posts">
+          {posts.length > 0 ? (
+            posts.map((post, index) => (
+              <div key={index} className="post">
+                <div className="post-header">
+                  <div className="profile-picture"></div>
+                  <div className="profile-info">
+                    <p>{post.username}</p>
+                    <span>{post.location}</span>
+                  </div>
+                </div>
+                <div className="post-image">
+                  {post.file && post.file.startsWith("data:image") ? (
+                    <img src={post.file} alt={post.caption} />
+                  ) : (
+                    <video autoPlay loop muted>
+                      <source src={post.file} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
+                <p>{post.caption}</p>
+              </div>
+            ))
+          ) : (
+            <p>No posts available.</p>
+          )}
         </div>
       </div>
 

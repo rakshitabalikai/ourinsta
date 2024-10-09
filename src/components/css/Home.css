@@ -59,11 +59,11 @@
 
 /* Main Feed */
 .main-feed {
-  width: 65%;
+  width: 75%;
   height: 100vh;
   background-color: #000000ce;
   padding: 20px;
-  
+ 
   
 }
 
@@ -118,12 +118,14 @@
 
 /* Suggestions */
 .suggestions {
-  /* width: %; */
+   width: 80px; 
+  height: 100%;
   background-color: #000000ce;
   padding: 10px;
   border-left: 1px solid #dbdbdb;
   /* margin-right: -50px; */
-  
+  position: fixed;
+  right: 320px;
 }
 
 .suggestions p {
