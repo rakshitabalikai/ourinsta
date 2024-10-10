@@ -23,6 +23,8 @@ body {
   background-image: 
       radial-gradient(at 47% 33%, hsl(279.74, 62%, 49%) 0, transparent 95%), 
       radial-gradient(at 82% 65%, hsl(314.84, 73%, 49%) 0, transparent 95%);
+  background-attachment: fixed; /* This will make the background image stationary */
+  background-size: cover;
   /* background: url('../assets/background/blurry-gradient-haikei.png') no-repeat center center/cover; */
   display: flex;
   justify-content: center;
