@@ -103,3 +103,14 @@ button[type="submit"]:hover {
 .sidebar a:hover {
   color: #9a00ff;
 }
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
