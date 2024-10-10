@@ -1,4 +1,4 @@
-import '../css/Signup.css';
+// import '../css/Signup.css';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import logo from "../assets/logo/logo.png"

@@ -1,4 +1,5 @@
 import '../css/Login.css';
+import logo from "../assets/logo/logo.png"
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // For navigation
@@ -36,14 +37,19 @@ function Login() {
     <div>
       <div className="main-container-login">
         <div className="box1">
+        <div className="heading">
+          <img src={logo}  className="logo" alt="logo" />
+        </div>
           <form className="login-form" onSubmit={handleSubmit}>
+
             <div className='field'>
-              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
               <label htmlFor='mobileOrEmailOrUsername'>Username, Email or Mobile</label>
+              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
             </div>
+
             <div className='field'>
-              <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
               <label htmlFor='password'>Password</label>
+              <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
             </div>
             <button className="login-button" title="login">Log In</button>
           </form>

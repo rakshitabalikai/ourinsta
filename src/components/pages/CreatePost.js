@@ -98,7 +98,7 @@ function CreatePost() {
               )}
   
               {/* Caption input */}
-              <div>
+              <div className="caption">
                 <label>Caption:</label>
                 <input
                   type="text"
