@@ -60,6 +60,7 @@ body {
 
 .field {
   position: relative;
+  text-align: left;
   margin-bottom: 20px; /* Added more space between fields */
 }
 
