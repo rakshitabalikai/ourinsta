@@ -29,6 +29,7 @@ function Home() {
       .then(response => {
         if (response.headers.get('content-type').includes('application/json')) {
           return response.json();
+          
         } else {
           throw new Error('Posts response is not JSON');
         }

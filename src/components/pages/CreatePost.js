@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Nav from "./Nav";
 import '../css/CreatePost.css';
 
@@ -9,7 +9,18 @@ function CreatePost() {
   const [caption, setCaption] = useState("");
   const [successMessage, setSuccessMessage] = useState(""); // For displaying success message
   const [errorMessage, setErrorMessage] = useState(""); // For displaying error message
+  const [user, setUser] = useState(null);
+  const [profilepic, setProfilePic] = useState('https://via.placeholder.com/150');
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      console.log(parsedUser);
+      setUser(parsedUser);
+      setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150'); // Set the profile pic here
+    }
+  }, []);
   // Handle file input and convert to base64 for preview
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -49,11 +60,12 @@ function CreatePost() {
         const base64File = await convertToBase64(file); // Convert file to base64
 
         const formData = {
+          user_id:user.id,
           file: base64File,
           caption,
           type: fileType, // Either 'story' or 'post'
         };
-
+        console.log(formData);
         // Select API based on fileType
         const apiUrl = fileType === "story"
           ? "http://localhost:5038/api/social_media/uploadstory"
