@@ -84,7 +84,8 @@ function Signup() {
 };
 
   return (
-    <div  className="main-container-login">
+    <div className='container_login'>
+      <div  className="main-container-login">
       <div className="box1">
         <div className="heading">
           <img src={logo}  className="logo" alt="logo" />
@@ -94,27 +95,27 @@ function Signup() {
           <form onSubmit={handleSubmit}>
             <div className="field">
               <label htmlFor="email">Email</label>
-              <input id="email" type="text" name="email" value={formData.email} onChange={handleChange} required />
+              <input id="email" type="text" placeholder='Email' name="email" value={formData.email} onChange={handleChange} required />
             </div>
 
             <div className="field">
               <label htmlFor="mobile">Mobile Number</label>
-              <input id="mobile" type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
+              <input id="mobile" type="text" placeholder='Mobile Number' name="mobile" value={formData.mobile} onChange={handleChange} required />
             </div>
 
             <div className="field">
               <label htmlFor="fullName">Full Name</label>
-              <input id="fullName" type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
+              <input id="fullName" type="text" placeholder='Full Name' name="fullName" value={formData.fullName} onChange={handleChange} required />
             </div>
 
             <div className="field">
               <label htmlFor="username">Username</label>
-              <input id="username" type="text" name="username" value={formData.username} onChange={handleChange} required />
+              <input id="username" type="text" placeholder='username'  name="username" value={formData.username} onChange={handleChange} required />
             </div>
 
             <div className="field">
               <label htmlFor="password">Password</label>
-              <input id="password" type="password" name="password" value={formData.password} onChange={handleChange} required />
+              <input id="password" type="password" placeholder='Password' name="password" value={formData.password} onChange={handleChange} required />
             </div>
 
             <div className="field">
@@ -148,10 +149,11 @@ function Signup() {
         </div>
 
         <p className="login-link">
-          Have an account? <Link to="/" className="login">Log in</Link>
+          Have an account? <Link to="/" className="signup1">Log in</Link>
         </p>
       </div>
       <Outlet></Outlet>
+    </div>
     </div>
   );
 }

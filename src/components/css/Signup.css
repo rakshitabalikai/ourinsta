@@ -11,7 +11,7 @@
 .field select {
   width: 100%;
   appearance: none; /* Remove default arrow */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="white" d="M7 10l5 5 5-5z"/></svg>');
+  /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="white" d="M7 10l5 5 5-5z"/></svg>'); */
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 10px;
@@ -27,4 +27,16 @@
 
 .field select:focus {
   border-bottom: 1px solid #fff; /* White border when focused */
+  background-color: transparent;
+
+}
+
+.field select option{
+    background-color: none; /* Make the options background transparent */
+    color: #000; /* Keep the text color for options */
+    
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* This inverts the color, making the icon white */
 }

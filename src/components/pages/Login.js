@@ -34,7 +34,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className='container_login'>
       <div className="main-container-login">
         <div className="box1">
         <div className="heading">
@@ -44,12 +44,12 @@ function Login() {
 
             <div className='field'>
               <label htmlFor='mobileOrEmailOrUsername'>Username, Email or Mobile</label>
-              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
+              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" placeholder='Mobile/Email/Username' value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
             </div>
 
             <div className='field'>
               <label htmlFor='password'>Password</label>
-              <input id='password' type="password" name="password" value={formData.password} onChange={handleChange} required />
+              <input id='password' type="password" placeholder='Password' name="password" value={formData.password} onChange={handleChange} required />
             </div>
             <button className="login-button" title="login">Log In</button>
           </form>

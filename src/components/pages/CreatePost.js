@@ -132,7 +132,7 @@ function CreatePost() {
               </div>
 
               {/* Submit button */}
-              <button type="submit">Upload {fileType === "story" ? "Story" : "Post"}</button>
+              <button className="upload" type="submit">Upload {fileType === "story" ? "Story" : "Post"}</button>
             </form>
           )}
 

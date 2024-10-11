@@ -77,12 +77,12 @@ label {
   margin-top: 10px;
 }
 
-button[type="submit"] {
+.upload {
   background-color: #00e05a;
   margin-top: 20px;
 }
 
-button[type="submit"]:hover {
+.upload:hover {
   background-color: #00ff9a;
 }
 
