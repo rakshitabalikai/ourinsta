@@ -1,4 +1,4 @@
-// import '../css/Signup.css';
+import '../css/Signup.css';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import logo from "../assets/logo/logo.png"
@@ -84,8 +84,8 @@ function Signup() {
 };
 
   return (
-    <div className="app">
-      <div className="signup-box">
+    <div  className="main-container-login">
+      <div className="box1">
         <div className="heading">
           <img src={logo}  className="logo" alt="logo" />
         </div>
@@ -93,41 +93,42 @@ function Signup() {
         <div>
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <input id="email" type="text" name="email" value={formData.email} onChange={handleChange} required />
               <label htmlFor="email">Email</label>
+              <input id="email" type="text" name="email" value={formData.email} onChange={handleChange} required />
             </div>
 
             <div className="field">
-              <input id="mobile" type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
               <label htmlFor="mobile">Mobile Number</label>
+              <input id="mobile" type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
             </div>
 
             <div className="field">
-              <input id="fullName" type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
               <label htmlFor="fullName">Full Name</label>
+              <input id="fullName" type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
             </div>
 
             <div className="field">
-              <input id="username" type="text" name="username" value={formData.username} onChange={handleChange} required />
               <label htmlFor="username">Username</label>
+              <input id="username" type="text" name="username" value={formData.username} onChange={handleChange} required />
             </div>
 
             <div className="field">
-              <input id="password" type="password" name="password" value={formData.password} onChange={handleChange} required />
               <label htmlFor="password">Password</label>
+              <input id="password" type="password" name="password" value={formData.password} onChange={handleChange} required />
             </div>
 
             <div className="field">
+              <label htmlFor="gender">Gender</label>
               <select id="gender" name="gender" value={formData.gender} onChange={handleChange} required>
                 <option value="">Select</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
-              <label htmlFor="gender">Gender</label>
             </div>
 
             <div className="field">
+              <label htmlFor="dateOfBirth">Date of Birth</label>
               <input
                 type="date"
                 id="dateOfBirth"
@@ -136,10 +137,9 @@ function Signup() {
                 onChange={handleChange}
                 required
               />
-              <label htmlFor="dateOfBirth">Date of Birth</label>
             </div>
 
-            <button type="submit" className="signup-btn">Sign Up</button>
+            <button type="submit" className="login-button">Sign Up</button>
           </form>
 
           {/* Display success or error messages */}

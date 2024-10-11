@@ -1,165 +1,30 @@
-/* Global Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Difference in .card class is missing in the new version */
 
-@keyframes animate {
-  from {
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0px);
-  }
-}
+/* .card styles are missing */
 
-body {
-  /* font-family: 'Arial', sans-serif; */
-  height: 100vh;
-  width: 100vw;
-  background: url('../assets/background/blurry-gradient-haikei.png') no-repeat center center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Main App Container */
-.app {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Signup Box */
+/* Changed background color of .signup-box */
 .signup-box {
   background: rgba(17, 1, 1, 0.498);
-  padding: 40px;
-  width: 600px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Logo */
-.page-logo {
-  font-family: 'Arial', sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  color: #fff; /* White text */
-  margin-bottom: 30px;
-}
-
-/* Input Field Container */
-.field {
-  position: relative;
-  margin-bottom: 25px;
-}
-
-/* Base Styles for All Input Fields */
-.field input,
+/* New input styling for field select */
 .field select {
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  color: #181818; /* White text */
-  background-color: rgba(246, 244, 244, 0); /* Transparent background */
-  border: none; /* Remove default borders */
-  border-bottom: 1px solid #ccc; /* Bottom border only */
-  outline: none; /* Remove default outline */
-  transition: 0.3s ease; /* Smooth transitions */
-}
-
-.field input:focus,
-.field select:focus {
-  border-bottom: 1px solid #fff; /* White border when focused */
-}
-
-/* Input Field Labels */
-.field label {
-  position: absolute;
-  top: 8px; /* Space between the input and label */
-  left: 15px;
-  font-size: 14px;
-  color: #999; /* Default label color */
-  transition: 0.3s ease;
-}
-
-/* Adjust Label Position when Input is Focused or Filled */
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field select:focus + label,
-.field select:not([value=""]) + label {
-  top: -20px;
-  font-size: 12px;
-   color: #fff;
-}
-
-/* Special Styling for Select Dropdown */
-.field select {
   appearance: none; /* Remove default arrow */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="white" d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 10px;
-}
-
-/* Special Styling for Date Input */
-.field input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* Change calendar icon to white */
-}
-
-/* Signup Button */
-.signup-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #e94560; /* Prominent red */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.signup-btn:hover {
-  background-color: #d8344c; /* Darker red on hover */
-}
-
-/* Error and Success Messages */
-.error-message,
-.success-message {
-  color: #e94560;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-/* Login Link */
-.login-link {
-  font-size: 14px;
-  margin-top: 20px;
   color: #fff;
+  border: none;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: rgba(246, 244, 244, 0); /* Transparent background */
+  font-size: 16px;
+  padding: 14px;
+  transition: 0.3s ease;
 }
 
-/* Login Text */
-.login {
-  color: red;
-  text-decoration: none;
-}
-
-/* Hover Effects for Signup Link */
-.signup {
-  color: rgb(247, 245, 245);
-  text-decoration: none;
-}
-
-.signup:hover {
-  text-decoration: underline;
-}
-.logo{
-  height: 80px;
-  /* margin-top: -10px; */
-  margin: -20px;
+.field select:focus {
+  border-bottom: 1px solid #fff; /* White border when focused */
 }
