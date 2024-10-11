@@ -65,7 +65,7 @@ function Home() {
         <div className="posts">
           {posts.length > 0 ? (
             posts.map((post, index) => (
-              <div key={index} className="post">
+              <div key={index} className="post autoshow">
                 <div className="post-header">
                   <div className="profile-picture"></div>
                   <div className="profile-info">
