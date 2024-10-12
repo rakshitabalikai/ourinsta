@@ -29,6 +29,12 @@ function Notification() {
       username: 'akshay_marambed',
       time: '10w',
       post: 'Liked your reel'
+    },
+    {
+      type: 'Comment',
+      username: 'akshay_marambed',
+      time: '10w',
+      post: 'commented on this post'
     }
   ];
 
@@ -72,12 +78,23 @@ function Notification() {
             </div>
           ))}
         </div>
+
+        {/* Comments */}
+        <div className="notifications-section">
+          <h3>Comments</h3>
+          {notifications.filter(n => n.type === 'Comment').map((notification, index) => (
+            <div key={index} className="notification-item">
+              <div className="profile-picture"></div>
+              <div className="notification-info">
+                <p>{notification.username} {notification.post}</p>
+                <span>{notification.time}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default Notification;
-
-
-

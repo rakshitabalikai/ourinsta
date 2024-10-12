@@ -43,7 +43,7 @@ button:hover {
   background-color: #9a00ff;
 }
 
-input[type="file"] {
+.caption {
   padding: 10px;
   margin-top: 10px;
   background-color: #333;
@@ -51,7 +51,7 @@ input[type="file"] {
   color: white;
 }
 
-input[type="text"] {
+.caption > input[type="text"] {
   padding: 10px;
   margin-top: 10px;
   background-color: #333;
@@ -77,12 +77,12 @@ label {
   margin-top: 10px;
 }
 
-button[type="submit"] {
+.upload {
   background-color: #00e05a;
   margin-top: 20px;
 }
 
-button[type="submit"]:hover {
+.upload:hover {
   background-color: #00ff9a;
 }
 
@@ -102,4 +102,15 @@ button[type="submit"]:hover {
 
 .sidebar a:hover {
   color: #9a00ff;
+}
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 }
