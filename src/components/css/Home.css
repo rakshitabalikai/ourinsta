@@ -2,17 +2,26 @@
 
 /* Ensure the app container takes full height and width */
 .home-container{
-  display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+   display: grid;
+    /* min-height: 100vh; */
     margin: 0px;
-    margin-left: 220px;
-    width: 85vw;
-    background-color: #000; /* Set the background to black */
+    grid-template-columns: 15% 70% 15%;
+    /* margin-left: 220px; */
+    /* width: 85vw; */
+    /* background-color: #000;  */
+    
+    /* background-color: #7236d4;
+    background-image: 
+        radial-gradient(at 47% 33%, hsl(279.74, 62%, 49%) 0, transparent 95%), 
+        radial-gradient(at 82% 65%, hsl(314.84, 73%, 49%) 0, transparent 95%);
     color: #fff;
+    background-attachment: fixed; 
+   background-size: cover; */
   
   
-  
+}
+.menu{
+  grid-column: 1;
 }
 
 /* Sidebar: set to full height */
@@ -59,10 +68,14 @@
 
 /* Main Feed */
 .main-feed {
+  grid-column: 2;
   width: 75%;
   height: 100vh;
-  background-color: #000000ce;
+  margin-left: -100PX;
+  /* background-color: #000000ce; */
   padding: 20px;
+  justify-content: center;
+  align-items: center;
  
   
 }
@@ -88,6 +101,7 @@
 .post {
   background-color: #fff;
   border: 1px solid #dbdbdb;
+  width: 150%;
   margin-bottom: 20px;
   border-radius: 3px;
 }
@@ -115,15 +129,20 @@
   height: auto;
   display: block;
 }
-
+.postDescription{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Suggestions */
 .suggestions {
+  grid-column: 3;
    width: 80px; 
   height: 100%;
-  background-color: #000000ce;
+  /* background-color: #000000ce; */
   padding: 10px;
   border-left: 1px solid #dbdbdb;
-  /* margin-right: -50px; */
+  margin-right: -50px;
   position: fixed;
   right: 320px;
 }
@@ -179,4 +198,7 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+.captions{
+  color: #000;
 }

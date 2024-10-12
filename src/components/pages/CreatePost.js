@@ -10,7 +10,6 @@ function CreatePost() {
   const [successMessage, setSuccessMessage] = useState(""); // For displaying success message
   const [errorMessage, setErrorMessage] = useState(""); // For displaying error message
   const [user, setUser] = useState(null);
-  const [profilepic, setProfilePic] = useState('https://via.placeholder.com/150');
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -18,7 +17,6 @@ function CreatePost() {
       const parsedUser = JSON.parse(storedUser);
       console.log(parsedUser);
       setUser(parsedUser);
-      setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150'); // Set the profile pic here
     }
   }, []);
   // Handle file input and convert to base64 for preview
