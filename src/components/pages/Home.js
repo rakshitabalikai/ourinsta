@@ -63,7 +63,7 @@ function Home() {
   return (
     <div className="home-container">
       {/* Sidebar */}
-      <div className="menu">
+      <div className="menu1">
         <Link to={"/home"}><button className='menu-button'><img src={home} alt="Home" /> Home</button></Link>
         <Link to={"/search"}><button className='menu-button'><img src={search} alt="Search" /> Search</button></Link> 
         <Link to={"/Explore"}><button className='menu-button'><img src={explore} alt="Explore" /> Explore</button></Link>

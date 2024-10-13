@@ -21,7 +21,7 @@ body {
   width: 100vw;
   
   /* background: url('../assets/background/blurry-gradient-haikei.png') no-repeat center center/cover; */
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
