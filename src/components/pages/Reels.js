@@ -5,7 +5,7 @@ function Reels() {
     return(
         <div className="reels_container">
             <Nav></Nav>
-            <h1 >hi trhere</h1>
+            {/* <h1 >hi trhere</h1> */}
         </div>
     )
 }

@@ -99,11 +99,12 @@
   align-items: center;
 }
 .post {
-  background-color: #fff;
+  /* background-color: #fff; */
   border: 1px solid #dbdbdb;
   width: 80%;
   margin-bottom: 20px;
   border-radius: 3px;
+  color: #fff;
 }
 
 .post-header {
@@ -119,6 +120,9 @@
   border-radius: 50%;
   margin-right: 10px;
 }
+.profile-picture > img{
+  border-radius: 50%;
+}
 
 .profile-info p {
   font-weight: bold;
@@ -129,9 +133,20 @@
   height: auto;
   display: block;
 }
-.postDescription{
+.post-image{
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.postDescription{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+}
+.likeandcomment{
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 /* Suggestions */
@@ -192,7 +207,7 @@
 
 @keyframes autoshowAnimation{
   from{
-    opacity: 0.1;
+    opacity: 0.8;
     transform: translateY(200px) scale(0.95);
   }to{
     opacity: 1;
@@ -200,7 +215,7 @@
   }
 }
 .captions{
-  color: #000;
+  color: #fff;
 }
 
 .menu1{

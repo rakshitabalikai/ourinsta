@@ -10,6 +10,7 @@ import create from '../assets/icons/create.png';
 import profileIcon from '../assets/icons/profile.png';
 import hamburger from '../assets/icons/hamburger.png';
 import like from '../assets/icons/liked.png'
+import comment from '../assets/icons/comment.png'
 import '../css/Home.css';
 import Nav from './Nav';
 
@@ -98,9 +99,11 @@ function Home() {
             posts.map((post, index) => (
               <div key={index} className="post autoshow">
                 <div className="post-header">
-                  <div className="profile-picture"></div>
+                  <div className="profile-picture">
+                    <img src={post.user.profile_pic} alt="" />
+                  </div>
                   <div className="profile-info">
-                    <p>{post.username}</p>
+                    <p>{post.user.username}</p>
                     <span>{post.location}</span>
                   </div>
                 </div>
@@ -116,7 +119,10 @@ function Home() {
                 </div>
                 <div className='postDescription'>
                 <p className='captions'>{post.caption}</p>
-                <button className='menu-button'><img src={like} alt="Home" /></button>
+                  <div className='likeandcomment'>
+                    <button className='menu-button'><img src={comment} alt="Home" /></button>
+                    <button className='menu-button'><img src={like} alt="Home" /></button>
+                  </div>
                 </div>
               </div>
             ))
