@@ -42,41 +42,26 @@ function Explore(){
              <Nav />
             </div>
         <div className="exploreposts">
-          {posts.length > 0 ? (
-            posts.map((post, index) => (
-              <div key={index} className="explorepost">
-                {/* <div className="post-header">
-                  <div className="profile-picture">
-                    <img src={post.user.profile_pic} alt="" />
-                  </div>
-                  <div className="profile-info">
-                    <p>{post.user.username}</p>
-                    <span>{post.location}</span>
-                  </div>
-                </div> */}
-                <div className="post-image">
-                  {post.file && post.file.startsWith("data:image") ? (
-                    <img src={post.file} alt={post.caption} />
-                  ) : (
-                    <video autoPlay loop muted>
-                      <source src={post.file} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  )}
-                </div>
-                {/* <div className='postDescription'>
-                <p className='captions'>{post.caption}</p>
-                  <div className='likeandcomment'>
-                    <button className='menu-button'><img src={comment} alt="Home" /></button>
-                    <button className='menu-button'><img src={like} alt="Home" /></button>
-                  </div>
-                </div> */}
-              </div>
-            ))
+  {posts.length > 0 ? (
+    posts.map((post, index) => (
+      <div key={index} className="explorepost">
+        <div className="post-image">
+          {post.file && post.file.startsWith("data:image") ? (
+            <img src={post.file} alt={post.caption} />
           ) : (
-            <p>No posts available.</p>
+            <video autoPlay loop muted>
+              <source src={post.file} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           )}
         </div>
+      </div>
+    ))
+  ) : (
+    <p>No posts available.</p>
+  )}
+</div>
+
         </div>
 
     );

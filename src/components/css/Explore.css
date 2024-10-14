@@ -1,14 +1,27 @@
-.explorecontainer{
+.explorecontainer {
     display: grid;
-    grid-template-columns: 15% 1fr;
+    grid-template-columns: 15% 1fr; /* Sidebar and content split */
 }
-.exploreposts{
-    left: calc(100%-15%);
-    columns: 400px;
+
+.exploreposts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 400px)); /* Create a responsive grid */
+    gap: 10px; /* Add consistent gap between posts */
+    padding: 10px;
 }
-.explorepost{
+
+.explorepost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1%;
+    box-sizing: border-box;
 }
-.explorepost > post-image{
+
+.explorepost > .post-image {
     width: 100%;
+    max-width: 100%; /* Ensures image doesn't overflow */
+    height: auto; /* Maintains aspect ratio */
+    min-width: 200px; /* Ensures the image has a minimum width */
+    object-fit: cover; /* Prevents distortion of the image */
 }
