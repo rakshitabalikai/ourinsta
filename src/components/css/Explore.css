@@ -1,0 +1,14 @@
+.explorecontainer{
+    display: grid;
+    grid-template-columns: 15% 1fr;
+}
+.exploreposts{
+    left: calc(100%-15%);
+    columns: 400px;
+}
+.explorepost{
+    padding: 1%;
+}
+.explorepost > post-image{
+    width: 100%;
+}

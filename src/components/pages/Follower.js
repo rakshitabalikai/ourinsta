@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
 import '../css/Search.css';
 import Nav from './Nav';
+import { useParams } from 'react-router-dom';
 
 function Following() {
   const [user, setUser] = useState(null);
   const [profilePic, setProfilePic] = useState('https://via.placeholder.com/150');
   const [followingUsers, setFollowingUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
-
+  const user_id = useParams();
   const navigate = useNavigate();  // Initialize useNavigate
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function Following() {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
       setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150');
-      fetchFollowingUsers(parsedUser.id); // Fetch following users using user ID
+      fetchFollowingUsers(user_id); // Fetch following users using user ID
     }
   }, []);
 

@@ -30,7 +30,7 @@ function Customeroutes(){
             <Route path="/Reels" element={<Reels></Reels>}></Route>
             <Route path="/Explore" element={<Explore></Explore>}></Route>
             <Route path="/Notification" element={<Notification></Notification>}></Route>
-            <Route path="/Following" element={<Following></Following>}></Route>
+            <Route path="/Following/:user_id" element={<Following></Following>}></Route>
         </Routes>
     );
 }

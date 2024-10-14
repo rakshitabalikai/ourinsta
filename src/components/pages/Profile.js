@@ -44,7 +44,7 @@ function Profile() {
 
   // Redirect to the following page
   const handleFollowingClick = () => {
-    navigate(`/following/${user.id}`); // Redirect to the following page with user ID
+    navigate(`/Following/${user.id}`); // Redirect to the following page with user ID
   };
 
   if (!user) {
