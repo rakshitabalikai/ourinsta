@@ -12,6 +12,7 @@ import CreatePost from "./CreatePost";
 import Reels from "./Reels";
 import Explore from "./Explore";
 import Notification from "./Notification";
+import Following from "./Follower";
 
 function Customeroutes(){
     return(
@@ -29,7 +30,7 @@ function Customeroutes(){
             <Route path="/Reels" element={<Reels></Reels>}></Route>
             <Route path="/Explore" element={<Explore></Explore>}></Route>
             <Route path="/Notification" element={<Notification></Notification>}></Route>
-
+            <Route path="/Following" element={<Following></Following>}></Route>
         </Routes>
     );
 }
