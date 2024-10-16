@@ -59,8 +59,8 @@ function Search() {
         }
 
         const followData = {
-            follower: user.id,   // Current logged-in user
-            user_id: user_id,    // User to be followed
+            following_id: user.id,   // Current logged-in user
+            follower_id: user_id,    // User to be followed
         };
 
         try {
