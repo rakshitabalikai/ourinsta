@@ -39,7 +39,7 @@ function Profile() {
 
   // Redirect to the followers page
   const handleFollowersClick = () => {
-    navigate(`/followers/${user.id}`); // Redirect to the followers page with user ID
+    navigate(`/follower/${user.id}`); // Redirect to the followers page with user ID
   };
 
   // Redirect to the following page
