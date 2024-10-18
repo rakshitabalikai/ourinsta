@@ -48,9 +48,9 @@ function Follower() {
   };
 
   return (
-    <div className="following-page">
+    <div className="search-page">
       <Nav /> {/* Navigation Bar */}
-      <div className="following-container">
+      <div className="search-container">
         <h2>Users following you</h2>
         {isLoading ? (
           <p>Loading...</p> // Display loading while fetching data

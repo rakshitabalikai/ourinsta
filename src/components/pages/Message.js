@@ -1,64 +1,146 @@
-import Nav from './Nav';
-import '../css/Message.css'; // CSS for the message section
-import '../css/Sidebar.css'; // CSS for the sidebar
-import React, { useEffect, useState, useRef } from 'react';
-import { io } from 'socket.io-client';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// const socket = io("http://localhost:5038", {
-//   transports: ["websocket"], // Force WebSocket transport
-// });
+function Message() {
+  const [user, setUser] = useState(null);
+  const [reciver, setreciver] = useState(null);
+  const [profilePic, setProfilePic] = useState('https://via.placeholder.com/150');
+  const [followingCount, setFollowingCount] = useState(0); // New state for following count
+  const [followersCount, setFollowersCount] = useState(0); // New state for followers count
+  const [chatHistory, setChatHistory] = useState([]);
+  const [message, setMessage] = useState('');
+  const [ws, setWs] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(null); // ID of the user to chat with
+  const [followedUsers, setFollowedUsers] = useState([]); // List of users the current user follows
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
-
-const Message = () => {
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState("");
-  const chatRef = useRef(null);
-  const ws = useRef(null);
-
+  // Fetch the logged-in user and follow stats
   useEffect(() => {
-    // Create a WebSocket connection when the component mounts
-    ws.current = new WebSocket("ws://localhost:5038");
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150');
+      fetchFollowStats(parsedUser.id); // Fetch follow stats using user ID
+      fetchFollowedUsers(parsedUser.id); // Fetch the followed users
+    } else {
+      navigate('/login'); // Redirect to login if no user is found
+    }
+  }, [navigate]);
 
-    // When a new message is received from the WebSocket server
-    ws.current.onmessage = (event) => {
-      setMessages((prevMessages) => [...prevMessages, event.data]);
-      // Auto-scroll to the bottom when new messages arrive
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  // Function to fetch follow stats (followers and following count)
+  const fetchFollowStats = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:5038/api/social_media/follow_stats/${userId}`);
+      const data = await response.json();
+      setFollowingCount(data.followingCount);
+      setFollowersCount(data.followersCount);
+    } catch (error) {
+      console.error('Error fetching follow stats:', error);
+    }
+  };
+
+  // Fetch followed users list
+  const fetchFollowedUsers = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:5038/api/social_media/following/${userId}`);
+      const data = await response.json();
+      setFollowedUsers(data.users);
+    } catch (error) {
+      console.error('Error fetching followed users:', error);
+    }
+  };
+
+  // Establish WebSocket connection when component mounts
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:5038');
+    setWs(socket);
+
+    socket.onopen = () => {
+      console.log('WebSocket connected');
     };
 
-    // Cleanup the WebSocket connection when the component unmounts
+    socket.onmessage = (event) => {
+      if (typeof event.data === 'string') {
+        // Handle text message
+        setChatHistory((prev) => [...prev, event.data]);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket disconnected');
+    };
+
     return () => {
-      ws.current.close();
+      socket.close();
     };
   }, []);
 
-  const sendMessage = () => {
-    if (inputMessage) {
-      // Send message to WebSocket server
-      ws.current.send(inputMessage);
-      setInputMessage(""); // Clear input after sending
+  // Send a message through WebSocket
+  const handleSendMessage = () => {
+    if (ws && message && selectedUserId) {
+      const messageData = JSON.stringify({
+        sender_id: user.id, // ID of the logged-in user
+        receiver_id: selectedUserId, // ID of the user to chat with
+        message,
+      });
+
+      ws.send(messageData);
+      setMessage(''); // Clear input field
     }
   };
 
   return (
     <div>
       <h1>WebSocket Chat</h1>
-      <div id="chat" ref={chatRef} style={{ height: "300px", overflowY: "auto", border: "1px solid black", padding: "10px" }}>
-        {messages.map((msg, index) => (
-          <p key={index}>{msg}</p>
-        ))}
+
+      <div>
+        <h3>Welcome, {user?.username}</h3>
+        <img src={profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+        <p>Following: {followingCount}</p>
+        <p>Followers: {followersCount}</p>
       </div>
-      <input
-        type="text"
-        value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
-        placeholder="Enter your message"
-      />
-      <button onClick={sendMessage}>Send</button>
+
+      <div>
+        <h3>Select a User to Chat With:</h3>
+        <ul>
+        {followedUsers.map((user) => (
+            <li key={user.id}>
+            <img src={user.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+            <button onClick={() => { setSelectedUserId(user.id); setreciver(user); }}>
+                {user.username} ({user.id})
+            </button>
+    </li>
+  ))}
+</ul>
+
+      </div>
+
+      {selectedUserId && (
+        <>
+            <div>
+            <img src={reciver.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+            </div>
+          <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
+            {chatHistory.map((msg, index) => (
+              <p key={index}>{msg}</p>
+            ))}
+          </div>
+            {selectedUserId}
+          <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Enter your message"
+            style={{ width: '80%' }}
+          />
+          <button onClick={handleSendMessage} style={{ width: '18%' }}>
+            Send
+          </button>
+        </>
+      )}
     </div>
   );
-};
-
-
+}
 
 export default Message;

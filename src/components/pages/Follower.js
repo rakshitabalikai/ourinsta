@@ -41,6 +41,42 @@ function Following() {
       setIsLoading(false);
     }
   };
+  // Function to handle follow
+  const handleUnfollow = async (user_id) => {
+    if (!user) {
+        console.error("No logged-in user found");
+        return;
+    }
+
+    const followData = {
+        following_id: user.id,   // Current logged-in user
+        follower_id: user_id,    // User to be unfollowed
+    };
+
+    try {
+        const response = await fetch('http://localhost:5038/api/social_media/unfollow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(followData),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            console.log("Unfollowing:", data.message);
+            alert(`You are now Unfollowing ${user_id}`);
+            // Refresh the page after successful unfollow
+            window.location.reload();
+        } else {
+            console.error("Failed to unfollow:", data.message);
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("Error unfollowing user:", error);
+    }
+};
+
 
   // Navigate to the user's profile page
   const handleProfileClick = (userId) => {
@@ -48,9 +84,9 @@ function Following() {
   };
 
   return (
-    <div className="following-page">
+    <div className="search-page">
       <Nav /> {/* Navigation Bar */}
-      <div className="following-container">
+      <div className="search-contain">
         <h2>Users you are following</h2>
         {isLoading ? (
           <p>Loading...</p> // Display loading while fetching data
@@ -60,7 +96,7 @@ function Following() {
               <div
                 key={followingUser._id} // Assuming backend returns `_id` for user IDs
                 className="following-item"
-                onClick={() => handleProfileClick(followingUser._id)} // Navigate to selected user's profile
+                onClick={() => handleProfileClick(followingUser.id)} // Navigate to selected user's profile
               >
                 <div className="usercard">
                   <img
@@ -72,6 +108,10 @@ function Following() {
                     <p className="username">{followingUser.username}</p>
                     <p className="full-name">{followingUser.fullName}</p>
                   </div>
+                  <button onClick={(e) => { 
+                      e.stopPropagation();  // Prevent triggering the profile click when following
+                        handleUnfollow(followingUser.id);
+                          }}>Unfollow</button>        
                 </div>
               </div>
             ))}
