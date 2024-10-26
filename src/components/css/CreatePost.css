@@ -27,8 +27,7 @@ h2 {
   width: 100%;
   max-width: 600px;
 }
-
-button {
+.createpostbutton {
   background-color: #5a00e0;
   color: white;
   border: none;
@@ -39,7 +38,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.createpostbutton:hover {
   background-color: #9a00ff;
 }
 

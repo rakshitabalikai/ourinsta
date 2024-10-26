@@ -102,8 +102,8 @@ function CreatePost() {
 
           {/* Buttons to choose between story and post */}
           <div>
-            <button onClick={() => setFileType("story")}>Upload Story</button>
-            <button onClick={() => setFileType("post")}>Upload Post</button>
+            <button onClick={() => setFileType("story")} className="createpostbutton">Upload Story</button>
+            <button onClick={() => setFileType("post")}className="createpostbutton">Upload Post</button>
           </div>
 
           {/* Show the file input and caption only if type is selected */}

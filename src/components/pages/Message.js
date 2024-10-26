@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../css/Message.css";
+import Nav from './Nav';
 
 function Message() {
   const [user, setUser] = useState(null);
@@ -91,54 +93,63 @@ function Message() {
   };
 
   return (
-    <div>
-      <h1>WebSocket Chat</h1>
-
+    <div className='messagecontainer'>
       <div>
+        <Nav></Nav>
+      </div>
+      <div className='messages'>
+        <div>
         <h3>Welcome, {user?.username}</h3>
-        <img src={profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
-        <p>Following: {followingCount}</p>
-        <p>Followers: {followersCount}</p>
-      </div>
-
-      <div>
-        <h3>Select a User to Chat With:</h3>
-        <ul>
-        {followedUsers.map((user) => (
-            <li key={user.id}>
-            <img src={user.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
-            <button onClick={() => { setSelectedUserId(user.id); setreciver(user); }}>
-                {user.username} ({user.id})
-            </button>
-    </li>
-  ))}
-</ul>
-
-      </div>
-
-      {selectedUserId && (
-        <>
-            <div>
-            <img src={reciver.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
-            </div>
-          <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
-            {chatHistory.map((msg, index) => (
-              <p key={index}>{msg}</p>
-            ))}
+            <img src={profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+          <p>Following: {followingCount}</p>
+            <p>Followers: {followersCount}</p>
           </div>
-            {selectedUserId}
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Enter your message"
-            style={{ width: '80%' }}
-          />
-          <button onClick={handleSendMessage} style={{ width: '18%' }}>
-            Send
-          </button>
-        </>
-      )}
+
+        <div>
+          <h3>Select a User to Chat With:</h3>
+          <ul>
+          {followedUsers.map((user) => (
+              <li key={user.id}>
+              <img src={user.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+              <button onClick={() => { setSelectedUserId(user.id); setreciver(user); }}>
+                  {user.username} ({user.id})
+              </button>
+            </li>
+          ))}
+          </ul>
+          </div>
+        </div>  
+
+        <div>
+          {selectedUserId && (
+            <>
+                <div>
+                <img src={reciver.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+                {selectedUserId}
+                </div>
+                <div>
+                <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
+                {chatHistory.map((msg, index) => (
+                  <p key={index}>{msg}</p>
+                ))}
+              </div>
+                
+                <div className='sendmessage'>
+                <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Enter your message"
+                style={{ width: '80%' }}
+              />
+              <button onClick={handleSendMessage} style={{ width: '18%' }}>
+                Send
+              </button>
+                </div>
+                </div>
+            </>
+          )}
+        </div>
     </div>
   );
 }

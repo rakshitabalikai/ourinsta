@@ -144,3 +144,19 @@
     background-color: #005bb5;
   }
   
+  .messagecontainer{
+    display: flex;
+  }
+
+  .sendmessage{
+    display: flex;
+  }
+
+.messages{
+  display: flex;
+  height: 100vh;
+  margin-left: 200px;
+ 
+  background-color: #000;
+  padding: 20px;
+}
