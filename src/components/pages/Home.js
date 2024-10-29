@@ -18,6 +18,7 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [stories, setStories] = useState([]);
   const [user, setUser] = useState(null);
+  const [suggestedUsers, setSuggestedUsers] = useState([]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -25,6 +26,7 @@ function Home() {
       const parsedUser = JSON.parse(storedUser);
       console.log(parsedUser);
       setUser(parsedUser);
+      fetchSuggestedUsers(parsedUser.id);
     }
   }, []);
   // Fetch posts and stories when the component mounts
@@ -44,6 +46,7 @@ function Home() {
         alert('Failed to load stories');
       });
 
+
     // Fetch posts from API
     fetch('http://localhost:5038/api/social_media/posts')
       .then(response => {
@@ -60,6 +63,23 @@ function Home() {
         alert('Failed to load posts');
       });
   }, []);
+
+  const fetchSuggestedUsers = async (user_id) => {
+    try {
+      const response = await fetch(`http://localhost:5038/api/social_media/suggestions/${user_id}`);
+      const data = await response.json();
+      console.log("Suggested Users:", data.suggestedUsers);
+      if (response.ok) {
+        setSuggestedUsers(data.suggestedUsers);
+      } else {
+        console.error("Error fetching suggestions:", data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }  
+  };
+  
+
 
   return (
     <div className="home-container">
@@ -79,19 +99,19 @@ function Home() {
       
 
       {/* Main Feed */}
-      <div className="main-feed">
+       <div className="main-feed"> 
         {/* Stories */}
-        <div className="stories">
-          {stories.length > 0 ? (
-            stories.map((story, index) => (
-              <Link key={index} to={`/story/${story._id}`} className="story">
-                {story.title} by {story.username}
-              </Link>
-            ))
-          ) : (
-            <p>No stories available.</p>
-          )}
-        </div>
+        {/* <div className="stories"> */}
+          {/* {stories.length > 0 ? ( */}
+            {/* stories.map((story, index) => ( */}
+              {/* <Link key={index} to={`/story/${story._id}`} className="story"> */}
+                {/* {story.title} by {story.username} */}
+              {/* </Link> */}
+            {/* )) */}
+          {/* ) : ( */}
+            {/* <p>No stories available.</p> */}
+          {/* )} */}
+        {/* </div> */}
 
         {/* Post */}
         <div className="posts">
