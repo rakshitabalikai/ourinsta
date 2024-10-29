@@ -118,34 +118,35 @@ function Message() {
         </div>  
 
         <div>
-          {selectedUserId && (
-            <>
-                <div>
-                <img src={reciver.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
-                {selectedUserId}
-                </div>
-                <div>
-                <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
-                {chatHistory.map((msg, index) => (
-                  <p key={index}>{msg}</p>
-                ))}
-              </div>
-                
-                <div className='sendmessage'>
-                <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Enter your message"
-                style={{ width: '80%' }}
-              />
-              <button onClick={handleSendMessage} style={{ width: '18%' }}>
-                Send
-              </button>
-                </div>
-                </div>
-            </>
-          )}
+        {selectedUserId && reciver && (
+  <>
+    <div className='selected_user'>
+      <img src={reciver.profile_pic} alt="Profile" className="profile-pic" />
+      <p>{reciver.username}</p>
+    </div>
+    <div>
+      <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
+        {chatHistory.map((msg, index) => (
+          <p key={index}>{msg}</p>
+        ))}
+      </div>
+
+      <div className='sendmessage'>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Enter your message"
+          style={{ width: '80%' }}
+        />
+        <button onClick={handleSendMessage} style={{ width: '18%' }}>
+          Send
+        </button>
+      </div>
+    </div>
+  </>
+)}
+
         </div>
     </div>
   );
