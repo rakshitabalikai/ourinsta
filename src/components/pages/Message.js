@@ -98,21 +98,18 @@ function Message() {
         <Nav></Nav>
       </div>
       <div className='messages'>
-        <div>
-        <h3>Welcome, {user?.username}</h3>
-            <img src={profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
-          <p>Following: {followingCount}</p>
-            <p>Followers: {followersCount}</p>
-          </div>
+        
+    
 
         <div>
-          <h3>Select a User to Chat With:</h3>
+        <h3>{user?.username}</h3>
+          {/* <h3>Select a User to Chat With:</h3> */}
           <ul>
           {followedUsers.map((user) => (
-              <li key={user.id}>
-              <img src={user.profilePic} alt="Profile" style={{ width: '150px', height: '150px' }} />
+              <li key={user.id} className='contents'>
+              <img src={user.profile_pic} alt="Profile" className="profile-pic" />
               <button onClick={() => { setSelectedUserId(user.id); setreciver(user); }}>
-                  {user.username} ({user.id})
+                  {user.username} 
               </button>
             </li>
           ))}
