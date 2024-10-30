@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import CryptoJS from 'crypto-js';
 import "../css/Message.css";
 import Nav from './Nav';
-
-const SECRET_KEY = 'your-secret-key';  // Replace with a securely stored key
 
 function Message() {
   const [user, setUser] = useState(null);
@@ -19,7 +16,9 @@ function Message() {
   const [ws, setWs] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [followedUsers, setFollowedUsers] = useState([]);
+  const [loading, setLoading] = useState(false);  // Track chat loading state
   const navigate = useNavigate();
+  const chatContainerRef = useRef(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -57,38 +56,24 @@ function Message() {
   };
 
   const fetchChatHistory = async (receiverId) => {
+    setLoading(true);
     const cookieKey = `chatHistory_${sender_id}_${receiverId}`;
     const storedChat = Cookies.get(cookieKey);
 
     if (storedChat) {
-      // Decrypt messages stored in cookies
-      const decryptedChat = JSON.parse(storedChat).map(msg => ({
-        ...msg,
-        message: CryptoJS.AES.decrypt(msg.message, SECRET_KEY).toString(CryptoJS.enc.Utf8),
-      }));
-      setChatHistory(decryptedChat);
+      setChatHistory(JSON.parse(storedChat));
+      console.log(storedChat);
     } else {
       try {
         const response = await fetch(`http://localhost:5038/api/social_media/messages/${sender_id}/${receiverId}`);
         const data = await response.json();
-
-        // Decrypt messages from API response
-        const decryptedMessages = data.messages.map(msg => ({
-          ...msg,
-          message: CryptoJS.AES.decrypt(msg.message, SECRET_KEY).toString(CryptoJS.enc.Utf8),
-        }));
-        setChatHistory(decryptedMessages);
-
-        // Store encrypted messages in cookies
-        const encryptedMessages = data.messages.map(msg => ({
-          ...msg,
-          message: CryptoJS.AES.encrypt(msg.message, SECRET_KEY).toString(),
-        }));
-        Cookies.set(cookieKey, JSON.stringify(encryptedMessages), { expires: 1 });
+        setChatHistory(data.messages);
+        Cookies.set(cookieKey, JSON.stringify(data.messages), { expires: 1 }); // Store chat in cookie
       } catch (error) {
         console.error('Error fetching chat history:', error);
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -102,11 +87,10 @@ function Message() {
     socket.onmessage = (event) => {
       if (typeof event.data === 'string') {
         const newMessage = JSON.parse(event.data);
-        newMessage.message = CryptoJS.AES.decrypt(newMessage.message, SECRET_KEY).toString(CryptoJS.enc.Utf8);
-        
+        const cookieKey = `chatHistory_${sender_id}_${newMessage.receiver_id}`;
+
         setChatHistory((prev) => {
           const updatedChat = [...prev, newMessage];
-          const cookieKey = `chatHistory_${sender_id}_${newMessage.receiver_id}`;
           Cookies.set(cookieKey, JSON.stringify(updatedChat), { expires: 1 });
           return updatedChat;
         });
@@ -124,18 +108,17 @@ function Message() {
 
   const handleSendMessage = () => {
     if (ws && message && selectedUserId) {
-      const encryptedMessage = CryptoJS.AES.encrypt(message, SECRET_KEY).toString();
       const messageData = {
         sender_id: user.id,
         receiver_id: selectedUserId,
-        message: encryptedMessage,
+        message,
         timestamp: new Date().toISOString(),
         direction: 'sent',
       };
 
       ws.send(JSON.stringify(messageData));
       setChatHistory((prev) => {
-        const updatedChat = [...prev, { ...messageData, message }];
+        const updatedChat = [...prev, messageData];
         const cookieKey = `chatHistory_${sender_id}_${selectedUserId}`;
         Cookies.set(cookieKey, JSON.stringify(updatedChat), { expires: 1 });
         return updatedChat;
@@ -149,6 +132,12 @@ function Message() {
     setReceiver(user);
     fetchChatHistory(user.id);
   };
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatHistory]);  // Scroll to bottom on new messages
 
   return (
     <div className='messagecontainer'>
@@ -177,12 +166,20 @@ function Message() {
               <p>{receiver.username}</p>
             </div>
             <div>
-              <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
-                {chatHistory.map((msg, index) => (
-                  <p key={index} className={msg.direction === 'sent' ? 'sent' : 'received'}>
-                    {msg.message}
-                  </p>
-                ))}
+              <div 
+                id="chat"
+                ref={chatContainerRef} 
+                style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}
+              >
+                {loading ? (
+                  <p>Loading chat history...</p>
+                ) : (
+                  chatHistory.map((msg, index) => (
+                    <p key={index} className={msg.direction === 'sent' ? 'sent' : 'received'}>
+                      {msg.message}
+                    </p>
+                  ))
+                )}
               </div>
 
               <div className='sendmessage'>
