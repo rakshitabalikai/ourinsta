@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import "../css/Message.css";
 import Nav from './Nav';
 
 function Message() {
   const [user, setUser] = useState(null);
-  const [sender_id, setsender_id] = useState(null);
-  const [receiver, setReceiver] = useState(null);
+  const [reciver, setreciver] = useState(null);
   const [profilePic, setProfilePic] = useState('https://via.placeholder.com/150');
   const [followingCount, setFollowingCount] = useState(0);
   const [followersCount, setFollowersCount] = useState(0);
@@ -16,16 +14,13 @@ function Message() {
   const [ws, setWs] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [followedUsers, setFollowedUsers] = useState([]);
-  const [loading, setLoading] = useState(false);  // Track chat loading state
   const navigate = useNavigate();
-  const chatContainerRef = useRef(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
-      setsender_id(parsedUser.id);
       setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150');
       fetchFollowStats(parsedUser.id);
       fetchFollowedUsers(parsedUser.id);
@@ -55,25 +50,14 @@ function Message() {
     }
   };
 
-  const fetchChatHistory = async (receiverId) => {
-    setLoading(true);
-    const cookieKey = `chatHistory_${sender_id}_${receiverId}`;
-    const storedChat = Cookies.get(cookieKey);
-
-    if (storedChat) {
-      setChatHistory(JSON.parse(storedChat));
-      console.log(storedChat);
-    } else {
-      try {
-        const response = await fetch(`http://localhost:5038/api/social_media/messages/${sender_id}/${receiverId}`);
-        const data = await response.json();
-        setChatHistory(data.messages);
-        Cookies.set(cookieKey, JSON.stringify(data.messages), { expires: 1 }); // Store chat in cookie
-      } catch (error) {
-        console.error('Error fetching chat history:', error);
-      }
+  const fetchChatHistory = async (senderId, receiverId) => {
+    try {
+      const response = await fetch(`http://localhost:5038/api/social_media/messages/${senderId}/${receiverId}`);
+      const data = await response.json();
+      setChatHistory(data.messages); // Set chat history with messages
+    } catch (error) {
+      console.error('Error fetching chat history:', error);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -86,14 +70,7 @@ function Message() {
 
     socket.onmessage = (event) => {
       if (typeof event.data === 'string') {
-        const newMessage = JSON.parse(event.data);
-        const cookieKey = `chatHistory_${sender_id}_${newMessage.receiver_id}`;
-
-        setChatHistory((prev) => {
-          const updatedChat = [...prev, newMessage];
-          Cookies.set(cookieKey, JSON.stringify(updatedChat), { expires: 1 });
-          return updatedChat;
-        });
+        setChatHistory((prev) => [...prev, JSON.parse(event.data)]);
       }
     };
 
@@ -104,44 +81,33 @@ function Message() {
     return () => {
       socket.close();
     };
-  }, [sender_id]);
+  }, []);
 
   const handleSendMessage = () => {
     if (ws && message && selectedUserId) {
-      const messageData = {
+      const messageData = JSON.stringify({
         sender_id: user.id,
         receiver_id: selectedUserId,
         message,
-        timestamp: new Date().toISOString(),
-        direction: 'sent',
-      };
-
-      ws.send(JSON.stringify(messageData));
-      setChatHistory((prev) => {
-        const updatedChat = [...prev, messageData];
-        const cookieKey = `chatHistory_${sender_id}_${selectedUserId}`;
-        Cookies.set(cookieKey, JSON.stringify(updatedChat), { expires: 1 });
-        return updatedChat;
       });
+
+      ws.send(messageData);
       setMessage('');
     }
   };
 
+  // Fetch chat history when a new user is selected
   const handleUserSelect = (user) => {
     setSelectedUserId(user.id);
-    setReceiver(user);
-    fetchChatHistory(user.id);
+    setreciver(user);
+    fetchChatHistory(user.id, user.id);  // Call the API to get chat history
   };
-
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
-  }, [chatHistory]);  // Scroll to bottom on new messages
 
   return (
     <div className='messagecontainer'>
-      <Nav />
+      <div>
+        <Nav />
+      </div>
       <div className='messages'>
         <div>
           <h3>{user?.username}</h3>
@@ -159,27 +125,19 @@ function Message() {
       </div>
 
       <div>
-        {selectedUserId && receiver && (
+        {selectedUserId && reciver && (
           <>
             <div className='selected_user'>
-              <img src={receiver.profile_pic} alt="Profile" className="profile-pic" />
-              <p>{receiver.username}</p>
+              <img src={reciver.profile_pic} alt="Profile" className="profile-pic" />
+              <p>{reciver.username}</p>
             </div>
             <div>
-              <div 
-                id="chat"
-                ref={chatContainerRef} 
-                style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}
-              >
-                {loading ? (
-                  <p>Loading chat history...</p>
-                ) : (
-                  chatHistory.map((msg, index) => (
-                    <p key={index} className={msg.direction === 'sent' ? 'sent' : 'received'}>
-                      {msg.message}
-                    </p>
-                  ))
-                )}
+              <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
+                {chatHistory.map((msg, index) => (
+                  <p key={index} className={msg.direction === 'sent' ? 'sent' : 'received'}>
+                    {msg.message}
+                  </p>
+                ))}
               </div>
 
               <div className='sendmessage'>
