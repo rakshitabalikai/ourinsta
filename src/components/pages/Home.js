@@ -11,6 +11,7 @@ import profileIcon from '../assets/icons/profile.png';
 import hamburger from '../assets/icons/hamburger.png';
 import like from '../assets/icons/liked.png'
 import comment from '../assets/icons/comment.png'
+import { useNavigate } from 'react-router-dom';
 import '../css/Home.css';
 import Nav from './Nav';
 
@@ -19,7 +20,7 @@ function Home() {
   const [stories, setStories] = useState([]);
   const [user, setUser] = useState(null);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -63,6 +64,43 @@ function Home() {
         alert('Failed to load posts');
       });
   }, []);
+  const handleFollow = async (user_id) => {
+    if (!user) {
+        console.error("No logged-in user found");
+        return;
+    }
+
+    const followData = {
+        following_id: user.id,   // Current logged-in user
+        follower_id: user_id,    // User to be followed
+    };
+
+    try {
+        const response = await fetch('http://localhost:5038/api/social_media/follow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(followData),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            console.log("Following:", data.message);
+            alert(`You are now following ${user_id}`);
+        } else {
+            console.error("Failed to follow:", data.message);
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("Error following user:", error);
+    }
+};
+
+// Navigate to the user's profile page
+const handleProfileClick = (user_id) => {
+    navigate(`/otherprofile/${user_id}`);  // Redirect to /profile/:user_id
+};
 
   const fetchSuggestedUsers = async (user_id) => {
     try {
@@ -155,7 +193,35 @@ function Home() {
       {/* Suggestions */}
       <div className="suggestions">
         <p>Suggestions For You</p>
-        
+        <ul>
+                            {suggestedUsers.length > 0 ? (
+                                suggestedUsers.map((resultUser) => (
+                                    <div 
+                                        key={resultUser.id} 
+                                        className="search-result-item"
+                                        onClick={() => handleProfileClick(resultUser.id)} // Redirect on click
+                                    >
+                                        <div className='usercard'>
+                                            <img 
+                                                src={resultUser.profile_pic}
+                                                alt={resultUser.username} 
+                                                className="profile-pic"
+                                            />
+                                            <div className="user-info">
+                                                <p className="username">{resultUser.username}</p>
+                                                <p className="full-name">{resultUser.fullName}</p>
+                                            </div>
+                                            <button onClick={(e) => { 
+                                                e.stopPropagation();  // Prevent triggering the profile click when following
+                                                handleFollow(resultUser.id);
+                                            }}>Follow</button>
+                                        </div>
+                                    </div >
+                                ))
+                            ) : (
+                                <p>No users found</p>
+                            )}
+                        </ul>
       </div>
     </div>
   );
