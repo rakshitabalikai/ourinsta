@@ -5,6 +5,7 @@ import Nav from './Nav';
 
 function Message() {
   const [user, setUser] = useState(null);
+  const [sender_id, setsender_id] = useState(null);
   const [reciver, setreciver] = useState(null);
   const [profilePic, setProfilePic] = useState('https://via.placeholder.com/150');
   const [followingCount, setFollowingCount] = useState(0);
@@ -21,6 +22,7 @@ function Message() {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
+      setsender_id(parsedUser.id);
       setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150');
       fetchFollowStats(parsedUser.id);
       fetchFollowedUsers(parsedUser.id);
@@ -50,11 +52,11 @@ function Message() {
     }
   };
 
-  const fetchChatHistory = async (senderId, receiverId) => {
+  const fetchChatHistory = async (receiverId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/messages/${senderId}/${receiverId}`);
+      const response = await fetch(`http://localhost:5038/api/social_media/messages/${sender_id}/${receiverId}`);
       const data = await response.json();
-      setChatHistory(data.messages); // Set chat history with messages
+      setChatHistory(data.messages);
     } catch (error) {
       console.error('Error fetching chat history:', error);
     }
@@ -70,7 +72,8 @@ function Message() {
 
     socket.onmessage = (event) => {
       if (typeof event.data === 'string') {
-        setChatHistory((prev) => [...prev, JSON.parse(event.data)]);
+        const newMessage = JSON.parse(event.data);
+        setChatHistory((prev) => [...prev, newMessage]);
       }
     };
 
@@ -81,33 +84,33 @@ function Message() {
     return () => {
       socket.close();
     };
-  }, []);
+  }, [sender_id]);
 
   const handleSendMessage = () => {
     if (ws && message && selectedUserId) {
-      const messageData = JSON.stringify({
+      const messageData = {
         sender_id: user.id,
         receiver_id: selectedUserId,
         message,
-      });
+        timestamp: new Date().toISOString(),
+        direction: 'sent',
+      };
 
-      ws.send(messageData);
+      ws.send(JSON.stringify(messageData));
+      setChatHistory((prev) => [...prev, messageData]);
       setMessage('');
     }
   };
 
-  // Fetch chat history when a new user is selected
   const handleUserSelect = (user) => {
     setSelectedUserId(user.id);
     setreciver(user);
-    fetchChatHistory(user.id, user.id);  // Call the API to get chat history
+    fetchChatHistory(user.id);
   };
 
   return (
     <div className='messagecontainer'>
-      <div>
-        <Nav />
-      </div>
+      <Nav />
       <div className='messages'>
         <div>
           <h3>{user?.username}</h3>
