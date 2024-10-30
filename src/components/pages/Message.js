@@ -109,55 +109,51 @@ function Message() {
   };
 
   return (
-    <div className='messagecontainer'>
+    <div className="message-container">
       <Nav />
-      <div className='messages'>
-        <div>
+      <div className="message-content">
+        <div className="user-list">
           <h3>{user?.username}</h3>
           <ul>
             {followedUsers.map((user) => (
-              <li key={user.id} className='contents'>
+              <li key={user.id} className="user-item">
                 <img src={user.profile_pic} alt="Profile" className="profile-pic" />
-                <button onClick={() => handleUserSelect(user)}>
+                <button className='userButton' onClick={() => handleUserSelect(user)}>
                   {user.username}
                 </button>
               </li>
             ))}
           </ul>
         </div>
-      </div>
 
-      <div>
-        {selectedUserId && reciver && (
-          <>
-            <div className='selected_user'>
-              <img src={reciver.profile_pic} alt="Profile" className="profile-pic" />
-              <p>{reciver.username}</p>
-            </div>
-            <div>
-              <div id="chat" style={{ height: '300px', overflowY: 'auto', border: '1px solid black', padding: '10px' }}>
+        <div className="chat-section">
+          {selectedUserId && reciver ? (
+            <>
+              <div className="selected-user-info">
+                <img src={reciver.profile_pic} alt="Profile" className="profile-pic" />
+                <p>{reciver.username}</p>
+              </div>
+              <div className="chat-box">
                 {chatHistory.map((msg, index) => (
-                  <p key={index} className={msg.direction === 'sent' ? 'sent' : 'received'}>
+                  <p key={index} className={`chat-message ${msg.direction === 'sent' ? 'sent' : 'received'}`}>
                     {msg.message}
                   </p>
                 ))}
               </div>
-
-              <div className='sendmessage'>
+              <div className="message-input">
                 <input
                   type="text"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Enter your message"
-                  style={{ width: '80%' }}
                 />
-                <button onClick={handleSendMessage} style={{ width: '18%' }}>
-                  Send
-                </button>
+                <button onClick={handleSendMessage}>Send</button>
               </div>
-            </div>
-          </>
-        )}
+            </>
+          ) : (
+            <div className="no-chat-selected">Select a user to start chatting</div>
+          )}
+        </div>
       </div>
     </div>
   );
