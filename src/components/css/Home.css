@@ -1,4 +1,9 @@
-
+body {
+  background-color:  rgb(69, 49, 56);
+  background-image: 
+      radial-gradient(at 40% 30%, rgb(183, 36, 91) 0, transparent 59%), 
+      radial-gradient(at 60% 65%,  rgb(183, 36, 91) 0, transparent 55%);
+}
 .home-container{
    display: grid;
     margin: 0px;
