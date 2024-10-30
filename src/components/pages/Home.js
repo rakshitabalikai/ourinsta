@@ -155,13 +155,7 @@ function Home() {
       {/* Suggestions */}
       <div className="suggestions">
         <p>Suggestions For You</p>
-        <ul>
-          <div className="follower-picture"><li>alex.anyways18 - <li id='follow'>Follow</li></li></div>
-          <div className="follower-picture"><li>chantoulflowergirl - Follow</li></div>
-          <div className="follower-picture"><li>gwangu77 - Follow</li></div>
-          <div className="follower-picture"><li>mishka_songs - Follow</li></div>
-          <div className="follower-picture"><li>pierre_thecomet - Follow</li></div>
-        </ul>
+        
       </div>
     </div>
   );
