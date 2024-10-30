@@ -192,7 +192,7 @@ const handleProfileClick = (user_id) => {
 
       {/* Suggestions */}
       <div className="suggestions">
-        <p>Suggestions For You</p>
+        <p className='suggestion-header'>Suggestions For You </p>
         <ul>
                             {suggestedUsers.length > 0 ? (
                                 suggestedUsers.map((resultUser) => (
@@ -201,7 +201,7 @@ const handleProfileClick = (user_id) => {
                                         className="search-result-item"
                                         onClick={() => handleProfileClick(resultUser.id)} // Redirect on click
                                     >
-                                        <div className='usercard'>
+                                        <div className='usercard1'>
                                             <img 
                                                 src={resultUser.profile_pic}
                                                 alt={resultUser.username} 

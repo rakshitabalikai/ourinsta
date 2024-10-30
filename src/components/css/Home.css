@@ -152,20 +152,23 @@
 /* Suggestions */
 .suggestions {
   grid-column: 3/3;
-   width: 80px; 
+  width: 150px; 
   height: 100%;
   /* background-color: #000000ce; */
-  padding: 10px;
+  padding: 0px;
   border-left: 1px solid #dbdbdb;
-  margin-right: -50px;
+  margin-right: -100px;
   position: fixed;
   right: 320px;
+
 }
 
 .suggestions p {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  width: 200px;
+  font-style: italic;
 }
 
 .suggestions ul {
@@ -228,4 +231,29 @@
   flex-direction: column !important;
   width: 15% !important;
   padding: 40px 20px !important;
+}
+.usercard1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0px 15px -35px;
+  transition: background-color 0.3s;
+  width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.usercard1 > button{
+  background-color: blue;
+  color:white;
+  width: 70px;
+  border: none;
+  border-radius: 5%;
+  padding: 5px;
+  margin-left: -70px;
+}
+.suggestion-header{
+  font-style: italic;
+  font-size: 25px !important;
+  width: 260px !important; 
+
 }
