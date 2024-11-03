@@ -1,14 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link,Outlet } from 'react-router-dom';
-import home from '../assets/icons/home.png';
-import search from '../assets/icons/search.png';
-import explore from '../assets/icons/explore.png';
-import reels from '../assets/icons/reels.png';
-import messages from '../assets/icons/messages.png';
-import notifications from '../assets/icons/notifications.png';
-import create from '../assets/icons/create.png';
-import profileIcon from '../assets/icons/profile.png';
-import hamburger from '../assets/icons/hamburger.png';
 import like from '../assets/icons/liked.png'
 import comment from '../assets/icons/comment.png'
 import { useNavigate } from 'react-router-dom';

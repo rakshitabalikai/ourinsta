@@ -10,6 +10,7 @@ function CreatePost() {
   const [successMessage, setSuccessMessage] = useState(""); // For displaying success message
   const [errorMessage, setErrorMessage] = useState(""); // For displaying error message
   const [user, setUser] = useState(null);
+  const [mediaType, setMediaType] = useState(""); // 'image' or 'video'
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -23,19 +24,23 @@ function CreatePost() {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setFile(selectedFile);
+        setFile(selectedFile);
 
-      // Convert the file to base64
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      reader.onload = () => {
-        setPreview(reader.result); // Set base64 preview
-      };
-      reader.onerror = (error) => {
-        console.error("Error converting file to base64:", error);
-      };
+        // Determine if the file is an image or video
+        const fileType = selectedFile.type.startsWith("image") ? "image" : "video";
+        setMediaType(fileType); // Set the media type
+
+        // Convert the file to base64 for preview
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onload = () => {
+            setPreview(reader.result); // Set base64 preview
+        };
+        reader.onerror = (error) => {
+            console.error("Error converting file to base64:", error);
+        };
     }
-  };
+};
 
   // Convert file to base64 for submission
   const convertToBase64 = (file) => {
@@ -48,50 +53,52 @@ function CreatePost() {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSuccessMessage(""); // Reset messages
-    setErrorMessage("");
+  // Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSuccessMessage("");
+  setErrorMessage("");
 
-    if (file && caption && fileType) {
+  if (file && caption && fileType && mediaType) {
       try {
-        const base64File = await convertToBase64(file); // Convert file to base64
+          const base64File = await convertToBase64(file);
 
-        const formData = {
-          user_id:user.id,
-          file: base64File,
-          caption,
-          type: fileType, // Either 'story' or 'post'
-        };
-        console.log(formData);
-        // Select API based on fileType
-        const apiUrl = fileType === "story"
-          ? "http://localhost:5038/api/social_media/uploadstory"
-          : "http://localhost:5038/api/social_media/uploadpost";
+          const formData = {
+              user_id: user.id,
+              file: base64File,
+              caption,
+              type: fileType, // 'story' or 'post'
+              mediaType, // Include the media type
+          };
 
-        // Make API request
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+          // Select API based on fileType
+          const apiUrl = fileType === "story"
+              ? "http://localhost:5038/api/social_media/uploadstory"
+              : "http://localhost:5038/api/social_media/uploadpost";
 
-        if (response.ok) {
-          setSuccessMessage(`${fileType === "story" ? "Story" : "Post"} uploaded successfully!`);
-        } else {
-          const errorData = await response.json();
-          setErrorMessage(errorData.message || "Error uploading file.");
-        }
+          // Make API request
+          const response = await fetch(apiUrl, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+              setSuccessMessage(`${fileType === "story" ? "Story" : "Post"} uploaded successfully!`);
+          } else {
+              const errorData = await response.json();
+              setErrorMessage(errorData.message || "Error uploading file.");
+          }
       } catch (error) {
-        console.error("Error:", error);
-        setErrorMessage("An unexpected error occurred.");
+          console.error("Error:", error);
+          setErrorMessage("An unexpected error occurred.");
       }
-    } else {
+  } else {
       setErrorMessage("Please select a file, add a caption, and choose a type.");
-    }
-  };
+  }
+};
 
   return (
     <div className="create-post-container">
