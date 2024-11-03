@@ -5,38 +5,7 @@ import Nav from './Nav';
 
 function Notification() {
   // Sample data for notifications (can be replaced by API calls)
-  const notifications = [
-    {
-      type: 'Follow Request',
-      username: '_almas__',
-      time: '1w',
-      action: 'follow_request'
-    },
-    {
-      type: 'Follow Request',
-      username: '_shambu_011',
-      time: '2w',
-      action: 'follow_request'
-    },
-    {
-      type: 'Like',
-      username: 'gp_reddy__',
-      time: '5w',
-      post: 'Liked your post'
-    },
-    {
-      type: 'Like',
-      username: 'akshay_marambed',
-      time: '10w',
-      post: 'Liked your reel'
-    },
-    {
-      type: 'Comment',
-      username: 'akshay_marambed',
-      time: '10w',
-      post: 'commented on this post'
-    }
-  ];
+  const notifications = []
 
   return (
     <div className="notifications-container">
