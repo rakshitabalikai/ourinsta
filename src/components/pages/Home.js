@@ -123,7 +123,7 @@ const handleProfileClick = (user_id) => {
     <div className="home-container">
       {/* Sidebar */}
       <div className="menu1">
-        <Link to={"/home"}><button className='menu-button'><img src={home} alt="Home" /> Home</button></Link>
+        {/* <Link to={"/home"}><button className='menu-button'><img src={home} alt="Home" /> Home</button></Link>
         <Link to={"/search"}><button className='menu-button'><img src={search} alt="Search" /> Search</button></Link> 
         <Link to={"/Explore"}><button className='menu-button'><img src={explore} alt="Explore" /> Explore</button></Link>
         <Link to={"/Reels"}><button className='menu-button'><img src={reels} alt="Reels" /> Clip</button></Link> 
@@ -132,7 +132,8 @@ const handleProfileClick = (user_id) => {
         <Link to={"/create"}><button className='menu-button'><img src={create} alt="Create" /> Create</button></Link>
         <Link to={"/profile"}><button className='menu-button'><img src={profileIcon} alt="Profile" /> Profile</button></Link>
         <button className='menu-button'><img src={hamburger} alt="More" /> More</button>
-        <Outlet></Outlet>
+        <Outlet></Outlet> */}
+        <Nav></Nav>
       </div>
       
 

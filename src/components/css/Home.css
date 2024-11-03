@@ -3,6 +3,8 @@ body {
   background-image: 
       radial-gradient(at 40% 30%, rgb(183, 36, 91) 0, transparent 59%), 
       radial-gradient(at 60% 65%,  rgb(183, 36, 91) 0, transparent 55%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .home-container{
    display: grid;
@@ -98,7 +100,7 @@ body {
 .posts{
   overflow: hidden;
   display: flex;
-  width: 70%;
+  width: 80%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -254,7 +256,7 @@ body {
   border: none;
   border-radius: 5%;
   padding: 5px;
-  margin-left: -70px;
+  margin-left: -40px;
 }
 .suggestion-header{
   font-style: italic;
