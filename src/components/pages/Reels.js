@@ -50,7 +50,7 @@ function Reels() {
                                 </div>
                             </div>
                             <div className="post-image">
-                                <video autoPlay loop muted controls>
+                                <video className="clipsvideo" autoPlay loop muted controls>
                                     <source src={`http://localhost:5038${post.fileUrl}`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>

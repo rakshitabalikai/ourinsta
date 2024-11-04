@@ -65,7 +65,8 @@ h2 {
   margin-top: 20px;
 }
 
-img, video {
+.preview-container > img,
+.preview-container > video {
   max-width: 100%;
   max-height: 300px;
 }
