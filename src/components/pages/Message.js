@@ -15,6 +15,8 @@ function Message() {
   const [ws, setWs] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [followedUsers, setFollowedUsers] = useState([]);
+  const [selectedMessages, setSelectedMessages] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +32,33 @@ function Message() {
       navigate('/login');
     }
   }, [navigate]);
-
+  const toggleSelectMessage = (messageId) => {
+    setSelectedMessages(prevSelected =>
+      prevSelected.includes(messageId)
+        ? prevSelected.filter(id => id !== messageId)  // Deselect if already selected
+        : [...prevSelected, messageId]  // Add to selected
+    );
+  };
+  const handleDeleteSelectedMessages = async () => {
+    try {
+      await fetch(`http://localhost:5038/api/social_media/messages/delete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messageIds: selectedMessages }),
+      });
+  
+      // Filter out deleted messages from chat history
+      setChatHistory(prevChatHistory => 
+        prevChatHistory.filter(msg => !selectedMessages.includes(msg._id))
+      );
+      setSelectedMessages([]); // Clear selection after deletion
+    } catch (error) {
+      console.error('Error deleting messages:', error);
+    }
+  };
+    
   const fetchFollowStats = async (userId) => {
     try {
       const response = await fetch(`http://localhost:5038/api/social_media/follow_stats/${userId}`);
@@ -135,11 +163,17 @@ function Message() {
               </div>
               <div className="chat-box">
                 {chatHistory.map((msg, index) => (
-                  <p key={index} className={`chat-message ${msg.direction === 'sent' ? 'sent' : 'received'}`}>
+                  <div key={index} className={`chat-message ${msg.direction === 'sent' ? 'sent' : 'received'}`}>
+                    <input
+                      type="checkbox"
+                      checked={selectedMessages.includes(msg._id)}
+                      onChange={() => toggleSelectMessage(msg._id)}
+                    />
                     {msg.message}
-                  </p>
+                  </div>
                 ))}
               </div>
+
               <div className="message-input">
                 <input
                   type="text"
@@ -148,6 +182,10 @@ function Message() {
                   placeholder="Enter your message"
                 />
                 <button onClick={handleSendMessage}>Send</button>
+                {selectedMessages.length > 0 && (
+                    <button onClick={handleDeleteSelectedMessages}>Delete Selected</button>
+                )}
+
               </div>
             </>
           ) : (
