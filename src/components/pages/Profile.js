@@ -73,9 +73,10 @@ const fetchUserPosts = async (userId) => {
   }
 
   return (
+    
     <div className="profile-container">
       <Nav />
-  
+      <div className='profile-collector'>
       <div className="profile-header">
         <div className="profile-pic">
           <img src={profilePic} alt="Profile" />
@@ -100,15 +101,15 @@ const fetchUserPosts = async (userId) => {
           </div>
         </div>
       </div>
-  
+      
       <div className="profile-content">
         <div className="profile-posts">
           {userPosts.map((post, index) => (
-            <div key={index} className="post-item">
+            <div key={index} className="userposts">
              {post.mediaType === 'image' ? (
-                    <img src={`http://localhost:5038${post.fileUrl}`} alt={post.caption} />
+                    <img  className='user-postimage' src={`http://localhost:5038${post.fileUrl}`} alt={post.caption} />
                   ) : (
-                    <video controls autoPlay loop muted>
+                    <video  className='user-postimage'controls autoPlay loop muted>
                       <source src={`http://localhost:5038${post.fileUrl}`} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
@@ -116,6 +117,7 @@ const fetchUserPosts = async (userId) => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
