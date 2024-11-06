@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
+import "../css/Notification.css"
 import axios from 'axios';
 
 const Notifications = () => {
@@ -67,6 +68,7 @@ const Notifications = () => {
       <div>
         <Nav />
       </div>
+      <div className='notification-collector'>
       <h3>Notifications</h3>
       {loading ? ( // Display loading indicator while fetching
         <p>Loading notifications...</p>
@@ -87,6 +89,7 @@ const Notifications = () => {
           ))}
         </ul>
       )}
+      </div>
     </div>
   );
 };
