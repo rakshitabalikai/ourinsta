@@ -1,0 +1,12 @@
+.more-collector{
+    margin-left: 15%;
+   
+
+}
+.more-nav{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    padding: 20px;
+    
+}
