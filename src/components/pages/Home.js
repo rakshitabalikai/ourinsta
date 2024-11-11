@@ -145,8 +145,8 @@ function Home() {
                 <div className='postDescription'>
                   <p className='captions'>{post.caption}</p>
                   <div className='likeandcomment'>
-                    <button className='menu-button'><img src={comment} alt="Home" /></button>
-                    <button className='menu-button'><img src={like} alt="Home" /></button>
+                    <button className='menu-button'><img src={comment} alt="comments" /></button>
+                    <button className='menu-button'><img src={like} alt="Like" /></button>
                   </div>
                 </div>
               </div>
