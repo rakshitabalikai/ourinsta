@@ -21,7 +21,7 @@ const storyData = {
   // Add more stories as needed
 };
 
-function StoryView() {
+function Storyview() {
   const { storyId } = useParams();
   const story = storyData[storyId];
 
