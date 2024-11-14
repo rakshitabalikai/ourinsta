@@ -1,100 +1,97 @@
-// Notifications.js
-import React from 'react';
-import '../css/Notification.css';
+import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
+import "../css/Notification.css"
+import axios from 'axios';
 
-function Notification() {
-  // Sample data for notifications (can be replaced by API calls)
-  const notifications = [
-    {
-      type: 'Follow Request',
-      username: '_almas__',
-      time: '1w',
-      action: 'follow_request'
-    },
-    {
-      type: 'Follow Request',
-      username: '_shambu_011',
-      time: '2w',
-      action: 'follow_request'
-    },
-    {
-      type: 'Like',
-      username: 'gp_reddy__',
-      time: '5w',
-      post: 'Liked your post'
-    },
-    {
-      type: 'Like',
-      username: 'akshay_marambed',
-      time: '10w',
-      post: 'Liked your reel'
-    },
-    {
-      type: 'Comment',
-      username: 'akshay_marambed',
-      time: '10w',
-      post: 'commented on this post'
+const Notifications = () => {
+  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setUserId(parsedUser.id);
     }
-  ];
+  }, []);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      if (!userId) return; // Don't fetch if userId is not available
+      try {
+        const response = await axios.get(`http://localhost:5038/api/social_media/notifications/${userId}`);
+        setNotifications(response.data.notifications);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
+      }
+    };
+
+    fetchNotifications();
+
+    if (userId) { // Establish WebSocket connection only if userId is available
+      const ws = new WebSocket(`ws://localhost:5038`);
+      setSocket(ws);
+
+      // Listen for WebSocket messages
+      ws.onmessage = (event) => {
+        const notification = JSON.parse(event.data);
+
+        if (notification.type === 'notification') {
+          // Append new notification to the notifications list
+          setNotifications((prevNotifications) => [
+            ...prevNotifications,
+            {
+              message: notification.data.message,
+              profile_pic: notification.data.profile_pic || "https://via.placeholder.com/150",
+              username: notification.data.username,
+              timestamp: new Date(notification.data.timestamp)
+            }
+          ]);
+        }
+      };
+
+      // Clean up WebSocket connection when component unmounts
+      return () => {
+        ws.close();
+      };
+    }
+  }, [userId]);
 
   return (
     <div className="notifications-container">
-      {/* Sidebar */}
-      <Nav />
-
-      {/* Notifications Feed */}
-      <div className="notifications-feed">
-        <h2>Notifications</h2>
-
-        {/* Follow Requests */}
-        <div className="notifications-section">
-          <h3>This Month</h3>
-          {notifications.filter(n => n.action === 'follow_request').map((notification, index) => (
-            <div key={index} className="notification-item">
-              <div className="profile-picture"></div>
-              <div className="notification-info">
-                <p>{notification.username} requested to follow you</p>
-                <span>{notification.time}</span>
+      <div>
+        <Nav />
+      </div>
+      <div className='notification-collector'>
+      <h3>Notifications</h3>
+      {loading ? ( // Display loading indicator while fetching
+        <p>Loading notifications...</p>
+      ) : (
+        <ul>
+          {notifications.map((notification, index) => (
+            <li key={index} className="notification-item">
+              <img 
+                src={notification.profile_pic || "https://via.placeholder.com/150"} 
+                alt="Profile" 
+                className="notification-profile-pic" 
+              />
+              <div className="notification-text">
+                <p><strong>{notification.username}</strong>: {notification.message}</p>
+                <span className="notification-timestamp">{new Date(notification.timestamp).toLocaleString()}</span>
               </div>
-              <div className="notification-actions">
-                <button className="confirm-button">Confirm</button>
-                <button className="delete-button">Delete</button>
-              </div>
-            </div>
+            </li>
           ))}
-        </div>
-
-        {/* Likes */}
-        <div className="notifications-section">
-          <h3>Earlier</h3>
-          {notifications.filter(n => n.type === 'Like').map((notification, index) => (
-            <div key={index} className="notification-item">
-              <div className="profile-picture"></div>
-              <div className="notification-info">
-                <p>{notification.username} {notification.post}</p>
-                <span>{notification.time}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Comments */}
-        <div className="notifications-section">
-          <h3>Comments</h3>
-          {notifications.filter(n => n.type === 'Comment').map((notification, index) => (
-            <div key={index} className="notification-item">
-              <div className="profile-picture"></div>
-              <div className="notification-info">
-                <p>{notification.username} {notification.post}</p>
-                <span>{notification.time}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        </ul>
+      )}
       </div>
     </div>
   );
-}
+};
 
-export default Notification;
+export default Notifications;

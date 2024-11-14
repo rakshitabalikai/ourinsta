@@ -50,7 +50,6 @@
     width: 85%;
     padding: 20px;
     margin: 20px 40px;
-    border-bottom: 1px solid #444;
     align-items: center;
   }
   
@@ -64,7 +63,7 @@
   
   /* Profile Info */
   .profile-info {
-    margin-left: 40px;
+    margin-left: 60px;
   }
   
   .profile-username {
@@ -139,4 +138,15 @@
     justify-content: space-between;
     padding: 20px 40px;
   }
-  
+  .profile-collector{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .user-postimage{
+    height:  100%;
+    max-width: 400px;
+    margin: 20px;
+    
+
+  }

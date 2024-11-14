@@ -107,7 +107,6 @@ body {
 }
 .post {
   /* background-color: #fff; */
-  border: 1px solid #dbdbdb;
   width: 80%;
   margin-bottom: 20px;
   border-radius: 3px;
@@ -210,7 +209,7 @@ body {
 }
 
 
-.autoshow{
+/* .autoshow{
   animation: autoshowAnimation;
   animation-timeline: view(5% auto);
 }
@@ -223,7 +222,7 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
+} */
 .captions{
   color: #fff;
 }

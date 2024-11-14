@@ -14,6 +14,7 @@ import Explore from "./Explore";
 import Notification from "./Notification";
 import Following from "./Follower";
 import Follower from "./Following";
+import More from "./More";
 
 function Customeroutes(){
     return(
@@ -33,6 +34,7 @@ function Customeroutes(){
             <Route path="/Notification" element={<Notification></Notification>}></Route>
             <Route path="/Following/:user_id" element={<Following></Following>}></Route>
             <Route path="/Follower/:user_id" element={<Follower></Follower>}></Route>
+            <Route path="/More" element={<More></More>}></Route>
         </Routes>
     );
 }

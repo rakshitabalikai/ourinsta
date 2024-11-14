@@ -13,6 +13,7 @@
   height: 100vh !important;
   flex-direction: column !important;
   width: 15% !important;
+  margin-right: 15%;
   padding: 40px 20px !important;
 }
 

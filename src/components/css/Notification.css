@@ -1,12 +1,13 @@
 /* Notifications.css */
 .notifications-container {
     display: flex;
+    margin-left: 15%;
   }
   
   .notifications-feed {
     width: 700px;
     padding: 20px 30px;
-    background-color: black;
+    /* background-color: black; */
     
   }
   
@@ -52,4 +53,20 @@
     background-color: #ff4d4d;
     color: white;
   }
+
+  .notification-collector{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    padding: 20px;
+    width: 600px;
+
+  }
+  .notification-profile-pic{
+    width: 80px;
+    border-radius: 50%;  
+  }
+.notification-collector > h3{
+ font-size: 30px;
+}
   

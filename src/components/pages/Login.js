@@ -1,8 +1,8 @@
 import '../css/Login.css';
 import logo from "../assets/logo/logo.png"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { useNavigate } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 
 function Login() {
@@ -11,6 +11,14 @@ function Login() {
     password: ''
   });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    const user = localStorage.getItem('user');
+    if (user) {
+      navigate('/home'); // Redirect to the home page if user is found
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,7 +32,7 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
       alert(response.data.message);
-      console.log(response)
+      console.log(response);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
       navigate('/profile');
@@ -37,19 +45,33 @@ function Login() {
     <div className='container_login'>
       <div className="main-container-login">
         <div className="box1">
-        <div className="heading">
-          <img src={logo}  className="logo" alt="logo" />
-        </div>
+          <div className="heading">
+            <img src={logo} className="logo" alt="logo" />
+          </div>
           <form className="login-form" onSubmit={handleSubmit}>
-
             <div className='field'>
               <label htmlFor='mobileOrEmailOrUsername'>Username, Email or Mobile</label>
-              <input id='mobileOrEmailOrUsername' type="text" name="mobileOrEmailOrUsername" placeholder='Mobile/Email/Username' value={formData.mobileOrEmailOrUsername} onChange={handleChange} required />
+              <input
+                id='mobileOrEmailOrUsername'
+                type="text"
+                name="mobileOrEmailOrUsername"
+                placeholder='Mobile/Email/Username'
+                value={formData.mobileOrEmailOrUsername}
+                onChange={handleChange}
+                required
+              />
             </div>
-
             <div className='field'>
               <label htmlFor='password'>Password</label>
-              <input id='password' type="password" placeholder='Password' name="password" value={formData.password} onChange={handleChange} required />
+              <input
+                id='password'
+                type="password"
+                placeholder='Password'
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </div>
             <button className="login-button" title="login">Log In</button>
           </form>

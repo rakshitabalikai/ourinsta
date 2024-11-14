@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   /* background-color: #f0f0f0; */
-  margin-left: 200px;
+  margin-left: 250px;
 }
 
 .message-content {
@@ -112,6 +112,6 @@
 .userButton{
 border: none;
 color: white;
-background-color: black;
+background-color:transparent;
 font-size: 25px;
 }
