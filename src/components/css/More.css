@@ -1,5 +1,6 @@
 .more-collector{
     margin-left: 15%;
+    display: flex;
    
 
 }
@@ -8,5 +9,7 @@
     flex-direction: column;
     width: 15%;
     padding: 10px;
+    height: 100vh;
+    border-right: 2px solid black;
 
 }
