@@ -12,6 +12,13 @@ function More() {
     const [user, setUser] = useState(null);
     const [activeOption, setActiveOption] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [file, setFile] = useState(null);
+    const [preview, setPreview] = useState(null);
+    const [feedback, setFeedback] = useState("");
+    const [reportedUserId, setReportedUserId] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+  
 
     const Logout = (e) => {
         localStorage.removeItem('user');
@@ -74,6 +81,57 @@ function More() {
         } catch (error) {
           console.error('Error blocking user:', error);
           alert(error.response?.data?.message || 'Failed to block user');
+        }
+      };
+
+      const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+          setFile(selectedFile);
+    
+          const reader = new FileReader();
+          reader.readAsDataURL(selectedFile);
+          reader.onload = () => setPreview(reader.result);
+        }
+      };
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSuccessMessage("");
+        setErrorMessage("");
+    
+        if (!file || !feedback || !reportedUserId || !user) {
+          setErrorMessage("Please fill all fields and select a screenshot.");
+          return;
+        }
+    
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("reporter_id", user.id);
+        formData.append("reported_user_id", reportedUserId);
+        formData.append("feedback", feedback);
+    
+        const apiUrl = "http://localhost:5038/api/social_media/report";
+    
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            body: formData,
+          });
+    
+          if (response.ok) {
+            setSuccessMessage("Report submitted successfully!");
+            setFile(null);
+            setPreview(null);
+            setFeedback("");
+            setReportedUserId("");
+          } else {
+            const errorData = await response.json();
+            setErrorMessage(errorData.message || "Error submitting report.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          setErrorMessage("An unexpected error occurred.");
         }
       };
       
@@ -139,7 +197,105 @@ function More() {
                                 </div>
                          </div>;
             case 'report':
-                return <div className="content-section">This is the Block section content.</div>;
+                return <div className="content-section">
+                            <div>
+                                <h2>Report a User</h2>
+                                <form onSubmit={handleSubmit}>
+                                <div>
+                                    <label>Select Screenshot:</label>
+                                    <input type="file" accept="image/*" onChange={handleFileChange} required />
+                                </div>
+
+                                {preview && (
+                                    <div className="preview-container">
+                                    <h3>Preview:</h3>
+                                    <img src={preview} alt="Screenshot Preview" />
+                                    </div>
+                                )}
+
+                                <div className="input-field">
+                                    {/* <label>Reported User ID:</label>
+                                    <input
+                                    type="text"
+                                    value={reportedUserId}
+                                    onChange={(e) => setReportedUserId(e.target.value)}
+                                    placeholder="Enter the User ID to report"
+                                    required
+                                    /> */}
+                                     <div className="content-section">
+                                    <div className="search-container">
+                                    <div className="search-bar">
+                                        <input
+                                        id="search"
+                                        type="text"
+                                        name="search"
+                                        placeholder="Search"
+                                        value={searchTerm}
+                                        onChange={handleInputChange}
+                                        required
+                                        />
+                                        {searchTerm && <button className="clear-btn" onClick={() => setSearchTerm('')}>✕</button>}
+                                    </div>
+                                    <div className="search-results">
+                                        {isLoading ? (
+                                        <p>Loading...</p>
+                                        ) : (
+                                        <ul>
+                                            {searchResults.length > 0 ? (
+                                            searchResults.map((resultUser) => (
+                                                <div
+                                                key={resultUser.id}
+                                                className="search-result-item"
+                                                onClick={() => setReportedUserId(resultUser.id)} // Redirect on click
+                                                >
+                                                <div className="usercard">
+                                                    <img
+                                                    src={resultUser.profile_pic}
+                                                    alt={resultUser.username}
+                                                    className="profile-pic"
+                                                    />
+                                                    <div className="user-info">
+                                                    <p className="username">{resultUser.username}</p>
+                                                    <p className="full-name">{resultUser.fullName}</p>
+                                                    </div>
+                                                    {/* <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation(); // Prevent triggering the profile click when blocking
+                                                        handleBlockUser(resultUser.id); // Call block handler
+                                                    }}
+                                                    >
+                                                    Block
+                                                    </button> */}
+                                                </div>
+                                                </div>
+                                            ))
+                                            ) : (
+                                            <p>No users found</p>
+                                            )}
+                                        </ul>
+                                        )}
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div className="input-field">
+                                    <label>Feedback:</label>
+                                    <textarea
+                                    value={feedback}
+                                    onChange={(e) => setFeedback(e.target.value)}
+                                    placeholder="Describe the issue..."
+                                    required
+                                    ></textarea>
+                                </div>
+
+                                <button className="report-button" type="submit">Submit Report</button>
+                                </form>
+
+                                {successMessage && <p className="success-message">{successMessage}</p>}
+                                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                            </div>
+                        </div>;
             case 'reset':
                 return <div className="content-section">This is the Reset Password section content.</div>;
             case 'about':
