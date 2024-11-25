@@ -15,7 +15,7 @@ import Notification from "./Notification";
 import Following from "./Follower";
 import Follower from "./Following";
 import More from "./More";
-
+import About_us from "./Aboutus";
 function Customeroutes(){
     return(
         <Routes>
@@ -35,6 +35,8 @@ function Customeroutes(){
             <Route path="/Following/:user_id" element={<Following></Following>}></Route>
             <Route path="/Follower/:user_id" element={<Follower></Follower>}></Route>
             <Route path="/More" element={<More></More>}></Route>
+            <Route path="/about_us" element={<About_us></About_us>}></Route>
+
         </Routes>
     );
 }
