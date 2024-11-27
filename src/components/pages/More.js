@@ -314,7 +314,7 @@ function More() {
                         <button className='menu-button' onClick={() => setActiveOption('report')}>Report</button>
                         <button className='menu-button' onClick={() => setActiveOption('block')}>Block</button>
                         <button className='menu-button' onClick={() => setActiveOption('reset')}>Reset password</button>
-                        <button className='menu-button' onClick={() => setActiveOption('about')}>About-us</button>
+                        <Link to={"/about_us"}> <button className='menu-button' onClick={() => setActiveOption('about')}>About-us</button></Link>
                         <button onClick={Logout} className='menu-button'>Log-out</button>
                     </div>
                     {/* Content displayed beside the menu */}

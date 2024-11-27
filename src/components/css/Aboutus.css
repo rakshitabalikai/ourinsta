@@ -1,0 +1,146 @@
+.about-us-container {
+    background-image: url("../assets/icons/abt-bg.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.logo {
+    height: 75px;
+}
+.welcome {
+    text-align: center;
+    font-size: 100px;
+}
+
+.mission {
+    font-size: 30px;
+    margin-top: 10%;
+    margin-right: 50%;
+
+}
+
+.mission-script {
+    margin-left: 5%;
+    width: 700px;
+    padding: 30px;
+    font-size: 20px;
+    border: 2px solid black;
+    background-color: rgb(23, 36, 62);
+}
+
+.choose {
+    font-size: 30px;
+    margin-top: -232px;
+    margin-left: 50%;
+}
+
+.choose-us-script {
+    width: 700px;
+    padding: 30px;
+    font-size: 20px;
+    margin-left: 55%;
+    border: 2px solid black;
+    background-color: rgb(23, 36, 62);
+
+}
+
+.contact {
+    font-size: 60px;
+    margin-top: 220px;
+
+}
+
+.ct-script {
+    font-size: 20px;
+    margin-left: 50px;
+}
+
+.images {
+    display: flex;
+    margin-top: 5%;
+}
+
+.img-1 {
+    margin-left: 70px;
+    width: 300px;
+    height: 120px;
+}
+
+.img-2 {
+    margin-left: 100px;
+    width: 300px;
+    height: 120px;
+}
+
+.img-3 {
+    margin-left: 80px;
+    width: 300px;
+    height: 120px;
+}
+
+.img-4 {
+    margin-left: 40px;
+    width: 300px;
+    height: 120px;
+}
+
+.n1 {
+    margin-top: 145px;
+    font-size: 20px;
+    margin-left: -121px;
+}
+
+.n2 {
+    margin-top: 145px;
+    font-size: 20px;
+    margin-left: -121px;
+}
+
+.n3 {
+    margin-top: 145px;
+    font-size: 20px;
+    margin-left: -121px;
+    width: 300%;
+}
+
+.n4 {
+    margin-top: 145px;
+    font-size: 18px;
+    margin-left: -121px;
+}
+
+.e1 {
+    margin-top: 10%;
+    margin-left: -68px;
+    font-size: 20px;
+}
+
+.e2 {
+    margin-top: 10%;
+    margin-left: -15px;
+    font-size: 20px;
+}
+
+.e3 {
+    margin-top: 17%;
+  margin-right: -10px;
+  font-size: 20px;
+
+}
+
+.e4 {
+    margin-top: 11%;
+    margin-left: -45px;
+    font-size: 20px;
+}
+
+.email {
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 220px;
+}
+
+footer {
+    margin-left: 50px;
+    margin-top: 30px;
+}
