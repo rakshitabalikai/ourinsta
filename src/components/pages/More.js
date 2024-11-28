@@ -1,9 +1,8 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
 import axios from 'axios';
 import '../css/More.css';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function More() {
     const navigate = useNavigate();
@@ -14,292 +13,189 @@ function More() {
     const [isLoading, setIsLoading] = useState(false);
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [feedback, setFeedback] = useState("");
-    const [reportedUserId, setReportedUserId] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-  
+    const [feedback, setFeedback] = useState('');
+    const [reportedUserId, setReportedUserId] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const Logout = (e) => {
-        localStorage.removeItem('user');
-        navigate('/');
-    };
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             const parsedUser = JSON.parse(storedUser);
-            console.log(parsedUser);
             setUser(parsedUser);
-            // setProfilePic(parsedUser.profile_pic || 'https://via.placeholder.com/150');
         }
     }, []);
+
+    const Logout = () => {
+        localStorage.removeItem('user');
+        navigate('/');
+    };
+
     const handleInputChange = async (event) => {
         const value = event.target.value;
         setSearchTerm(value);
 
-        if (value.trim() === "") {
+        if (value.trim() === '') {
             setSearchResults([]);
             return;
         }
 
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:5038/api/social_media/search?query=${value}`);
-            const data = await response.json();
+            const response = await axios.get(`http://localhost:5038/api/social_media/search`, {
+                params: { query: value },
+            });
 
-            if (response.ok) {
-                setSearchResults(data.users);
-            } else {
-                setSearchResults([]);
-                console.error(data.message);
-            }
+            setSearchResults(response.data.users || []);
         } catch (error) {
-            console.error("Error searching for users:", error);
+            console.error('Error searching for users:', error);
             setSearchResults([]);
         } finally {
             setIsLoading(false);
         }
     };
-    const handleProfileClick = (user_id) => {
-        navigate(`/otherprofile/${user_id}`);  // Redirect to /profile/:user_id
-    };
 
-    const handleBlockUser = async (blockedId) => {
-        const storedUser = JSON.parse(localStorage.getItem('user')); // Get logged-in user info
-        const blockerId = user.id; // Assuming `_id` is the logged-in user's ID
-      
-        try {
-          const response = await axios.post('http://localhost:5038/api/social_media/user/blockuser', {
-            blockerId,
-            blockedId,
-          });
-      
-          if (response.status === 201) {
-            alert('User blocked successfully');
-            // Optionally, refresh the search results or update UI
-          }
-        } catch (error) {
-          console.error('Error blocking user:', error);
-          alert(error.response?.data?.message || 'Failed to block user');
-        }
-      };
-
-      const handleFileChange = (e) => {
+    const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
-          setFile(selectedFile);
-    
-          const reader = new FileReader();
-          reader.readAsDataURL(selectedFile);
-          reader.onload = () => setPreview(reader.result);
+            setFile(selectedFile);
+
+            const reader = new FileReader();
+            reader.onload = () => setPreview(reader.result);
+            reader.readAsDataURL(selectedFile);
         }
-      };
-    
-      const handleSubmit = async (e) => {
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSuccessMessage("");
-        setErrorMessage("");
-    
+        setSuccessMessage('');
+        setErrorMessage('');
+
         if (!file || !feedback || !reportedUserId || !user) {
-          setErrorMessage("Please fill all fields and select a screenshot.");
-          return;
+            setErrorMessage('Please fill all fields and select a screenshot.');
+            return;
         }
-    
+
         const formData = new FormData();
-        formData.append("file", file);
-        formData.append("reporter_id", user.id);
-        formData.append("reported_user_id", reportedUserId);
-        formData.append("feedback", feedback);
-    
-        const apiUrl = "http://localhost:5038/api/social_media/report";
-    
+        formData.append('file', file);
+        formData.append('reporter_id', user.id);
+        formData.append('reported_user_id', reportedUserId);
+        formData.append('feedback', feedback);
+
         try {
-          const response = await fetch(apiUrl, {
-            method: "POST",
-            body: formData,
-          });
-    
-          if (response.ok) {
-            setSuccessMessage("Report submitted successfully!");
-            setFile(null);
-            setPreview(null);
-            setFeedback("");
-            setReportedUserId("");
-          } else {
-            const errorData = await response.json();
-            setErrorMessage(errorData.message || "Error submitting report.");
-          }
+            const response = await axios.post('http://localhost:5038/api/social_media/report', formData);
+
+            if (response.status === 201) {
+                setSuccessMessage('Report submitted successfully!');
+                setFile(null);
+                setPreview(null);
+                setFeedback('');
+                setReportedUserId('');
+                setSearchTerm('');
+            }
         } catch (error) {
-          console.error("Error:", error);
-          setErrorMessage("An unexpected error occurred.");
+            console.error('Error submitting report:', error);
+            setErrorMessage(error.response?.data?.message || 'Failed to submit the report.');
         }
-      };
-      
+    };
 
     const renderContent = () => {
         switch (activeOption) {
-            case 'block':
-                return <div className="content-section">
-                                <div className="content-section">
-                                    <div className="search-container">
-                                    <div className="search-bar">
-                                        <input
-                                        id="search"
-                                        type="text"
-                                        name="search"
-                                        placeholder="Search"
-                                        value={searchTerm}
-                                        onChange={handleInputChange}
-                                        required
-                                        />
-                                        {searchTerm && <button className="clear-btn" onClick={() => setSearchTerm('')}>✕</button>}
-                                    </div>
-                                    <div className="search-results">
-                                        {isLoading ? (
-                                        <p>Loading...</p>
-                                        ) : (
-                                        <ul>
-                                            {searchResults.length > 0 ? (
-                                            searchResults.map((resultUser) => (
-                                                <div
-                                                key={resultUser.id}
-                                                className="search-result-item"
-                                                onClick={() => handleProfileClick(resultUser.id)} // Redirect on click
-                                                >
-                                                <div className="usercard">
-                                                    <img
-                                                    src={resultUser.profile_pic}
-                                                    alt={resultUser.username}
-                                                    className="profile-pic"
-                                                    />
-                                                    <div className="user-info">
-                                                    <p className="username">{resultUser.username}</p>
-                                                    <p className="full-name">{resultUser.fullName}</p>
-                                                    </div>
-                                                    <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation(); // Prevent triggering the profile click when blocking
-                                                        handleBlockUser(resultUser.id); // Call block handler
-                                                    }}
-                                                    >
-                                                    Block
-                                                    </button>
-                                                </div>
-                                                </div>
-                                            ))
-                                            ) : (
-                                            <p>No users found</p>
-                                            )}
-                                        </ul>
-                                        )}
-                                    </div>
-                                    </div>
-                                </div>
-                         </div>;
             case 'report':
-                return <div className="content-section">
+                return (
+                    <div className="content-section">
+                        <h2>Report a User</h2>
+                        <form onSubmit={handleSubmit}>
                             <div>
-                                <h2>Report a User</h2>
-                                <form onSubmit={handleSubmit}>
-                                <div>
-                                    <label>Select Screenshot:</label>
-                                    <input type="file" accept="image/*" onChange={handleFileChange} required />
-                                </div>
+                                <label>Select Screenshot:</label>
+                                <input type="file" accept="image/*" onChange={handleFileChange} required />
+                            </div>
 
-                                {preview && (
-                                    <div className="preview-container">
+                            {preview && (
+                                <div className="preview-container">
                                     <h3>Preview:</h3>
                                     <img src={preview} alt="Screenshot Preview" />
-                                    </div>
-                                )}
+                                </div>
+                            )}
 
-                                <div className="input-field">
-                                    {/* <label>Reported User ID:</label>
+                            <div className="input-field">
+                                <label>Search User to Report:</label>
+                                <div className="search-bar">
                                     <input
-                                    type="text"
-                                    value={reportedUserId}
-                                    onChange={(e) => setReportedUserId(e.target.value)}
-                                    placeholder="Enter the User ID to report"
-                                    required
-                                    /> */}
-                                     <div className="content-section">
-                                    <div className="search-container">
-                                    <div className="search-bar">
-                                        <input
-                                        id="search"
                                         type="text"
-                                        name="search"
-                                        placeholder="Search"
+                                        placeholder="Search for a user"
                                         value={searchTerm}
                                         onChange={handleInputChange}
                                         required
-                                        />
-                                        {searchTerm && <button className="clear-btn" onClick={() => setSearchTerm('')}>✕</button>}
-                                    </div>
-                                    <div className="search-results">
-                                        {isLoading ? (
+                                    />
+                                    {searchTerm && (
+                                        <button
+                                            className="clear-btn"
+                                            onClick={() => {
+                                                setSearchTerm('');
+                                                setSearchResults([]);
+                                            }}
+                                        >
+                                            ✕
+                                        </button>
+                                    )}
+                                </div>
+                                <div className="search-results">
+                                    {isLoading ? (
                                         <p>Loading...</p>
-                                        ) : (
+                                    ) : searchResults.length > 0 ? (
                                         <ul>
-                                            {searchResults.length > 0 ? (
-                                            searchResults.map((resultUser) => (
-                                                <div
-                                                key={resultUser.id}
-                                                className="search-result-item"
-                                                onClick={() => setReportedUserId(resultUser.id)} // Redirect on click
+                                            {searchResults.map((resultUser) => (
+                                                <li
+                                                    key={resultUser.id}
+                                                    className={`search-result-item ${
+                                                        reportedUserId === resultUser.id ? 'selected' : ''
+                                                    }`}
+                                                    onClick={() => setReportedUserId(resultUser.id)}
                                                 >
-                                                <div className="usercard">
                                                     <img
-                                                    src={resultUser.profile_pic}
-                                                    alt={resultUser.username}
-                                                    className="profile-pic"
+                                                        src={resultUser.profile_pic || 'https://via.placeholder.com/150'}
+                                                        alt={resultUser.username}
+                                                        className="profile-pic"
                                                     />
-                                                    <div className="user-info">
-                                                    <p className="username">{resultUser.username}</p>
-                                                    <p className="full-name">{resultUser.fullName}</p>
+                                                    <div>
+                                                        <p className="username">{resultUser.username}</p>
+                                                        <p className="full-name">{resultUser.fullName}</p>
                                                     </div>
-                                                    {/* <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation(); // Prevent triggering the profile click when blocking
-                                                        handleBlockUser(resultUser.id); // Call block handler
-                                                    }}
-                                                    >
-                                                    Block
-                                                    </button> */}
-                                                </div>
-                                                </div>
-                                            ))
-                                            ) : (
-                                            <p>No users found</p>
-                                            )}
+                                                </li>
+                                            ))}
                                         </ul>
-                                        )}
-                                    </div>
-                                    </div>
+                                    ) : (
+                                        <p>No users found</p>
+                                    )}
                                 </div>
-                                </div>
+                            </div>
 
-                                <div className="input-field">
-                                    <label>Feedback:</label>
-                                    <textarea
+                            <div className="input-field">
+                                <label>Feedback:</label>
+                                <textarea
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
                                     placeholder="Describe the issue..."
                                     required
-                                    ></textarea>
-                                </div>
-
-                                <button className="report-button" type="submit">Submit Report</button>
-                                </form>
-
-                                {successMessage && <p className="success-message">{successMessage}</p>}
-                                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                                ></textarea>
                             </div>
-                        </div>;
+
+                            <button className="report-button" type="submit">
+                                Submit Report
+                            </button>
+                        </form>
+
+                        {successMessage && <p className="success-message">{successMessage}</p>}
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    </div>
+                );
+            case 'block':
+                return <div className="content-section">Block user functionality here</div>;
             case 'reset':
-                return <div className="content-section">This is the Reset Password section content.</div>;
+                return <div className="content-section">Reset Password section content here</div>;
             case 'about':
-                return <div className="content-section">This is the About Us section content.</div>;
+                return <div className="content-section">About Us section content here</div>;
             default:
                 return <div className="content-section">Please select an option to view details.</div>;
         }
@@ -307,20 +203,27 @@ function More() {
 
     return (
         <div>
-            <div className='more-container'>
+            <div className="more-container">
                 <Nav />
-                <div className='more-collector'>
-                    <div className='more-nav'>
-                        <button className='menu-button' onClick={() => setActiveOption('report')}>Report</button>
-                        <button className='menu-button' onClick={() => setActiveOption('block')}>Block</button>
-                        <button className='menu-button' onClick={() => setActiveOption('reset')}>Reset password</button>
-                        <button className='menu-button' onClick={() => setActiveOption('about')}>About-us</button>
-                        <button onClick={Logout} className='menu-button'>Log-out</button>
+                <div className="more-collector">
+                    <div className="more-nav">
+                        <button className="menu-button" onClick={() => setActiveOption('report')}>
+                            Report
+                        </button>
+                        <button className="menu-button" onClick={() => setActiveOption('block')}>
+                            Block
+                        </button>
+                        <button className="menu-button" onClick={() => setActiveOption('reset')}>
+                            Reset password
+                        </button>
+                        <button className="menu-button" onClick={() => setActiveOption('about')}>
+                            About-us
+                        </button>
+                        <button onClick={Logout} className="menu-button">
+                            Log-out
+                        </button>
                     </div>
-                    {/* Content displayed beside the menu */}
-                    <div className="more-content">
-                        {renderContent()}
-                    </div>
+                    <div className="more-content">{renderContent()}</div>
                 </div>
             </div>
         </div>
