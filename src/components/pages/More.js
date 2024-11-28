@@ -222,6 +222,13 @@ function More() {
                         <button onClick={Logout} className="menu-button">
                             Log-out
                         </button>
+                <div className='more-collector'>
+                    <div className='more-nav'>
+                        <button className='menu-button' onClick={() => setActiveOption('report')}>Report</button>
+                        <button className='menu-button' onClick={() => setActiveOption('block')}>Block</button>
+                        <button className='menu-button' onClick={() => setActiveOption('reset')}>Reset password</button>
+                        <Link to={"/about_us"}> <button className='menu-button' onClick={() => setActiveOption('about')}>About-us</button></Link>
+                        <button onClick={Logout} className='menu-button'>Log-out</button>
                     </div>
                     <div className="more-content">{renderContent()}</div>
                 </div>
