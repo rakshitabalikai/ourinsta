@@ -202,36 +202,17 @@ function More() {
     };
 
     return (
-        <div>
-            <div className="more-container">
-                <Nav />
-                <div className="more-collector">
-                    <div className="more-nav">
-                        <button className="menu-button" onClick={() => setActiveOption('report')}>
-                            Report
-                        </button>
-                        <button className="menu-button" onClick={() => setActiveOption('block')}>
-                            Block
-                        </button>
-                        <button className="menu-button" onClick={() => setActiveOption('reset')}>
-                            Reset password
-                        </button>
-                        <button className="menu-button" onClick={() => setActiveOption('about')}>
-                            About-us
-                        </button>
-                        <button onClick={Logout} className="menu-button">
-                            Log-out
-                        </button>
-                <div className='more-collector'>
-                    <div className='more-nav'>
-                        <button className='menu-button' onClick={() => setActiveOption('report')}>Report</button>
-                        <button className='menu-button' onClick={() => setActiveOption('block')}>Block</button>
-                        <button className='menu-button' onClick={() => setActiveOption('reset')}>Reset password</button>
-                        <Link to={"/about_us"}> <button className='menu-button' onClick={() => setActiveOption('about')}>About-us</button></Link>
-                        <button onClick={Logout} className='menu-button'>Log-out</button>
-                    </div>
-                    <div className="more-content">{renderContent()}</div>
+        <div className="more-container">
+            <Nav />
+            <div className="more-collector">
+                <div className="more-nav">
+                    <button className="menu-button" onClick={() => setActiveOption('report')}>Report</button>
+                    <button className="menu-button" onClick={() => setActiveOption('block')}>Block</button>
+                    <button className="menu-button" onClick={() => setActiveOption('reset')}>Reset password</button>
+                    <Link to={"/about_us"} className="menu-button">About-us</Link>
+                    <button onClick={Logout} className="menu-button">Log-out</button>
                 </div>
+                <div className="more-content">{renderContent()}</div>
             </div>
         </div>
     );
