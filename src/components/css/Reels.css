@@ -16,7 +16,7 @@
 }
 
 .post {
-  width: 80vw; /* Full viewport width */
+  width: 50vw; /* Full viewport width */
   height: 100vh; /* Full viewport height */
   /* border: 1px solid #dbdbdb; */
   margin-bottom: 20px;
@@ -28,6 +28,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  margin-left: -10%;
 }
 
 .post-header {

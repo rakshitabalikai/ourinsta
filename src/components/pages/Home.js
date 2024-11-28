@@ -108,6 +108,48 @@ function Home() {
     }  
   };
 
+  const handleLike = async (postId) => {
+    if (!user) {
+      alert("You must be logged in to like posts.");
+      return;
+    }
+  
+    const likeData = {
+      postId: postId, // ID of the post being liked/unliked
+      userId: user.id, // Current logged-in user's ID
+    };
+  
+    try {
+      const response = await fetch('http://localhost:5038/api/social_media/post/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(likeData),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message); // Display the server's response message (e.g., "Post liked" or "Like removed")
+  
+        // Update the local state (optional)
+        setPosts((prevPosts) =>
+          prevPosts.map((post) =>
+            post._id === postId
+              ? { ...post, liked: !post.liked } // Toggle the `liked` state
+              : post
+          )
+        );
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error liking/unliking the post:', error);
+      alert('An error occurred while liking/unliking the post.');
+    }
+  };
+  
+
   return (
     <div className="home-container">
       {/* Sidebar */}
@@ -146,7 +188,10 @@ function Home() {
                   <p className='captions'>{post.caption}</p>
                   <div className='likeandcomment'>
                     <button className='menu-button'><img src={comment} alt="comments" /></button>
-                    <button className='menu-button'><img src={like} alt="Like" /></button>
+                    <button className="menu-button" onClick={() => handleLike(post._id)}>
+                      <img src={like} alt="Like" />
+                    </button>
+
                   </div>
                 </div>
               </div>
