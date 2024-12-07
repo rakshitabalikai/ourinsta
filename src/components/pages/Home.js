@@ -189,7 +189,7 @@ function Home() {
                   <p className='captions'>{post.caption}</p>
                   <div className='likeandcomment'>
                         <div class="container">
-                        <button className="menu-button" onClick={() => handleLike(post._id)}></button>
+                        <button className="menu-button" onClick={() => handleLike(post._id)}><img src={like} alt="Like" /></button>
                             <input type="text" name="text" class="input" required="" placeholder="Type to search..."></input>
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
@@ -200,7 +200,7 @@ function Home() {
                             </div>
                         </div>                    
                     
-                      <img src={like} alt="Like" />
+                      
                     
 
                   </div>
