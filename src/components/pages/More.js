@@ -3,6 +3,7 @@ import Nav from './Nav';
 import axios from 'axios';
 import '../css/More.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Input from './Comment';
 
 function More() {
     const navigate = useNavigate();
@@ -191,7 +192,9 @@ function More() {
                     </div>
                 );
             case 'block':
-                return <div className="content-section">Block user functionality here</div>;
+                return <div className="content-section">
+                    <Input></Input>
+                </div>;
             case 'reset':
                 return <div className="content-section">Reset Password section content here</div>;
             case 'about':
