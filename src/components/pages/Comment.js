@@ -1,22 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import commentIcon from '../assets/icons/comment.png';
+import axios from 'axios';
 
-const Input = () => {
+const Input = ({ user_id, post_id }) => {
+  const [comment, setComment] = useState('');
+  console.log(user_id);
+  const handleKeyDown = async (event) => {
+    if (event.key === 'Enter' && comment.trim() !== '') {
+      try {
+        const payload = { user_id, post_id, comment };
+        console.log("Payload being sent:", payload);
+  
+        const response = await axios.post('http://localhost:5038/api/social_media/comments', payload);
+        console.log('Comment successfully saved:', response.data);
+        setComment('');
+      } catch (error) {
+        console.error('Error saving comment:', error);
+      }
+    }
+  };
+  
+
   return (
     <StyledWrapper>
       <div className="container">
-        <input type="text" name="text" className="input" required placeholder="Type to search..." />
+        <input
+          type="text"
+          name="text"
+          className="input"
+          placeholder="Comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
         <div className="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
-            <title>Search</title>
-            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" strokeMiterlimit={10} strokeWidth={32} />
-            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit={10} strokeWidth={32} d="M338.29 338.29L448 448" />
-          </svg>
+          <img src={commentIcon} alt="Comment Icon" />
         </div>
       </div>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
   .container {
@@ -47,12 +71,6 @@ const StyledWrapper = styled.div`
     box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 1.5px 1.5px 3px #0e0e0e, inset -1.5px -1.5px 3px #5f5e5e;
   }
 
-  .input:focus + .icon,
-  .input:not(:invalid) + .icon {
-    pointer-events: all;
-    cursor: pointer;
-  }
-
   .container .icon {
     position: absolute;
     width: var(--size-button);
@@ -63,9 +81,10 @@ const StyledWrapper = styled.div`
     pointer-events: none;
   }
 
-  .container .icon svg {
+  .container .icon img {
     width: 100%;
     height: 100%;
-  }`;
+  }
+`;
 
 export default Input;
