@@ -135,7 +135,7 @@ function Home() {
   
       const data = await response.json();
       if (response.ok) {
-        alert(data.message); // Display the server's response message (e.g., "Post liked" or "Like removed")
+        // alert(data.message); // Display the server's response message (e.g., "Post liked" or "Like removed")
   
         // Update the local state (optional)
         setPosts((prevPosts) =>
