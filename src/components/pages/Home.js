@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/Home.css';
 import Nav from './Nav';
 import Input from './Comment';
+import LikeButton from './Like';
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -192,7 +193,7 @@ function Home() {
                   <p className='captions'>{post.caption}</p>
                   <div className='likeandcomment'>
                         {/* <div class="container"> */}
-                        <button className="menu-button" onClick={() => handleLike(post._id)}><img src={like} alt="Like" /></button>
+                        <button className="menu-button" onClick={() => handleLike(post._id)}><LikeButton postId={post._id} userId={userid}></LikeButton></button>
                         <Input user_Id={userid} post_id={post._id} />
 
                         {/* </div>                */}
