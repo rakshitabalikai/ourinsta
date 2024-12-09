@@ -236,7 +236,7 @@ body {
   height: 100vh !important;
   flex-direction: column !important;
   width: 15% !important;
-  padding: 40px 20px !important;
+  /* padding: 40px 20px !important; */
 }
 .usercard1{
   display: flex;
