@@ -30,7 +30,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://192.168.125.11:5038/api/social_media/login', formData);
+      const response = await axios.post('http://localhost:5038/api/social_media/login', formData);
       alert(response.data.message);
       console.log(response);
       localStorage.setItem('user', JSON.stringify(response.data.user));
