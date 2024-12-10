@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const RequestReset = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [otpSent, setOtpSent] = useState(false);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5038/api/social_media/reset-password/request', { email });
             setMessage(response.data.message);
             setOtpSent(true);
+            navigate('/Resetpassword');
         } catch (error) {
             setMessage(error.response?.data?.message || 'Error requesting OTP');
         }
