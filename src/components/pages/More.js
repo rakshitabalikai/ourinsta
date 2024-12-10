@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../css/More.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from './Comment';
+import RequestReset from './Resentpasswordrequest';
 
 function More() {
     const navigate = useNavigate();
@@ -196,7 +197,9 @@ function More() {
                     <Input></Input>
                 </div>;
             case 'reset':
-                return <div className="content-section">Reset Password section content here</div>;
+                return <div className="content-section">
+                <RequestReset></RequestReset>
+                </div>;
             case 'about':
                 return <div className="content-section">About Us section content here</div>;
             default:

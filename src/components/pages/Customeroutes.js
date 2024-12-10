@@ -16,6 +16,8 @@ import Following from "./Follower";
 import Follower from "./Following";
 import More from "./More";
 import About_us from "./Aboutus";
+import RequestReset from "./Resentpasswordrequest";
+import ResetPassword from "./Restpassword";
 function Customeroutes(){
     return(
         <Routes>
@@ -35,7 +37,8 @@ function Customeroutes(){
             <Route path="/Follower/:user_id" element={<Follower></Follower>}></Route>
             <Route path="/More" element={<More></More>}></Route>
             <Route path="/about_us" element={<About_us></About_us>}></Route>
-
+            <Route path="/RequestReset" element={<RequestReset></RequestReset>}></Route>
+            <Route path="/Resetpassword" element={<ResetPassword></ResetPassword>}></Route>
         </Routes>
     );
 }
