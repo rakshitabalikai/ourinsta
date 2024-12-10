@@ -1,22 +1,19 @@
-// components/RequestReset.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Navigate} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 const RequestReset = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const navigate = useNavigate();
+    const [otpSent, setOtpSent] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/social_media/reset-password/request', { email });
+            const response = await axios.post('http://localhost:5038/api/social_media/reset-password/request', { email });
             setMessage(response.data.message);
-            navigate('/Resetpassword');
+            setOtpSent(true);
         } catch (error) {
-            setMessage(error.response?.data?.message || 'Error requesting password reset');
+            setMessage(error.response?.data?.message || 'Error requesting OTP');
         }
     };
 
@@ -36,7 +33,9 @@ const RequestReset = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Send Reset Link</button>
+                <button type="submit" className="btn btn-primary" disabled={otpSent}>
+                    {otpSent ? 'OTP Sent' : 'Send OTP'}
+                </button>
             </form>
             {message && <p className="message">{message}</p>}
         </div>
