@@ -2,14 +2,28 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import commentIcon from '../assets/icons/comment.png';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const Input = ({ user_id, post_id }) => {
   const [comment, setComment] = useState('');
+  const [user, setUser] = useState(null);
+  const [userid,setuserid] = useState();
   console.log(user_id);
+  useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        console.log(parsedUser);
+        setUser(parsedUser);
+        setuserid(parsedUser.id);
+        console.log("userid",userid);
+      }
+    }, []);
+
   const handleKeyDown = async (event) => {
     if (event.key === 'Enter' && comment.trim() !== '') {
       try {
-        const payload = { user_id, post_id, comment };
+        const payload = { userid, post_id, comment };
         console.log("Payload being sent:", payload);
   
         const response = await axios.post('http://localhost:5038/api/social_media/comments', payload);
