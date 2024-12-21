@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../css/Message.css";
 import Nav from './Nav';
+import addbtn from '../assets/icons/addbtn.png';
+import { Link } from 'react-router-dom';
 
 function Message() {
   const [user, setUser] = useState(null);
@@ -139,8 +141,12 @@ function Message() {
   return (
     <div className="message-container">
       <Nav />
+      
       <div className="message-content">
         <div className="user-list">
+          {/* <div className='addbtn'>
+          <Link to={"/addbtn"}><button><img src={addbtn} alt='addbtn'/></button></Link>
+          </div> */}
           <h3>{user?.username}</h3>
           <ul>
             {followedUsers.map((user) => (
@@ -150,7 +156,9 @@ function Message() {
                   {user.username}
                 </button>
               </li>
+              
             ))}
+            
           </ul>
         </div>
 

@@ -85,7 +85,7 @@ const fetchUserPosts = async (userId) => {
           <div className="profile-username">
             <h2>{username}</h2>
             <Link to={"/Editprofile"}><button>Edit Profile</button></Link>
-            <button className="settings-button">&#9881;</button>
+            
           </div>
           <div className="profile-stats">
             <span><strong>{postCount}</strong> posts</span>
