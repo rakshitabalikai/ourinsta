@@ -8,12 +8,13 @@
 
 .about-us-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 .aboutus-logo {
   max-width: 400px;
-  margin-bottom: 20px;
+  margin-top: -50px;
+  margin-bottom: 0px;
 
 }
 
@@ -55,6 +56,7 @@
 .profile-image {
   border-radius: 50%;
   margin-bottom: 15px;
+  height:100px;
 }
 
 .profile-name {
