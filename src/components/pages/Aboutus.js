@@ -1,7 +1,10 @@
 import React from 'react';
 import '../css/Aboutus.css';
 import logo from "../assets/logo/logo.png";
-
+import rakshita from "../assets/logo/rakshita.jpeg";
+import puneeth from "../assets/logo/puneeth.jpeg";
+import preeti from "../assets/logo/preeti.jpeg";
+import suhani from "../assets/logo/suhani.jpeg";
 function AboutUs() {
   return (
     <div className="about-us-container">
@@ -32,13 +35,13 @@ function AboutUs() {
         <h2 className="section-title">Contact Us</h2>
         <div className="profile-cards">
           {[
-            { name: 'Preethi NR', email: 'preethi@connectify.com' },
-            { name: 'Puneeth', email: 'puneeth@connectify.com' },
-            { name: 'Rakshitha', email: 'rakshitha@connectify.com' },
-            { name: 'Suhani', email: 'suhani@connectify.com' }
+            { name: 'Preethi NR', email: 'preethi@connectify.com',src:preeti },
+            { name: 'Puneeth', email: 'puneeth@connectify.com', src:puneeth },
+            { name: 'Rakshitha', email: 'rakshita@connectify.com',src:rakshita },
+            { name: 'Suhani', email: 'suhani@connectify.com',src:suhani }
           ].map((profile, index) => (
             <div className="profile-card" key={index}>
-              <img src="https://via.placeholder.com/100" alt={profile.name} className="profile-image" />
+              <img src={profile.src} alt={profile.name} className="profile-image" />
               <h3 className="profile-name">{profile.name}</h3>
               <a href={`mailto:${profile.email}`} className="profile-email">{profile.email}</a>
             </div>

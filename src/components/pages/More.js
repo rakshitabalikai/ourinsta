@@ -28,6 +28,29 @@ function More() {
         }
     }, []);
 
+    const handleBlockUser = async (blockedId) => {
+        const storedUser = JSON.parse(localStorage.getItem('user')); // Get logged-in user info
+        const blockerId = user.id; // Assuming `_id` is the logged-in user's ID
+      
+        try {
+          const response = await axios.post('http://localhost:5038/api/social_media/user/blockuser', {
+            blockerId,
+            blockedId,
+          });
+      
+          if (response.status === 201) {
+            alert('User blocked successfully');
+            // Optionally, refresh the search results or update UI
+          }
+        } catch (error) {
+          console.error('Error blocking user:', error);
+          alert(error.response?.data?.message || 'Failed to block user');
+        }
+      };
+      
+    const handleProfileClick = (user_id) => {
+        navigate(`/otherprofile/${user_id}`);  // Redirect to /profile/:user_id
+    };
     const Logout = () => {
         localStorage.removeItem('user');
         navigate('/');
@@ -194,8 +217,62 @@ function More() {
                 );
             case 'block':
                 return <div className="content-section">
-                    <Input></Input>
-                </div>;
+                <div className="content-section">
+                    <div className="search-container">
+                    <div className="search-bar">
+                        <input
+                        id="search"
+                        type="text"
+                        name="search"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                        required
+                        />
+                        {searchTerm && <button className="clear-btn" onClick={() => setSearchTerm('')}>✕</button>}
+                    </div>
+                    <div className="search-results">
+                        {isLoading ? (
+                        <p>Loading...</p>
+                        ) : (
+                        <ul>
+                            {searchResults.length > 0 ? (
+                            searchResults.map((resultUser) => (
+                                <div
+                                key={resultUser.id}
+                                className="search-result-item"
+                                onClick={() => handleProfileClick(resultUser.id)} // Redirect on click
+                                >
+                                <div className="usercard">
+                                    <img
+                                    src={resultUser.profile_pic}
+                                    alt={resultUser.username}
+                                    className="profile-pic"
+                                    />
+                                    <div className="user-info">
+                                    <p className="username">{resultUser.username}</p>
+                                    <p className="full-name">{resultUser.fullName}</p>
+                                    </div>
+                                    <button
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the profile click when blocking
+                                        handleBlockUser(resultUser.id); // Call block handler
+                                    }}
+                                    >
+                                    Block
+                                    </button>
+                                </div>
+                                </div>
+                            ))
+                            ) : (
+                            <p>No users found</p>
+                            )}
+                        </ul>
+                        )}
+                    </div>
+                    </div>
+                </div>
+         </div>;
             case 'reset':
                 return <div className="content-section">
                 <RequestReset></RequestReset>
