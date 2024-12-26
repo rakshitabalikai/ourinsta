@@ -1,10 +1,11 @@
-.more-collector{
+.more-collector {
     margin-left: 15%;
     display: flex;
-   
+
 
 }
-.more-nav{
+
+.more-nav {
     display: flex;
     flex-direction: column;
     width: 15%;
@@ -12,4 +13,68 @@
     height: 100vh;
     border-right: 2px solid black;
 
+}
+
+
+
+/* Main Content Section */
+.content-section {
+    margin: 35px;
+    margin-left: 35px;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #e4bbb6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 245px;
+}
+
+.content-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #8b0000;
+    margin-bottom: 20px;
+}
+
+/* Form Labels and Inputs */
+.content-section label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.content-section input[type="file"] {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.content-section input[type="file"]:focus {
+    outline: none;
+    border-color: #8b0000;
+    box-shadow: 0 0 4px rgba(139, 0, 0, 0.5);
+}
+
+/* Preview Container */
+.preview-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.preview-container h3 {
+    font-size: 1.2rem;
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.preview-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
