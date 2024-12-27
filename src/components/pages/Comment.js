@@ -38,7 +38,7 @@ const Input = ({ user_id, post_id }) => {
 
   return (
     <StyledWrapper>
-      <div className="container">
+      <div className="container1">
         <input
           type="text"
           name="text"
@@ -57,7 +57,7 @@ const Input = ({ user_id, post_id }) => {
 };
 
 const StyledWrapper = styled.div`
-  .container {
+  .container1 {
     position: relative;
     --size-button: 40px;
     color: white;
@@ -85,7 +85,7 @@ const StyledWrapper = styled.div`
     box-shadow: 0px 0px 0px #0e0e0e, 0px 0px 0px rgb(95 94 94 / 25%), inset 1.5px 1.5px 3px #0e0e0e, inset -1.5px -1.5px 3px #5f5e5e;
   }
 
-  .container .icon {
+  .container1 .icon {
     position: absolute;
     width: var(--size-button);
     height: var(--size-button);
@@ -95,7 +95,7 @@ const StyledWrapper = styled.div`
     pointer-events: none;
   }
 
-  .container .icon img {
+  .container1 .icon img {
     width: 100%;
     height: 100%;
   }

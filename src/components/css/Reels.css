@@ -32,6 +32,7 @@
 }
 
 .post-header {
+  margin-left: 140px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -90,4 +91,5 @@
 .likeandcomment {
   display: flex;
   gap: 10px;
+  margin-left: 150px;
 }
