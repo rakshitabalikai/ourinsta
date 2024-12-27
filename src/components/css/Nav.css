@@ -6,6 +6,7 @@
     padding: 20px; /* Adjusted padding to remove top space */
     position: fixed;
     left: 0;
+    top: 0;
     height: 100vh;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
