@@ -45,12 +45,13 @@
   }
   
   /* Profile Header */
-  .profile-header {
+  .profile-header1 {
     display: flex;
     width: 85%;
     padding: 20px;
     margin: 20px 40px;
     align-items: center;
+    /* margin-top: 800px */
   }
   
   /* Adjust profile header to stand out against black background */
@@ -135,8 +136,8 @@
   .profile-posts {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px 40px;
+    /* justify-content: space-between; */
+    padding: 10px 20px;
   }
   .profile-collector{
     display: flex;
@@ -145,8 +146,10 @@
   }
   .user-postimage{
     height:  100%;
-    max-width: 400px;
+    max-width: 300px;
     margin: 20px;
+    max-height: 400px;
+
     
 
   }

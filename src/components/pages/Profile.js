@@ -77,7 +77,7 @@ const fetchUserPosts = async (userId) => {
     <div className="profile-container">
       <Nav />
       <div className='profile-collector'>
-      <div className="profile-header">
+      <div className="profile-header1">
         <div className="profile-pic">
           <img src={profilePic} alt="Profile" />
         </div>
