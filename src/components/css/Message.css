@@ -12,8 +12,9 @@
 }
 
 .user-list {
-  width: 25%;
+  /* width: 25%; */
   padding: 20px;
+  margin-left: -450px;
   border-right: 1px solid #ddd;
   /* background-color: #fff; */
   overflow-y: auto;
@@ -33,7 +34,7 @@
 }
 
 .chat-section {
-  width: 75%;
+  width:600px;
   display: flex;
   flex-direction: column;
   padding: 20px;
