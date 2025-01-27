@@ -42,13 +42,13 @@ function Explore() {
                 {posts.length > 0 ? (
                     posts.map((post, index) => (
                         <div key={index} className="explorepost">
-                            <div className="post-image">
+                            <div className="post-image1">
                                 {/* Use fileUrl to load image or video */}
                                 {post.mediaType === 'image' ? (
-                                    <img src={`http://localhost:5038${post.fileUrl}`} alt={post.caption} />
+                                    <img className="post-image2" src={`http://localhost:5038${post.fileUrl}`} alt={post.caption} />
                                 ) : (
-                                    <video autoPlay loop muted>
-                                        <source src={`http://localhost:5038${post.fileUrl}`} type="video/mp4" />
+                                    <video className="post-video2" autoPlay loop muted>
+                                        <source   src={`http://localhost:5038${post.fileUrl}`} type="video/mp4" />
                                         Your browser does not support the video tag.
                                     </video>
                                 )}

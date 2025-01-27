@@ -4,10 +4,10 @@
 }
 
 .exploreposts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 400px)); /* Create a responsive grid */
-    gap: 10px; /* Add consistent gap between posts */
+    display:flex;
+   flex-wrap: wrap;
     padding: 10px;
+    margin-top: 1300px;
 }
 
 .explorepost {
@@ -18,10 +18,22 @@
     box-sizing: border-box;
 }
 
-.explorepost > .post-image {
-    width: 100%;
-    max-width: 100%; /* Ensures image doesn't overflow */
+.post-image1 {
+    /* width: 100%; */
+    width: 400px; /* Ensures image doesn't overflow */
     height: auto; /* Maintains aspect ratio */
     min-width: 200px; /* Ensures the image has a minimum width */
     object-fit: cover; /* Prevents distortion of the image */
+}
+
+.post-image2 {
+    /* width: 100%; */
+    width: 400px; /* Ensures image doesn't overflow */
+    height: 400px;
+    object-fit: cover; /* Prevents distortion of the image */
+}
+
+.post-video2{
+ width: 400px;
+ max-height: 400px;
 }
