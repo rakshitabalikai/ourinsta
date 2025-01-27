@@ -216,8 +216,8 @@ function More() {
                     </div>
                 );
             case 'block':
-                return <div className="content-section">
-                <div className="content-section">
+                return <div className="content-sectionblock">
+                <div className="content-sectionblock">
                     <div className="search-container">
                     <div className="search-bar">
                         <input
