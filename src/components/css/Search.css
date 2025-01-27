@@ -124,7 +124,7 @@ body {
 
 .usercard{
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     margin: 15px 0px 15px 0px;
     transition: background-color 0.3s;

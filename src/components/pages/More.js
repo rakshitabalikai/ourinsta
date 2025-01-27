@@ -131,9 +131,9 @@ function More() {
                     <div className="content-section">
                         <h2>Report a User</h2>
                         <form onSubmit={handleSubmit}>
-                            <div>
+                            <div >
                                 <label>Select Screenshot:</label>
-                                <input type="file" accept="image/*" onChange={handleFileChange} required />
+                                <input className='ss-report' type="file" accept="image/*" onChange={handleFileChange} required />
                             </div>
 
                             {preview && (
@@ -145,8 +145,9 @@ function More() {
 
                             <div className="input-field">
                                 <label>Search User to Report:</label>
-                                <div className="search-bar">
+                                <div >
                                     <input
+                                        className="search-bar-more"
                                         type="text"
                                         placeholder="Search for a user"
                                         value={searchTerm}
@@ -196,9 +197,11 @@ function More() {
                                 </div>
                             </div>
 
-                            <div className="input-field">
-                                <label>Feedback:</label>
+                            <div >
+                                <label >Feedback:</label>
+                                
                                 <textarea
+                                    className="report-feedback"
                                     value={feedback}
                                     onChange={(e) => setFeedback(e.target.value)}
                                     placeholder="Describe the issue..."
@@ -219,8 +222,9 @@ function More() {
                 return <div className="content-sectionblock">
                 <div className="content-sectionblock">
                     <div className="search-container">
-                    <div className="search-bar">
+                    <div>
                         <input
+                         className="search-bar-more-block"
                         id="search"
                         type="text"
                         name="search"
