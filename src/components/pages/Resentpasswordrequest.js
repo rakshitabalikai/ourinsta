@@ -21,7 +21,7 @@ const RequestReset = () => {
 
     return (
         <div className="container">
-            <h2>Forgot Password?</h2>
+            <h1  style={{ color: '#8e0038',alignItems:'center' }}>Forgot Password?</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Enter your email:</label>

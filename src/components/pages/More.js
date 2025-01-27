@@ -128,8 +128,8 @@ function More() {
         switch (activeOption) {
             case 'report':
                 return (
-                    <div className="content-section">
-                        <h2>Report a User</h2>
+                    <div className="content-section-report">
+                        <h1 className="content-section-report" style={{ marginLeft:'50px' }}>Report a User</h1>
                         <form onSubmit={handleSubmit}>
                             <div >
                                 <label>Select Screenshot:</label>
@@ -219,12 +219,12 @@ function More() {
                     </div>
                 );
             case 'block':
-                return <div className="content-sectionblock">
+                return <div >
                 <div className="content-sectionblock">
-                    <div className="search-container">
-                    <div>
+                <h1 style={{ color: '#8e0038', marginLeft:'50px' }}>Block an User</h1>
+                    <div className="search-container-block">
+                    <div className="search-bar-more-block" >
                         <input
-                         className="search-bar-more-block"
                         id="search"
                         type="text"
                         name="search"
