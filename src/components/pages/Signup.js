@@ -59,7 +59,7 @@ function Signup() {
     }
 
     try {
-      const response = await fetch('http://localhost:5038/api/social_media/signup', {
+      const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

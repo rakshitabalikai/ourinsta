@@ -26,7 +26,7 @@ const Input = ({ user_id, post_id }) => {
         const payload = { userid, post_id, comment };
         console.log("Payload being sent:", payload);
   
-        const response = await axios.post('http://localhost:5038/api/social_media/comments', payload);
+        const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/comments', payload);
         console.log('Comment successfully saved:', response.data);
         setComment('');
       } catch (error) {

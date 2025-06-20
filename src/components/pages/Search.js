@@ -34,7 +34,7 @@ function Search() {
 
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:5038/api/social_media/search?query=${value}`);
+            const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/search?query=${value}`);
             const data = await response.json();
 
             if (response.ok) {
@@ -64,7 +64,7 @@ function Search() {
         };
 
         try {
-            const response = await fetch('http://localhost:5038/api/social_media/follow', {
+            const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/follow', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

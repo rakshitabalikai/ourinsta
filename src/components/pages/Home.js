@@ -29,7 +29,7 @@ function Home() {
   // Fetch posts and stories when the component mounts
   useEffect(() => {
     // Fetch stories from API
-    fetch('http://localhost:5038/api/social_media/stories')
+    fetch('https://socialmedia-apis-2.onrender.com/api/social_media/stories')
       .then(response => {
         if (response.headers.get('content-type').includes('application/json')) {
           return response.json();
@@ -44,7 +44,7 @@ function Home() {
       });
 
     // Fetch posts from API
-    fetch('http://localhost:5038/api/social_media/posts')
+    fetch('https://socialmedia-apis-2.onrender.com/api/social_media/posts')
       .then(response => {
         if (response.headers.get('content-type').includes('application/json')) {
           return response.json();
@@ -71,7 +71,7 @@ function Home() {
     };
 
     try {
-      const response = await fetch('http://localhost:5038/api/social_media/follow', {
+      const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function Home() {
 
   const fetchSuggestedUsers = async (user_id) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/suggestions/${user_id}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/suggestions/${user_id}`);
       const data = await response.json();
       console.log("Suggested Users:", data.suggestedUsers);
       if (response.ok) {
@@ -125,7 +125,7 @@ function Home() {
     console.log('likeData',likeData);
   
     try {
-      const response = await fetch('http://localhost:5038/api/social_media/post/like', {
+      const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/post/like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -38,7 +38,7 @@ function OtherProfile() {
     // Fetch the user data based on userId passed from the route
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:5038/api/social_media/user/${userId}`);
+        const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/user/${userId}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -59,7 +59,7 @@ function OtherProfile() {
 
   const fetchFollowStats = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/follow_stats/${userId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/follow_stats/${userId}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -75,7 +75,7 @@ function OtherProfile() {
 
   const fetchUserPosts = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/user_posts/${userId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/user_posts/${userId}`);
       const data = await response.json();
   
       if (response.ok) {
@@ -103,7 +103,7 @@ function OtherProfile() {
     };
 
     try {
-      const response = await fetch('http://localhost:5038/api/social_media/follow', {
+      const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

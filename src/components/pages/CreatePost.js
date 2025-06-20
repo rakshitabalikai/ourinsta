@@ -51,8 +51,8 @@ function CreatePost() {
     formData.append("mediaType", mediaType);
 
     const apiUrl = fileType === "story"
-      ? "http://localhost:5038/api/social_media/uploadstory"
-      : "http://localhost:5038/api/social_media/uploadpost";
+      ? "https://socialmedia-apis-2.onrender.com/api/social_media/uploadstory"
+      : "https://socialmedia-apis-2.onrender.com/api/social_media/uploadpost";
 
     try {
       const response = await fetch(apiUrl, {

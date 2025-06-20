@@ -22,7 +22,7 @@ const Notifications = () => {
     const fetchNotifications = async () => {
       if (!userId) return; // Don't fetch if userId is not available
       try {
-        const response = await axios.get(`http://localhost:5038/api/social_media/notifications/${userId}`);
+        const response = await axios.get(`https://socialmedia-apis-2.onrender.com/api/social_media/notifications/${userId}`);
         setNotifications(response.data.notifications);
       } catch (error) {
         console.error("Error fetching notifications:", error);

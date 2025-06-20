@@ -12,7 +12,7 @@ const ResetPassword = () => {
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5038/api/social_media/reset-password/verify-otp', {
+            const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/reset-password/verify-otp', {
                 email,
                 otp,
             });
@@ -26,7 +26,7 @@ const ResetPassword = () => {
     const handleResetPassword = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5038/api/social_media/reset-password/update', {
+            const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/reset-password/update', {
                 email,
                 newPassword,
             });

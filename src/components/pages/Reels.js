@@ -22,7 +22,7 @@ function Reels() {
         }
       }, []);
 
-      fetch('http://localhost:5038/api/social_media/posts')
+      fetch('https://socialmedia-apis-2.onrender.com/api/social_media/posts')
       .then(response => {
         if (response.headers.get('content-type').includes('application/json')) {
           return response.json();
@@ -48,7 +48,7 @@ function Reels() {
         console.log('likeData',likeData);
       
         try {
-          const response = await fetch('http://localhost:5038/api/social_media/post/like', {
+          const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/post/like', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ function Reels() {
     
     useEffect(() => {
         // Fetch video posts from API
-        fetch('http://localhost:5038/api/social_media/posts/videos')
+        fetch('https://socialmedia-apis-2.onrender.com/api/social_media/posts/videos')
             .then(response => {
                 if (response.headers.get('content-type').includes('application/json')) {
                     return response.json();

@@ -27,7 +27,7 @@ function Following() {
   const fetchFollowingUsers = async (user_id) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/following/${user_id}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/following/${user_id}`);
       const data = await response.json();
       console.log("data",data);
       if (response.ok) {
@@ -54,7 +54,7 @@ function Following() {
     };
 
     try {
-        const response = await fetch('http://localhost:5038/api/social_media/unfollow', {
+        const response = await fetch('https://socialmedia-apis-2.onrender.com/api/social_media/unfollow', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

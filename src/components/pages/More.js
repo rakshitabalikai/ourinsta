@@ -33,7 +33,7 @@ function More() {
         const blockerId = user.id; // Assuming `_id` is the logged-in user's ID
       
         try {
-          const response = await axios.post('http://localhost:5038/api/social_media/user/blockuser', {
+          const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/user/blockuser', {
             blockerId,
             blockedId,
           });
@@ -67,7 +67,7 @@ function More() {
 
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://localhost:5038/api/social_media/search`, {
+            const response = await axios.get(`https://socialmedia-apis-2.onrender.com/api/social_media/search`, {
                 params: { query: value },
             });
 
@@ -108,7 +108,7 @@ function More() {
         formData.append('feedback', feedback);
 
         try {
-            const response = await axios.post('http://localhost:5038/api/social_media/report', formData);
+            const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/report', formData);
 
             if (response.status === 201) {
                 setSuccessMessage('Report submitted successfully!');

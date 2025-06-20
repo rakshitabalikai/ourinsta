@@ -18,7 +18,7 @@ function Explore() {
 
     // Fetch posts when the component mounts
     useEffect(() => {
-        fetch('http://localhost:5038/api/social_media/posts')
+        fetch('https://socialmedia-apis-2.onrender.com/api/social_media/posts')
             .then(response => {
                 if (response.headers.get('content-type').includes('application/json')) {
                     return response.json();

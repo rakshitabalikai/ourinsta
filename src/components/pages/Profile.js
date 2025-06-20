@@ -26,7 +26,7 @@ function Profile() {
   // Function to fetch posts and user details of the specific user
 const fetchUserPosts = async (userId) => {
   try {
-    const response = await fetch(`http://localhost:5038/api/social_media/user_posts/${userId}`);
+    const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/user_posts/${userId}`);
     const data = await response.json();
 
     if (response.ok) {
@@ -44,7 +44,7 @@ const fetchUserPosts = async (userId) => {
   // Function to fetch follow stats from the API
   const fetchFollowStats = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/follow_stats/${userId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/follow_stats/${userId}`);
       const data = await response.json();
 
       if (response.ok) {

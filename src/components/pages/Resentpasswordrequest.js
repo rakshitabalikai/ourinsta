@@ -10,7 +10,7 @@ const RequestReset = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5038/api/social_media/reset-password/request', { email });
+            const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/reset-password/request', { email });
             setMessage(response.data.message);
             setOtpSent(true);
             navigate('/Resetpassword');

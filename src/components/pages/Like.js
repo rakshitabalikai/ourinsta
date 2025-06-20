@@ -9,7 +9,7 @@ const LikeButton = ({ postId, userId }) => {
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:5038/api/social_media/post/like/status', {
+        const response = await axios.get('https://socialmedia-apis-2.onrender.com/api/social_media/post/like/status', {
           params: { postId, userId },
         });
         setLiked(response.data.liked);
@@ -24,7 +24,7 @@ const LikeButton = ({ postId, userId }) => {
   const toggleLike = async () => {
     try {
       // Call the like API
-      const response = await axios.post('http://localhost:5038/api/social_media/post/like', {
+      const response = await axios.post('https://socialmedia-apis-2.onrender.com/api/social_media/post/like', {
         postId,
         userId,
       });

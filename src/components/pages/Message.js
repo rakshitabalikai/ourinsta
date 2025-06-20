@@ -43,7 +43,7 @@ function Message() {
   };
   const handleDeleteSelectedMessages = async () => {
     try {
-      await fetch(`http://localhost:5038/api/social_media/messages/delete`, {
+      await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/messages/delete`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function Message() {
     
   const fetchFollowStats = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/follow_stats/${userId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/follow_stats/${userId}`);
       const data = await response.json();
       setFollowingCount(data.followingCount);
       setFollowersCount(data.followersCount);
@@ -74,7 +74,7 @@ function Message() {
 
   const fetchFollowedUsers = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/following/${userId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/following/${userId}`);
       const data = await response.json();
       setFollowedUsers(data.users);
     } catch (error) {
@@ -84,7 +84,7 @@ function Message() {
 
   const fetchChatHistory = async (receiverId) => {
     try {
-      const response = await fetch(`http://localhost:5038/api/social_media/messages/${sender_id}/${receiverId}`);
+      const response = await fetch(`https://socialmedia-apis-2.onrender.com/api/social_media/messages/${sender_id}/${receiverId}`);
       const data = await response.json();
       setChatHistory(data.messages);
     } catch (error) {
